@@ -1,11 +1,26 @@
 import React from 'react';
 import './App.scss';
+import { Routes, Route } from 'react-router-dom';
+import { Logo } from './Components/Logo/Logo';
+import { HomeView } from './Views/HomeView';
 
 function App() {
   return (
     <div className='app'>
       <header className='appWrapper'>
-        <h1>Barker</h1>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <div className='appContent'>
+                <nav>
+                  <Logo />
+                </nav>
+                <HomeView />
+              </div>
+            }
+          />
+        </Routes>
       </header>
     </div>
   );
