@@ -1,5 +1,4 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ILogo } from '../../Models/ILogo';
 
 export const Logo = (props: ILogo) => {
