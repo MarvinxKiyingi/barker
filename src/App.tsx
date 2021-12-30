@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Logo } from './Components/Logo/Logo';
 import { HomeView } from './Views/HomeView';
 import { ErrorPage } from './Views/ErrorView';
+import { SignUpView } from './Views/SignUpView';
 
 function App() {
   return (
@@ -17,6 +18,17 @@ function App() {
                   <Logo />
                 </nav>
                 <HomeView />
+              </div>
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <div className='appContent'>
+                <nav>
+                  <Logo />
+                </nav>
+                <SignUpView />
               </div>
             }
           />

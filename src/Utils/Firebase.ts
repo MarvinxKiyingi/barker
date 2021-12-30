@@ -1,13 +1,18 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-export const firebase = initializeApp({
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+// Initialize Firebase
+const firebaseApp = initializeApp({
+  apiKey: 'AIzaSyDJA29GMAzbrsWO8JI5eSpVvSuHt32qj2Y',
+  authDomain: 'barker-9f2cf.firebaseapp.com',
+  projectId: 'barker-9f2cf',
+  storageBucket: 'barker-9f2cf.appspot.com',
+  messagingSenderId: '424472745275',
+  appId: '1:424472745275:web:637dee5142220d12f7131e',
 });
 
-export const auth = getAuth(firebase);
+//Exports
+export const auth = getAuth();
+export const getCreateUserWithEmailAndPassword = createUserWithEmailAndPassword;
+export const db = getFirestore(firebaseApp);

@@ -6,6 +6,9 @@
 .pnp.js
 .env
 
+#components
+src/Utils/Firebase.ts
+
 # testing
 /coverage
 
