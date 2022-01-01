@@ -1,49 +1,68 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { IUser, userStartValue } from '../../Models/IUser';
-import { auth } from '../../Utils/Firebase';
+import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { errorMsgStartValue, IErrorMsg } from '../../Models/IErrorMsg';
 import { useNavigate } from 'react-router-dom';
-import { SignUpForm } from '../Forms/SignUpForm';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+// Function
+import { auth } from '../../Utils/Firebase';
+
+// Models
+import { ISignUp, signUpstartValues } from '../../Models/ISignUp';
+import { errorMsgStartValue, IErrorMsg } from '../../Models/IErrorMsg';
+import { IYupSchema } from '../../Models/IYupSchema';
 
 export const SignUp = () => {
-  const [signUpForm, setSignUpForm] = useState<IUser>(userStartValue);
+  // All states
   const [errorMsg, setErrorMsg] = useState<IErrorMsg>(errorMsgStartValue);
   const [disabledBtn, setdisabledBtn] = useState(false);
 
+  // Used to redirect users to a spesific route.
   const navigate = useNavigate();
 
-  // Form value handlers
-  const handleSignUpValue = (e: ChangeEvent<HTMLInputElement>) => {
-    let name = e.target.name;
-    setSignUpForm({ ...signUpForm, [name]: e.target.value });
-  };
-
-  const handleCheckboxValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignUpForm({ ...signUpForm, ['gdprTerms']: e.target.checked });
-  };
-
-  // Creation of a user through firebase auth
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, signUpForm.email!, signUpForm.password!)
+  // React-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ISignUp>(
+    // Importing Yup Schema for validation
+    { resolver: yupResolver(IYupSchema) }
+  );
+  // Form handler
+  const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
+    // Creation of a user through firebase auth
+    createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         setdisabledBtn(true);
         navigate('/login');
       })
       .catch((error) => {
+        setdisabledBtn(false);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
+        console.log(errorMsg.errorCode);
       });
-  };
-
-  // Submitting user to firebase auth
-  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    createUser();
   };
 
   return (
     <div>
-      <SignUpForm onChange={handleSignUpValue} onChangeGDPR={handleCheckboxValue} onSubmit={handleSubmitForm} disabled={disabledBtn} />
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <input {...register('email')} type='text' />
+        {errors.email?.message && <span>{errors.email.message}</span>}
+
+        <input {...register('password')} type='password' />
+        {errors.password?.message && <span>{errors.password.message}</span>}
+
+        <input {...register('confirmPassword')} type='password' />
+        {errors.confirmPassword?.message && <span>{errors.confirmPassword.message}</span>}
+
+        <input {...register('gdprTerms')} type='checkbox' />
+        {errors.gdprTerms?.message && <span>{errors.gdprTerms.message}</span>}
+
+        <button type='submit' disabled={disabledBtn}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 };
