@@ -5,7 +5,7 @@ export const IYupSchema = yup.object().shape({
   password: yup.string().required().min(6),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Passwords does not match')
-    .required('This field is required'),
-  gdprTerms: yup.boolean().oneOf([true], 'This field must be checked'),
+    .oneOf([yup.ref('password')], 'passwords does not match')
+    .required('this field is required'),
+  gdprTerms: yup.boolean().oneOf([true], 'You must accept the terms & conditions to continue'),
 });

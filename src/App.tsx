@@ -1,6 +1,6 @@
 import './App.scss';
 import { Routes, Route } from 'react-router-dom';
-import { Logo } from './Components/Logo/Logo';
+import { LogoLarge } from './Components/Logo/Logo';
 import { HomeView } from './Views/HomeView';
 import { ErrorPage } from './Views/ErrorView';
 import { SignUpView } from './Views/SignUpView';
@@ -15,7 +15,7 @@ function App() {
             element={
               <div className='appContent'>
                 <nav>
-                  <Logo />
+                  <LogoLarge />
                 </nav>
                 <HomeView />
               </div>
@@ -24,9 +24,9 @@ function App() {
           <Route
             path='/signup'
             element={
-              <div className='appContent'>
+              <div className='signUpViewWrapper'>
                 <nav>
-                  <Logo />
+                  <LogoLarge />
                 </nav>
                 <SignUpView />
               </div>
