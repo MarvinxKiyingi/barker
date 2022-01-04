@@ -1,32 +1,26 @@
-import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { useState } from 'react';
 
 // Function
 import { auth } from '../../Utils/Firebase';
 
 // Models
 import { ISignUp } from '../../Models/ISignUp';
+import { ISignInYupSchema } from '../../Models/IYupSchema';
 import { errorMsgStartValue, IErrorMsg } from '../../Models/IErrorMsg';
-import { ISignUpYupSchema } from '../../Models/IYupSchema';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import FormHelperText from '@mui/material/FormHelperText';
-import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import { Alert } from '@mui/material';
 
-//SASS
-import '../../Styles/Scss/SignUp.scss';
-
-export const SignUp = () => {
-  // All states
-  const [errorMsg, setErrorMsg] = useState<IErrorMsg>(errorMsgStartValue);
-  const [disabledBtn, setdisabledBtn] = useState(false);
+export const SignIn = () => {
   const [firebaseError, setFirebaseError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<IErrorMsg>(errorMsgStartValue);
 
   // Used to redirect users to a spesific route.
   const navigate = useNavigate();
@@ -38,31 +32,34 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<ISignUp>(
     // Importing Yup Schema for validation
-    { resolver: yupResolver(ISignUpYupSchema) }
+    { resolver: yupResolver(ISignInYupSchema) }
   );
 
   // Form handler
   const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
     // Creation of a user through firebase auth
 
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((user) => {
-        setdisabledBtn(true);
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('The signed in user is...: ', user);
         setFirebaseError(false);
-        console.log(user.user);
-        navigate('/');
+        navigate('/swipe');
       })
       .catch((error) => {
-        setdisabledBtn(false);
         setFirebaseError(true);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
         console.log(errorMsg.errorCode);
+        navigate('/');
       });
   };
 
   const errorHandler = () => {
-    if (errorMsg.errorCode === 'auth/email-already-in-use') {
-      return 'Email is already in use';
+    if (errorMsg.errorCode === 'auth/wrong-password') {
+      return 'Wrong password';
+    }
+    if (errorMsg.errorCode === 'auth/user-not-found') {
+      return 'User not found';
     } else return errorMsg.errorCode;
   };
 
@@ -104,43 +101,10 @@ export const SignUp = () => {
             />
           )}
         />
-        <Controller
-          name={'confirmPassword'}
-          control={control}
-          defaultValue={''}
-          render={({ field }) => (
-            <TextField
-              className='formInputs'
-              {...field}
-              type='password'
-              label='Confirm Password'
-              variant='outlined'
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword ? errors.confirmPassword?.message : ''}
-              fullWidth
-              style={{ margin: ' 1rem 0rem' }}
-            />
-          )}
-        />
-        <div className='gdprTermsWrapper'>
-          <div className='gdprTermsWrapper_content'>
-            <Controller
-              name={'gdprTerms'}
-              control={control}
-              defaultValue={false}
-              render={({ field }) => <Checkbox {...field} inputProps={{ 'aria-label': 'checked this checkbox to continue' }} />}
-            />
-            <p>
-              I have read and agreed to the <a href='https://gdpr.eu/terms-and-conditions/'>Terms & Conditions</a> and{' '}
-              <a href='https://gdpr.eu/privacy-policy/'> Privicy Policy</a>
-            </p>
-          </div>
-          <FormHelperText error>{errors.gdprTerms?.message}</FormHelperText>
-        </div>
 
         <div className='submitButtonWrapper'>
-          <Button type='submit' variant='contained' disabled={disabledBtn}>
-            Sign up
+          <Button type='submit' variant='contained'>
+            Sign in
           </Button>
         </div>
       </form>
