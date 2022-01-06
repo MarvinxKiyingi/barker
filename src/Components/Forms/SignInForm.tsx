@@ -1,29 +1,20 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+// Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-import { useState } from 'react';
-
-// Function
-import { auth } from '../../Utils/Firebase';
 
 // Models
 import { ISignUp } from '../../Models/ISignUp';
 import { ISignInYupSchema } from '../../Models/IYupSchema';
-import { errorMsgStartValue, IErrorMsg } from '../../Models/IErrorMsg';
 
 // MUI components
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Alert } from '@mui/material';
+import { useAuth } from '../../Utils/Contexs/AuthContext';
 
-export const SignIn = () => {
-  const [firebaseError, setFirebaseError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<IErrorMsg>(errorMsgStartValue);
-
-  // Used to redirect users to a spesific route.
-  const navigate = useNavigate();
+export const SignInForm = () => {
+  // Importing function from contex
+  const { SignInUser, errorMsg, disabledBtn, firebaseError } = useAuth();
 
   // React-hook-form
   const {
@@ -38,20 +29,7 @@ export const SignIn = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
     // Creation of a user through firebase auth
-
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('The signed in user is...: ', user);
-        setFirebaseError(false);
-        navigate('/swipe');
-      })
-      .catch((error) => {
-        setFirebaseError(true);
-        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
-        navigate('/');
-      });
+    SignInUser(data);
   };
 
   const errorHandler = () => {

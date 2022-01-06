@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { SignUp } from '../Components/SignUp/SignUp';
+import { SignUpForm } from '../Components/Forms/SignUpForm';
 
 //SASS
 import '../Styles/Scss/SignUpView.scss';
@@ -11,7 +11,7 @@ export const SignUpView = () => {
       <p>
         Already have an account? <Link to={'/'}>Sign in</Link>
       </p>
-      <SignUp />
+      <SignUpForm />
     </div>
   );
 };
