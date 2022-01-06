@@ -8,4 +8,5 @@ export interface IAuthContex {
   firebaseError: boolean;
   SignUpUser: (props: ISignUp) => void;
   SignInUser: (props: ISignIn) => void;
+  isSignedIn: boolean;
 }

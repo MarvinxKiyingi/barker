@@ -27,6 +27,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const [errorMsg, setErrorMsg] = useState(errorMsgStartValue);
   const [disabledBtn, setdisabledBtn] = useState(false);
   const [firebaseError, setFirebaseError] = useState(false);
+  const [isSignedIn, setisSignedIn] = useState(false);
 
   // Signing up a user to firebase
   const SignUpUser = (props: ISignUp) => {
@@ -59,7 +60,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   };
 
   // Auth provider values
-  const values = { errorMsg, disabledBtn, firebaseError, SignUpUser, SignInUser };
+  const values = { errorMsg, disabledBtn, firebaseError, SignUpUser, SignInUser, isSignedIn };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;
 };

@@ -5,6 +5,8 @@ import { SignInView } from './Views/SignInView';
 import { ErrorPage } from './Views/ErrorView';
 import { SignUpView } from './Views/SignUpView';
 import { AuthContexProvider } from './Utils/Contexs/AuthContext';
+import { PrivateRoute } from './Utils/PrivateRoute';
+import { SwipeView } from './Views/SwipeView';
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
                 </div>
               }
             />
+            <Route path='/swipe' element={<PrivateRoute component={SwipeView} />} />
             <Route
               path='*'
               element={
