@@ -3,11 +3,10 @@ import { SignInForm } from '../Components/Forms/SignInForm';
 
 // MUI components
 import Button from '@mui/material/Button';
-import { GoogleSignIn } from '../Utils/GoogleSignIn';
-import { FacebookSignIn } from '../Utils/FacebookSignIn';
-import { GitHubSignIn } from '../Utils/GitHubSignin';
+import { useAuth } from '../Utils/Contexs/AuthContext';
 
 export const SignInView = () => {
+  const { googleSignIn, facebookSignIn, gitHubSignIn } = useAuth();
   return (
     <div className='signInWrapper'>
       <SignInForm />
@@ -18,11 +17,11 @@ export const SignInView = () => {
             backgroundColor: 'white',
             color: 'black',
           }}
-          onClick={() => GoogleSignIn()}
+          onClick={() => googleSignIn()}
         >
           Google
         </Button>
-        <Button variant='contained' onClick={() => FacebookSignIn()}>
+        <Button variant='contained' onClick={() => facebookSignIn()}>
           Facebook
         </Button>
         <Button
@@ -31,7 +30,7 @@ export const SignInView = () => {
             backgroundColor: 'black',
             color: 'white',
           }}
-          onClick={() => GitHubSignIn()}
+          onClick={() => gitHubSignIn()}
         >
           Github
         </Button>

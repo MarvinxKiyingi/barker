@@ -37,6 +37,7 @@ export const SignUpForm = () => {
     signUpUser(data);
   };
 
+  // This functions returns a string that is being presented to the user if there is an error.
   const errorHandler = () => {
     if (errorMsg.errorCode === 'auth/email-already-in-use') {
       return 'Email is already in use';

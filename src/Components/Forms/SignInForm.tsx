@@ -32,6 +32,7 @@ export const SignInForm = () => {
     signInUser(data);
   };
 
+  // This functions returns a string that is being presented to the user if there is an error.
   const errorHandler = () => {
     if (errorMsg.errorCode === 'auth/wrong-password') {
       return 'Wrong password';

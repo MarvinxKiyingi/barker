@@ -1,7 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 //Firebase
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
 import { auth } from '../Firebase';
 import { User as FirebaseUser } from 'firebase/auth';
 
@@ -21,15 +30,20 @@ export const AuthContex = React.createContext({} as IAuthContex);
 export const useAuth = () => useContext(AuthContex);
 
 export const AuthContexProvider: React.FC = ({ children }) => {
-  // Used to redirect users to a spesific route
-  const navigate = useNavigate();
-
   // All useStates
   const [errorMsg, setErrorMsg] = useState(errorMsgStartValue);
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
   const [disabledBtn, setdisabledBtn] = useState(false);
   const [firebaseError, setFirebaseError] = useState(false);
   const [isSignedIn, setisSignedIn] = useState(false);
+
+  // Used to redirect users to a spesific route
+  const navigate = useNavigate();
+
+  //Social media providor
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
 
   // Signing up a user to firebase
   const signUpUser = (props: ISignUp) => {
@@ -74,13 +88,68 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       });
   };
 
+  // Sign in with social media plattforms
+  // Google sign in
+  const googleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // The signed-in user info.
+        setisSignedIn(true);
+        navigate('/swipe');
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        setisSignedIn(false);
+        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
+        console.log(errorMsg.errorCode);
+        navigate('/');
+      });
+  };
+
+  // Facebook sign in
+  const facebookSignIn = () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        // The signed-in user info.
+        setisSignedIn(true);
+        navigate('/swipe');
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        setisSignedIn(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode || errorMessage);
+        navigate('/');
+      });
+  };
+
+  // Github sign in
+  const gitHubSignIn = () => {
+    signInWithPopup(auth, gitHubProvider)
+      .then((result) => {
+        // The signed-in user info.
+        setisSignedIn(true);
+        navigate('/swipe');
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        setisSignedIn(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode || errorMessage);
+        navigate('/');
+      });
+  };
+
   // Getting the current user.
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (data) => {
+    onAuthStateChanged(auth, (data) => {
       if (data) {
         // User is signed in
         setisSignedIn(true);
         setCurrentUser(data);
+        console.log('UseEffect', data);
       } else {
         // User is signed out
         setisSignedIn(false);
@@ -88,7 +157,19 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     });
   }, [isSignedIn, currentUser]);
   // Auth provider values
-  const values = { errorMsg, disabledBtn, firebaseError, signUpUser, signInUser, signOutUser, isSignedIn, currentUser };
+  const values = {
+    errorMsg,
+    disabledBtn,
+    firebaseError,
+    signUpUser,
+    signInUser,
+    signOutUser,
+    googleSignIn,
+    facebookSignIn,
+    gitHubSignIn,
+    isSignedIn,
+    currentUser,
+  };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;
 };
