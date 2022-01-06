@@ -6,7 +6,9 @@ export interface IAuthContex {
   errorMsg: IErrorMsg;
   disabledBtn: boolean;
   firebaseError: boolean;
-  SignUpUser: (props: ISignUp) => void;
-  SignInUser: (props: ISignIn) => void;
+  signUpUser: (props: ISignUp) => void;
+  signInUser: (props: ISignIn) => void;
+  signOutUser: () => void;
   isSignedIn: boolean;
+  currentUser: any; // Remove any and set the real data type!!!
 }

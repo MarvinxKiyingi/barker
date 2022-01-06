@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 //Firebase
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../Firebase';
+import { User as FirebaseUser } from 'firebase/auth';
 
 // Npm packages
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +26,13 @@ export const AuthContexProvider: React.FC = ({ children }) => {
 
   // All useStates
   const [errorMsg, setErrorMsg] = useState(errorMsgStartValue);
+  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
   const [disabledBtn, setdisabledBtn] = useState(false);
   const [firebaseError, setFirebaseError] = useState(false);
   const [isSignedIn, setisSignedIn] = useState(false);
 
   // Signing up a user to firebase
-  const SignUpUser = (props: ISignUp) => {
+  const signUpUser = (props: ISignUp) => {
     createUserWithEmailAndPassword(auth, props.email, props.password)
       .then((user) => {
         setdisabledBtn(true);
@@ -45,7 +47,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       });
   };
 
-  const SignInUser = (props: ISignIn) => {
+  // Signin in a user to firebase
+  const signInUser = (props: ISignIn) => {
     signInWithEmailAndPassword(auth, props.email, props.password)
       .then((user) => {
         setFirebaseError(false);
@@ -59,8 +62,33 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       });
   };
 
+  // Signing out a user from firebase
+  const signOutUser = () => {
+    signOut(auth)
+      .then(() => {
+        setisSignedIn(false);
+      })
+      .catch((error) => {
+        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
+        console.log(errorMsg.errorCode);
+      });
+  };
+
+  // Getting the current user.
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (data) => {
+      if (data) {
+        // User is signed in
+        setisSignedIn(true);
+        setCurrentUser(data);
+      } else {
+        // User is signed out
+        setisSignedIn(false);
+      }
+    });
+  }, [isSignedIn, currentUser]);
   // Auth provider values
-  const values = { errorMsg, disabledBtn, firebaseError, SignUpUser, SignInUser, isSignedIn };
+  const values = { errorMsg, disabledBtn, firebaseError, signUpUser, signInUser, signOutUser, isSignedIn, currentUser };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;
 };

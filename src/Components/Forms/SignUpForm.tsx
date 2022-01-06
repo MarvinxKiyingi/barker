@@ -1,5 +1,4 @@
 // Npm packages
-import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -20,7 +19,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 export const SignUpForm = () => {
   // Importing function from contex
-  const { SignUpUser, errorMsg, disabledBtn, firebaseError } = useAuth();
+  const { signUpUser, errorMsg, disabledBtn, firebaseError } = useAuth();
 
   // React-hook-form
   const {
@@ -35,7 +34,7 @@ export const SignUpForm = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
     // Creation of a user through context and firebase auth
-    SignUpUser(data);
+    signUpUser(data);
   };
 
   const errorHandler = () => {

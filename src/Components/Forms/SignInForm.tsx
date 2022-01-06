@@ -14,7 +14,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 export const SignInForm = () => {
   // Importing function from contex
-  const { SignInUser, errorMsg, disabledBtn, firebaseError } = useAuth();
+  const { signInUser, errorMsg, firebaseError } = useAuth();
 
   // React-hook-form
   const {
@@ -29,7 +29,7 @@ export const SignInForm = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
     // Creation of a user through firebase auth
-    SignInUser(data);
+    signInUser(data);
   };
 
   const errorHandler = () => {
