@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // Models
-import { ISignUp } from '../../Models/ISignUp';
+import { ISignIn } from '../../Models/ISignIn';
 import { ISignInYupSchema } from '../../Models/IYupSchema';
 
 // MUI components
@@ -21,13 +21,13 @@ export const SignInForm = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ISignUp>(
+  } = useForm<ISignIn>(
     // Importing Yup Schema for validation
     { resolver: yupResolver(ISignInYupSchema) }
   );
 
   // Form handler
-  const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
+  const formSubmitHandler: SubmitHandler<ISignIn> = (data: ISignIn) => {
     // Creation of a user through firebase auth
     signInUser(data);
   };
@@ -43,7 +43,7 @@ export const SignInForm = () => {
   };
 
   return (
-    <div className='signUpContent'>
+    <div className='signInContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
