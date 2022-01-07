@@ -7,6 +7,7 @@ import { SignUpView } from './Views/SignUpView';
 import { AuthContexProvider } from './Utils/Contexs/AuthContext';
 import { PrivateRoute } from './Utils/PrivateRoute';
 import { SwipeView } from './Views/SwipeView';
+import { ResetPasswordView } from './Views/ResetPasswordView';
 
 function App() {
   return (
@@ -33,6 +34,17 @@ function App() {
                     <LogoLarge />
                   </nav>
                   <SignUpView />
+                </div>
+              }
+            />
+            <Route
+              path='/resetpassword'
+              element={
+                <div className='resetPasswordViewWrapper'>
+                  <nav>
+                    <LogoLarge />
+                  </nav>
+                  <ResetPasswordView />
                 </div>
               }
             />

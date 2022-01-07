@@ -7,6 +7,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -22,6 +23,7 @@ import { ISignUp } from '../../Models/ISignUp';
 import { errorMsgStartValue } from '../../Models/IErrorMsg';
 import { IAuthContex } from '../../Models/IAuthContex';
 import { ISignIn } from '../../Models/ISignIn';
+import { IPasswrodReset } from '../../Models/IPasswordReset';
 
 // Initiating context
 export const AuthContex = React.createContext({} as IAuthContex);
@@ -36,6 +38,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const [disabledBtn, setdisabledBtn] = useState(false);
   const [firebaseError, setFirebaseError] = useState(false);
   const [isSignedIn, setisSignedIn] = useState(false);
+  const [succsessMsg, setsuccsessMsg] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Used to redirect users to a spesific route
   const navigate = useNavigate();
@@ -85,6 +89,21 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
         console.log(errorMsg.errorCode);
+      });
+  };
+
+  // Reset password with firebase
+  const passwordReset = (props: IPasswrodReset) => {
+    sendPasswordResetEmail(auth, props.email)
+      .then(() => {
+        // Password reset email sent!
+        setIsSuccess(true);
+        setsuccsessMsg('Check your email to reset your password');
+      })
+      .catch((error) => {
+        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
+        console.log(errorMsg.errorCode);
+        // ..
       });
   };
 
@@ -159,10 +178,13 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   // Auth provider values
   const values = {
     errorMsg,
+    succsessMsg,
+    isSuccess,
     disabledBtn,
     firebaseError,
     signUpUser,
     signInUser,
+    passwordReset,
     signOutUser,
     googleSignIn,
     facebookSignIn,
