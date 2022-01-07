@@ -1,16 +1,10 @@
-import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+// Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// Function
-import { auth } from '../../Utils/Firebase';
-
 // Models
 import { ISignUp } from '../../Models/ISignUp';
-import { errorMsgStartValue, IErrorMsg } from '../../Models/IErrorMsg';
-import { IYupSchema } from '../../Models/IYupSchema';
+import { ISignUpYupSchema } from '../../Models/IYupSchema';
 
 // MUI components
 import TextField from '@mui/material/TextField';
@@ -21,15 +15,11 @@ import Button from '@mui/material/Button';
 
 //SASS
 import '../../Styles/Scss/SignUp.scss';
+import { useAuth } from '../../Utils/Contexs/AuthContext';
 
-export const SignUp = () => {
-  // All states
-  const [errorMsg, setErrorMsg] = useState<IErrorMsg>(errorMsgStartValue);
-  const [disabledBtn, setdisabledBtn] = useState(false);
-  const [firebaseError, setFirebaseError] = useState(false);
-
-  // Used to redirect users to a spesific route.
-  const navigate = useNavigate();
+export const SignUpForm = () => {
+  // Importing function from contex
+  const { signUpUser, errorMsg, disabledBtn, firebaseError } = useAuth();
 
   // React-hook-form
   const {
@@ -38,27 +28,16 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<ISignUp>(
     // Importing Yup Schema for validation
-    { resolver: yupResolver(IYupSchema) }
+    { resolver: yupResolver(ISignUpYupSchema) }
   );
 
   // Form handler
   const formSubmitHandler: SubmitHandler<ISignUp> = (data: ISignUp) => {
-    // Creation of a user through firebase auth
-
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        setdisabledBtn(true);
-        setFirebaseError(false);
-        navigate('/login');
-      })
-      .catch((error) => {
-        setdisabledBtn(false);
-        setFirebaseError(true);
-        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
-      });
+    // Creation of a user through context and firebase auth
+    signUpUser(data);
   };
 
+  // This functions returns a string that is being presented to the user if there is an error.
   const errorHandler = () => {
     if (errorMsg.errorCode === 'auth/email-already-in-use') {
       return 'Email is already in use';
@@ -111,7 +90,6 @@ export const SignUp = () => {
             <TextField
               className='formInputs'
               {...field}
-              required
               type='password'
               label='Confirm Password'
               variant='outlined'
