@@ -61,7 +61,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         setdisabledBtn(false);
         setFirebaseError(true);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(error.errorCode);
       });
   };
 
@@ -75,7 +74,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         setFirebaseError(true);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
         navigate('/');
       });
   };
@@ -88,7 +86,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       })
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
       });
   };
 
@@ -102,7 +99,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       })
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
         // ..
       });
   };
@@ -120,7 +116,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         // Handle Errors here.
         setisSignedIn(false);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        console.log(errorMsg.errorCode);
         navigate('/');
       });
   };
@@ -136,9 +131,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         // Handle Errors here.
         setisSignedIn(false);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode || errorMessage);
         navigate('/');
       });
   };
@@ -154,9 +146,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         // Handle Errors here.
         setisSignedIn(false);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode || errorMessage);
         navigate('/');
       });
   };
@@ -168,7 +157,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         // User is signed in
         setisSignedIn(true);
         setCurrentUser(data);
-        console.log('UseEffect', data);
       } else {
         // User is signed out
         setisSignedIn(false);
