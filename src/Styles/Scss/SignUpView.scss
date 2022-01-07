@@ -1,0 +1,15 @@
+.signUpWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .actionTitle {
+    margin: 1rem 0rem;
+  }
+
+  @media (min-width: 768px) {
+    .actionTitle {
+      font-size: 1.5rem;
+    }
+  }
+}

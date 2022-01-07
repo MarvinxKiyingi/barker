@@ -1,0 +1,28 @@
+.signUpContent {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  padding: 0 2rem;
+  .formInputs .gdprTermsWrapper {
+    margin: 1rem 0rem;
+  }
+  .gdprTermsWrapper {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0rem;
+  }
+
+  .gdprTermsWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .gdprTermsWrapper_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .submitButtonWrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
