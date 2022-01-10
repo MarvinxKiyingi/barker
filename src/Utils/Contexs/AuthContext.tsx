@@ -61,7 +61,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .then((user) => {
         setdisabledBtn(true);
         setFirebaseError(false);
-        navigate('/');
+        navigate('/signin');
       })
       .catch((error) => {
         setdisabledBtn(false);
@@ -79,7 +79,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         const docSnap = await getDoc(docRef);
         // Check if user is new
         if (docSnap.exists().valueOf()) {
-          navigate('/swipe');
+          navigate('/');
         } else {
           navigate('createprofile');
         }
@@ -87,7 +87,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         setFirebaseError(true);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        navigate('/');
+        navigate('/signin');
       });
   };
 
@@ -95,7 +95,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
-        navigate('/');
+        navigate('/signin');
       })
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
@@ -127,7 +127,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         // Handle Errors here.
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        navigate('/');
+        navigate('/signin');
       });
   };
 
@@ -141,7 +141,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         // Handle Errors here.
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        navigate('/');
+        navigate('/signin');
       });
   };
 
@@ -155,7 +155,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         // Handle Errors here.
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        navigate('/');
+        navigate('/signin');
       });
   };
 

@@ -16,8 +16,9 @@ function App() {
       <AuthContexProvider>
         <header className='appWrapper'>
           <Routes>
+            <Route path='/' element={<PrivateRoute component={SwipeView} />} />
             <Route
-              path='/'
+              path='/signin'
               element={
                 <div className='appContent'>
                   <nav>
@@ -49,18 +50,7 @@ function App() {
                 </div>
               }
             />
-            <Route
-              path='/createprofile'
-              element={
-                <div className='resetPasswordViewWrapper'>
-                  <nav>
-                    <LogoLarge />
-                  </nav>
-                  <CreateProfileView />
-                </div>
-              }
-            />
-            <Route path='/swipe' element={<PrivateRoute component={SwipeView} />} />
+            <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
             <Route
               path='*'
               element={

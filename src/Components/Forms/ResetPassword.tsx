@@ -70,7 +70,7 @@ export const ResetPassword = () => {
           </Button>
         </div>
         <div>
-          <Link to='/'>Sign in</Link>
+          <Link to='/signin'>Sign in</Link>
         </div>
       </form>
     </div>

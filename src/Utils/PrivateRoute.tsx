@@ -6,5 +6,5 @@ export const PrivateRoute: React.FC<IPrivateRoute> = ({ component: RouteComponen
   // importing state from context
   const { currentUser, currentUserLoading } = useAuth();
 
-  return currentUser || currentUserLoading ? <RouteComponent /> : <Navigate replace to='/' />;
+  return currentUser || currentUserLoading ? <RouteComponent /> : <Navigate replace to='/signin' />;
 };

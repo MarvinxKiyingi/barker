@@ -9,7 +9,7 @@ export const IsNewSocialMediaUser = (result: UserCredential) => {
     // redirect users to create a profile
     return 'createprofile';
   } else {
-    return '/swipe';
+    return '/';
   }
 };
 

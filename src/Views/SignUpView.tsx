@@ -9,7 +9,7 @@ export const SignUpView = () => {
     <div className='signUpWrapper'>
       <h3 className='actionTitle'>Create account</h3>
       <p>
-        Already have an account? <Link to={'/'}>Sign in</Link>
+        Already have an account? <Link to={'/signin'}>Sign in</Link>
       </p>
       <SignUpForm />
     </div>

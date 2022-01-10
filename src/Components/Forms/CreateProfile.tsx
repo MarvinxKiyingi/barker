@@ -46,7 +46,7 @@ export const CreateProfile = () => {
           age: data.age,
           height: data.height,
         });
-        navigate('/swipe');
+        navigate('/');
       } catch {
         console.log('something went wrong');
       }
