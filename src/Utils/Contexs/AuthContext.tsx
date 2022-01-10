@@ -12,7 +12,7 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
-import { auth } from '../Firebase';
+import { auth, db } from '../Firebase';
 import { User as FirebaseUser } from 'firebase/auth';
 
 // Npm packages
@@ -24,6 +24,10 @@ import { errorMsgStartValue } from '../../Models/IErrorMsg';
 import { IAuthContex } from '../../Models/IAuthContex';
 import { ISignIn } from '../../Models/ISignIn';
 import { IPasswrodReset } from '../../Models/IPasswordReset';
+
+// Utils
+import { IsNewSocialMediaUser } from '../IsNewUser';
+import { doc, getDoc } from 'firebase/firestore';
 
 // Initiating context
 export const AuthContex = React.createContext({} as IAuthContex);
@@ -67,9 +71,17 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   // Signin in a user to firebase
   const signInUser = (props: ISignIn) => {
     signInWithEmailAndPassword(auth, props.email, props.password)
-      .then((user) => {
+      .then(async (user) => {
         setFirebaseError(false);
-        navigate('/swipe');
+        const docRef = doc(db, 'Users', `${currentUser?.uid}`);
+        const docSnap = await getDoc(docRef);
+
+        // Check if user is new
+        if (docSnap.exists().valueOf()) {
+          navigate('/swipe');
+        } else {
+          navigate('createprofile');
+        }
       })
       .catch((error) => {
         setFirebaseError(true);
@@ -83,6 +95,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     signOut(auth)
       .then(() => {
         setisSignedIn(false);
+        navigate('/');
       })
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
@@ -110,7 +123,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .then((result) => {
         // The signed-in user info.
         setisSignedIn(true);
-        navigate('/swipe');
+        // IsNewUser returns a string depending on if the users first time or not.
+        navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -126,7 +140,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .then((result) => {
         // The signed-in user info.
         setisSignedIn(true);
-        navigate('/swipe');
+        // IsNewUser returns a string depending on if the users first time or not.
+        navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -141,7 +156,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .then((result) => {
         // The signed-in user info.
         setisSignedIn(true);
-        navigate('/swipe');
+        // IsNewUser returns a string depending on if the users first time or not.
+        navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -157,9 +173,12 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         // User is signed in
         setisSignedIn(true);
         setCurrentUser(data);
+        console.log('state = definitely signed in');
+        console.log('CurrentUser: ', currentUser);
       } else {
         // User is signed out
         setisSignedIn(false);
+        console.log('state = definitely signed out');
       }
     });
   }, [isSignedIn, currentUser]);

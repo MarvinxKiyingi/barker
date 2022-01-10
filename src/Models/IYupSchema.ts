@@ -13,6 +13,11 @@ export const ISignInYupSchema = yup.object().shape({
   email: yup.string().required().email(),
   password: yup.string().required().min(6),
 });
+export const IUserYupSchema = yup.object().shape({
+  name: yup.string().required(),
+  age: yup.number().required().min(1).max(16),
+  height: yup.number().required().min(15).max(110),
+});
 export const IPasswordResetYupSchema = yup.object().shape({
   email: yup.string().required().email(),
 });
