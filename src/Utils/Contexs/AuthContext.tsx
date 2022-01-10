@@ -14,6 +14,7 @@ import {
 } from 'firebase/auth';
 import { auth, db } from '../Firebase';
 import { User as FirebaseUser } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Npm packages
 import { useNavigate } from 'react-router-dom';
@@ -36,12 +37,13 @@ export const AuthContex = React.createContext({} as IAuthContex);
 export const useAuth = () => useContext(AuthContex);
 
 export const AuthContexProvider: React.FC = ({ children }) => {
-  // All useStates
+  // firebase-React-Hooks
+  const [currentUser, currentUserLoading, error] = useAuthState(auth);
+
+  // My useStates
   const [errorMsg, setErrorMsg] = useState(errorMsgStartValue);
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
   const [disabledBtn, setdisabledBtn] = useState(false);
   const [firebaseError, setFirebaseError] = useState(false);
-  const [isSignedIn, setisSignedIn] = useState(false);
   const [succsessMsg, setsuccsessMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -71,11 +73,10 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   // Signin in a user to firebase
   const signInUser = (props: ISignIn) => {
     signInWithEmailAndPassword(auth, props.email, props.password)
-      .then(async (user) => {
+      .then(async (data) => {
         setFirebaseError(false);
-        const docRef = doc(db, 'Users', `${currentUser?.uid}`);
+        const docRef = doc(db, 'Users', `${data.user.uid}`);
         const docSnap = await getDoc(docRef);
-
         // Check if user is new
         if (docSnap.exists().valueOf()) {
           navigate('/swipe');
@@ -94,7 +95,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
-        setisSignedIn(false);
         navigate('/');
       })
       .catch((error) => {
@@ -121,14 +121,11 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const googleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        // The signed-in user info.
-        setisSignedIn(true);
         // IsNewUser returns a string depending on if the users first time or not.
         navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
-        setisSignedIn(false);
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
         navigate('/');
       });
@@ -138,14 +135,12 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const facebookSignIn = () => {
     signInWithPopup(auth, facebookProvider)
       .then((result) => {
-        // The signed-in user info.
-        setisSignedIn(true);
         // IsNewUser returns a string depending on if the users first time or not.
         navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
-        setisSignedIn(false);
+        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
         navigate('/');
       });
   };
@@ -154,34 +149,16 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const gitHubSignIn = () => {
     signInWithPopup(auth, gitHubProvider)
       .then((result) => {
-        // The signed-in user info.
-        setisSignedIn(true);
         // IsNewUser returns a string depending on if the users first time or not.
         navigate(`${IsNewSocialMediaUser(result)}`);
       })
       .catch((error) => {
         // Handle Errors here.
-        setisSignedIn(false);
+        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
         navigate('/');
       });
   };
 
-  // Getting the current user.
-  useEffect(() => {
-    onAuthStateChanged(auth, (data) => {
-      if (data) {
-        // User is signed in
-        setisSignedIn(true);
-        setCurrentUser(data);
-        console.log('state = definitely signed in');
-        console.log('CurrentUser: ', currentUser);
-      } else {
-        // User is signed out
-        setisSignedIn(false);
-        console.log('state = definitely signed out');
-      }
-    });
-  }, [isSignedIn, currentUser]);
   // Auth provider values
   const values = {
     errorMsg,
@@ -196,8 +173,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     googleSignIn,
     facebookSignIn,
     gitHubSignIn,
-    isSignedIn,
     currentUser,
+    currentUserLoading,
   };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;

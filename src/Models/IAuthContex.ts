@@ -17,6 +17,6 @@ export interface IAuthContex {
   googleSignIn: () => void;
   facebookSignIn: () => void;
   gitHubSignIn: () => void;
-  isSignedIn: boolean;
-  currentUser: FirebaseUser | null; // Remove any and set the real data type!!!
+  currentUser: FirebaseUser | null | undefined;
+  currentUserLoading: boolean; // Remove any and set the real data type!!!
 }

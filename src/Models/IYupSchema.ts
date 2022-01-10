@@ -11,7 +11,7 @@ export const ISignUpYupSchema = yup.object().shape({
 });
 export const ISignInYupSchema = yup.object().shape({
   email: yup.string().required().email(),
-  password: yup.string().required().min(6),
+  password: yup.string().required(),
 });
 export const IUserYupSchema = yup.object().shape({
   name: yup.string().required(),
