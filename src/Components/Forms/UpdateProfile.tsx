@@ -1,13 +1,16 @@
 // Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
 
 //Firebase
-import { doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../Utils/Firebase';
+
+// react-firebase-hooks
+import { useDocument } from 'react-firebase-hooks/firestore';
 
 // Models
-import { IUserYupSchema } from '../../Models/IYupSchema';
+import { IUpdateUserYupSchema } from '../../Models/IYupSchema';
 import { IUser } from '../../Models/IUser';
 
 // Importing context
@@ -16,14 +19,16 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 // MUI components
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { db } from '../../Utils/Firebase';
+import Stack from '@mui/material/Stack';
 
-export const CreateProfile = () => {
-  const { currentUser, createUserProfile } = useAuth();
+export const UpdateProfile = () => {
+  const { currentUser, deleteUserAndProfile, updateUserProfile } = useAuth();
   console.log('CurrentUser: ', currentUser);
 
-  // Used to redirect users to a spesific route
-  const navigate = useNavigate();
+  const [value] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
+
+  console.log(value?.data());
+  const snapShot = value?.data();
 
   // React-hook-form
   const {
@@ -32,13 +37,13 @@ export const CreateProfile = () => {
     formState: { errors },
   } = useForm<IUser>(
     // Importing Yup Schema for validation
-    { resolver: yupResolver(IUserYupSchema) }
+    { resolver: yupResolver(IUpdateUserYupSchema) }
   );
 
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
     console.log('Form object: ', data);
-    createUserProfile(data);
+    updateUserProfile(data);
   };
 
   return (
@@ -47,12 +52,12 @@ export const CreateProfile = () => {
         <Controller
           name={'name'}
           control={control}
-          defaultValue={''}
+          defaultValue={snapShot?.name}
           render={({ field }) => (
             <TextField
               {...field}
               type='name'
-              label='name'
+              label={`${snapShot?.name}`}
               variant='outlined'
               error={!!errors.name}
               helperText={errors.name ? errors.name?.message : ''}
@@ -64,12 +69,12 @@ export const CreateProfile = () => {
         <Controller
           name={'age'}
           control={control}
-          defaultValue={0}
+          defaultValue={snapShot?.age}
           render={({ field }) => (
             <TextField
               {...field}
               type='age'
-              label='age'
+              label={`${snapShot?.age}`}
               variant='outlined'
               error={!!errors.age}
               helperText={errors.age ? errors.age?.message : ''}
@@ -81,12 +86,12 @@ export const CreateProfile = () => {
         <Controller
           name={'height'}
           control={control}
-          defaultValue={0}
+          defaultValue={snapShot?.height}
           render={({ field }) => (
             <TextField
               {...field}
               type='height'
-              label='height'
+              label={`${snapShot?.height}`}
               variant='outlined'
               error={!!errors.height}
               helperText={errors.height ? errors.height?.message : ''}
@@ -96,11 +101,14 @@ export const CreateProfile = () => {
           )}
         />
 
-        <div className='submitButtonWrapper'>
+        <Stack spacing={2} direction='row' justifyContent='center'>
           <Button type='submit' variant='contained'>
-            Create profile
+            Update
           </Button>
-        </div>
+          <Button variant='contained' color='error' onClick={() => deleteUserAndProfile()}>
+            Delete
+          </Button>
+        </Stack>
       </form>
     </div>
   );

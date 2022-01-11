@@ -1,19 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 //Firebase
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   FacebookAuthProvider,
   GithubAuthProvider,
   GoogleAuthProvider,
-  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
 import { auth, db } from '../Firebase';
-import { User as FirebaseUser } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Npm packages
@@ -28,7 +27,8 @@ import { IPasswrodReset } from '../../Models/IPasswordReset';
 
 // Utils
 import { IsNewSocialMediaUser } from '../IsNewUser';
-import { doc, getDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { IUser } from '../../Models/IUser';
 
 // Initiating context
 export const AuthContex = React.createContext({} as IAuthContex);
@@ -38,7 +38,7 @@ export const useAuth = () => useContext(AuthContex);
 
 export const AuthContexProvider: React.FC = ({ children }) => {
   // firebase-React-Hooks
-  const [currentUser, currentUserLoading, error] = useAuthState(auth);
+  const [currentUser, currentUserLoading] = useAuthState(auth);
 
   // My useStates
   const [errorMsg, setErrorMsg] = useState(errorMsgStartValue);
@@ -100,6 +100,49 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         setErrorMsg({ errorMessage: error.message, errorCode: error.code });
       });
+  };
+  const createUserProfile = (props: IUser) => {
+    if (currentUser) {
+      try {
+        setDoc(doc(db, 'Users', currentUser.uid), {
+          name: props.name,
+          age: props.age,
+          height: props.height,
+        });
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const updateUserProfile = (props: IUser) => {
+    if (currentUser) {
+      try {
+        updateDoc(doc(db, 'Users', currentUser.uid), {
+          name: props.name,
+          age: props.age,
+          height: props.height,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const deleteUserAndProfile = async () => {
+    if (currentUser) {
+      try {
+        await deleteDoc(doc(db, 'Users', currentUser.uid));
+      } catch (error) {
+        console.log(error);
+      }
+      try {
+        deleteUser(currentUser);
+      } catch (error) {
+        console.log(error);
+      }
+      navigate('/signin');
+    }
   };
 
   // Reset password with firebase
@@ -175,6 +218,9 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     gitHubSignIn,
     currentUser,
     currentUserLoading,
+    deleteUserAndProfile,
+    updateUserProfile,
+    createUserProfile,
   };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;
