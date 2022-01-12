@@ -20,14 +20,13 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { Alert, InputLabel } from '@mui/material';
 
 export const UpdateProfile = () => {
-  const { currentUser, deleteUserAndProfile, updateUserProfile } = useAuth();
-  console.log('CurrentUser: ', currentUser);
+  const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
 
-  const [value] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
-
-  console.log(value?.data());
+  // using React Firebase Hooks to retrive the data from firebase
+  const [value, isLoading, error] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const snapShot = value?.data();
 
   // React-hook-form
@@ -37,83 +36,93 @@ export const UpdateProfile = () => {
     formState: { errors },
   } = useForm<IUser>(
     // Importing Yup Schema for validation
-
-    { defaultValues: snapShot }
+    { resolver: yupResolver(IUpdateUserYupSchema) }
   );
 
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
-    // console.log('From FIREBASE: ', snapShot);
-    console.log('Form object: ', data);
-    // console.log('Updated Value: ', { ...snapShot, ...data });
-    const updatedData = { ...snapShot!, ...data };
-    // updateUserProfile(updatedData);
+    updateUserProfile(data);
+  };
+
+  const errorHandler = () => {
+    return errorMsg.errorCode;
   };
 
   return (
     <div className='passwordResetContent'>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <Controller
-          name={'name'}
-          control={control}
-          defaultValue={snapShot?.name}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              type='name'
-              label={`${snapShot?.name}`}
-              variant='outlined'
-              error={!!errors.name}
-              helperText={errors.name ? errors.name?.message : ''}
-              fullWidth
-              style={{ margin: ' 1rem 0rem' }}
-            />
-          )}
-        />
-        <Controller
-          name={'age'}
-          control={control}
-          defaultValue={snapShot?.age}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              type='age'
-              label={`${snapShot?.age}`}
-              variant='outlined'
-              error={!!errors.age}
-              helperText={errors.age ? errors.age?.message : ''}
-              fullWidth
-              style={{ margin: ' 1rem 0rem' }}
-            />
-          )}
-        />
-        <Controller
-          name={'height'}
-          control={control}
-          defaultValue={snapShot?.height}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              type='height'
-              label={`${snapShot?.height}`}
-              variant='outlined'
-              error={!!errors.height}
-              helperText={errors.height ? errors.height?.message : ''}
-              fullWidth
-              style={{ margin: ' 1rem 0rem' }}
-            />
-          )}
-        />
+      {isLoading ? (
+        <p>Loading....</p>
+      ) : (
+        <form onSubmit={handleSubmit(formSubmitHandler)}>
+          {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null};
+          <Controller
+            name={'name'}
+            control={control}
+            defaultValue={snapShot?.name}
+            render={({ field }) => (
+              <>
+                <InputLabel>Name: {snapShot?.name}</InputLabel>
+                <TextField
+                  {...field}
+                  type='name'
+                  variant='outlined'
+                  error={!!errors.name}
+                  helperText={errors.name ? errors.name?.message : ''}
+                  fullWidth
+                  style={{ margin: ' 1rem 0rem' }}
+                />
+              </>
+            )}
+          />
+          <Controller
+            name={'age'}
+            control={control}
+            defaultValue={snapShot?.age}
+            render={({ field }) => (
+              <>
+                <InputLabel>Age: {snapShot?.age}</InputLabel>
+                <TextField
+                  {...field}
+                  type='age'
+                  variant='outlined'
+                  error={!!errors.age}
+                  helperText={errors.age ? errors.age?.message : ''}
+                  fullWidth
+                  style={{ margin: ' 1rem 0rem' }}
+                />
+              </>
+            )}
+          />
+          <Controller
+            name={'height'}
+            control={control}
+            defaultValue={snapShot?.height}
+            render={({ field }) => (
+              <>
+                <InputLabel>Height: {snapShot?.height}</InputLabel>
 
-        <Stack spacing={2} direction='row' justifyContent='center'>
-          <Button type='submit' variant='contained'>
-            Update
-          </Button>
-          <Button variant='contained' color='error' onClick={() => deleteUserAndProfile()}>
-            Delete
-          </Button>
-        </Stack>
-      </form>
+                <TextField
+                  {...field}
+                  type='height'
+                  variant='outlined'
+                  error={!!errors.height}
+                  helperText={errors.height ? errors.height?.message : ''}
+                  fullWidth
+                  style={{ margin: ' 1rem 0rem' }}
+                />
+              </>
+            )}
+          />
+          <Stack spacing={2} direction='row' justifyContent='center'>
+            <Button type='submit' variant='contained'>
+              Update
+            </Button>
+            <Button variant='contained' color='error' onClick={() => deleteUserAndProfile()}>
+              Delete
+            </Button>
+          </Stack>
+        </form>
+      )}
     </div>
   );
 };
