@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,7 +22,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Alert, InputLabel } from '@mui/material';
+import { Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
 
 export const UpdateProfile = () => {
   const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
@@ -28,6 +30,9 @@ export const UpdateProfile = () => {
   // using React Firebase Hooks to retrive the data from firebase
   const [value, isLoading] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const snapShot = value?.data();
+
+  // state for MUI Dialog
+  const [open, setOpen] = useState(false);
 
   // React-hook-form
   const {
@@ -44,6 +49,12 @@ export const UpdateProfile = () => {
     updateUserProfile(data);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const errorHandler = () => {
     return errorMsg.errorCode;
   };
@@ -54,7 +65,7 @@ export const UpdateProfile = () => {
         <p>Loading....</p>
       ) : (
         <form onSubmit={handleSubmit(formSubmitHandler)}>
-          {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null};
+          {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
           <Controller
             name={'name'}
             control={control}
@@ -117,9 +128,24 @@ export const UpdateProfile = () => {
             <Button type='submit' variant='contained'>
               Update
             </Button>
-            <Button variant='contained' color='error' onClick={() => deleteUserAndProfile()}>
+            <Button variant='contained' color='error' onClick={() => handleClickOpen()}>
               Delete
             </Button>
+
+            <Dialog open={open} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
+              <DialogTitle id='alert-dialog-title'>{'Delete account'}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id='alert-dialog-description'>
+                  Are you sure you want remove Barker account? All of your data and information will be permanently deleted.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Disagree</Button>
+                <Button onClick={() => deleteUserAndProfile()} autoFocus>
+                  Agree
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Stack>
         </form>
       )}
