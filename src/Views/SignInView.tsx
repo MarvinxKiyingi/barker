@@ -4,14 +4,15 @@ import { SignInForm } from '../Components/Forms/SignInForm';
 // MUI components
 import Button from '@mui/material/Button';
 import { useAuth } from '../Utils/Contexs/AuthContext';
+import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrapper';
 
 //SASS
-import '../Styles/Scss/SignInView.scss';
+// import '../Styles/Scss/SignInView.scss';
 
 export const SignInView = () => {
   const { googleSignIn, facebookSignIn, gitHubSignIn } = useAuth();
   return (
-    <div className='signInWrapper'>
+    <StyledFormsWrapper className='signUpWrapper'>
       <SignInForm />
       <div className='socialMediaLoginWrapper'>
         <Button
@@ -38,9 +39,6 @@ export const SignInView = () => {
           Github
         </Button>
       </div>
-      <p>
-        Not a member? <Link to={'/signup'}>Sign up</Link>
-      </p>
-    </div>
+    </StyledFormsWrapper>
   );
 };

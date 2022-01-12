@@ -37,13 +37,17 @@ export const UpdateProfile = () => {
     formState: { errors },
   } = useForm<IUser>(
     // Importing Yup Schema for validation
-    { resolver: yupResolver(IUpdateUserYupSchema) }
+
+    { defaultValues: snapShot }
   );
 
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
+    // console.log('From FIREBASE: ', snapShot);
     console.log('Form object: ', data);
-    updateUserProfile(data);
+    // console.log('Updated Value: ', { ...snapShot, ...data });
+    const updatedData = { ...snapShot!, ...data };
+    // updateUserProfile(updatedData);
   };
 
   return (

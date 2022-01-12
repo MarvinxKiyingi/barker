@@ -1,4 +1,7 @@
-.signUpWrapper {
+import styled from 'styled-components';
+
+export const StyledFormsWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,4 +15,4 @@
       font-size: 1.5rem;
     }
   }
-}
+`;

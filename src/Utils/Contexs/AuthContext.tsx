@@ -116,17 +116,18 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     }
   };
   const updateUserProfile = (props: IUser) => {
-    if (currentUser) {
-      try {
-        updateDoc(doc(db, 'Users', currentUser.uid), {
-          name: props.name,
-          age: props.age,
-          height: props.height,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    console.log('Resiving Data: ', props);
+    // if (currentUser) {
+    //   try {
+    //     updateDoc(doc(db, 'Users', currentUser.uid), {
+    //       name: props.name,
+    //       age: props.age,
+    //       height: props.height,
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   };
 
   const deleteUserAndProfile = async () => {

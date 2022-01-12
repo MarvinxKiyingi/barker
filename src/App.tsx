@@ -21,7 +21,7 @@ function App() {
             <Route
               path='/signin'
               element={
-                <div className='appContent'>
+                <div className='signInViewWrapper'>
                   <nav>
                     <LogoLarge />
                   </nav>

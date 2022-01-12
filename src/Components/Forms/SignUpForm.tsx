@@ -16,8 +16,8 @@ import Button from '@mui/material/Button';
 //Contex
 import { useAuth } from '../../Utils/Contexs/AuthContext';
 
-//SASS
-import '../../Styles/Scss/SignUpForm.scss';
+// Styles
+import { StyledSignUpForm } from '../../Styles/StyledComponents/StyledForms';
 
 export const SignUpForm = () => {
   // Importing function from contex
@@ -47,7 +47,7 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className='signUpContent'>
+    <StyledSignUpForm className='signUpContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
@@ -124,6 +124,6 @@ export const SignUpForm = () => {
           </Button>
         </div>
       </form>
-    </div>
+    </StyledSignUpForm>
   );
 };

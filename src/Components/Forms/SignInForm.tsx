@@ -15,6 +15,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Alert } from '@mui/material';
 
+//Styles
+import { StyledSignInForm } from '../../Styles/StyledComponents/StyledForms';
+
 export const SignInForm = () => {
   // Importing function from contex
   const { signInUser, errorMsg, firebaseError } = useAuth();
@@ -46,8 +49,12 @@ export const SignInForm = () => {
   };
 
   return (
-    <div className='signInContent'>
+    <StyledSignInForm className='signInContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
+      <h3 className='actionTitle'>Sign in</h3>
+      <p>
+        Not a member? <Link to={'/signup'}>Sign up</Link>
+      </p>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name={'email'}
@@ -83,16 +90,15 @@ export const SignInForm = () => {
             />
           )}
         />
-
         <div className='submitButtonWrapper'>
           <Button type='submit' variant='contained'>
             Sign in
           </Button>
         </div>
-        <div>
+        <div className='resetPassword'>
           <Link to='/resetpassword'>Forgot your password ?</Link>
         </div>
       </form>
-    </div>
+    </StyledSignInForm>
   );
 };
