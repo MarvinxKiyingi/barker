@@ -26,7 +26,7 @@ export const UpdateProfile = () => {
   const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
 
   // using React Firebase Hooks to retrive the data from firebase
-  const [value, isLoading, error] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
+  const [value, isLoading] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const snapShot = value?.data();
 
   // React-hook-form
