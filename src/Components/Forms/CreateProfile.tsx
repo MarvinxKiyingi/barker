@@ -1,10 +1,6 @@
 // Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
-
-//Firebase
-import { doc, setDoc } from 'firebase/firestore';
 
 // Models
 import { IUserYupSchema } from '../../Models/IYupSchema';
@@ -16,15 +12,12 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 // MUI components
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Alert } from '@mui/material';
-import { db } from '../../Utils/Firebase';
 
 export const CreateProfile = () => {
-  const { currentUser, errorMsg, firebaseError } = useAuth();
+  const { currentUser, createUserProfile } = useAuth();
   console.log('CurrentUser: ', currentUser);
 
   // Used to redirect users to a spesific route
-  const navigate = useNavigate();
 
   // React-hook-form
   const {
@@ -39,27 +32,11 @@ export const CreateProfile = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
     console.log('Form object: ', data);
-    if (currentUser) {
-      try {
-        setDoc(doc(db, 'Users', currentUser.uid), {
-          name: data.name,
-          age: data.age,
-          height: data.height,
-        });
-        navigate('/');
-      } catch {
-        console.log('something went wrong');
-      }
-    }
-  };
-  // This functions returns a string that is being presented to the user if there is an error.
-  const errorHandler = () => {
-    return errorMsg.errorCode;
+    createUserProfile(data);
   };
 
   return (
     <div className='passwordResetContent'>
-      {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name={'name'}

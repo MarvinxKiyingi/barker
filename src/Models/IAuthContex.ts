@@ -3,6 +3,7 @@ import { ISignUp } from './ISignUp';
 import { ISignIn } from './ISignIn';
 import { IPasswrodReset } from './IPasswordReset';
 import { User as FirebaseUser } from 'firebase/auth';
+import { IUser } from './IUser';
 
 export interface IAuthContex {
   errorMsg: IErrorMsg;
@@ -14,6 +15,9 @@ export interface IAuthContex {
   signInUser: (props: ISignIn) => void;
   passwordReset: (props: IPasswrodReset) => void;
   signOutUser: () => void;
+  createUserProfile: (props: IUser) => void;
+  updateUserProfile: (props: IUser) => void;
+  deleteUserAndProfile: () => Promise<void>;
   googleSignIn: () => void;
   facebookSignIn: () => void;
   gitHubSignIn: () => void;

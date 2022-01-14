@@ -9,6 +9,7 @@ import { SwipeView } from './Views/SwipeView';
 import { ResetPasswordView } from './Views/ResetPasswordView';
 import { CreateProfileView } from './Views/CreateProfileView';
 import { PrivateRoute } from './Utils/PrivateRoute';
+import { ProfileView } from './Views/ProfileView';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <Route
               path='/signin'
               element={
-                <div className='appContent'>
+                <div className='signInViewWrapper'>
                   <nav>
                     <LogoLarge />
                   </nav>
@@ -51,6 +52,7 @@ function App() {
               }
             />
             <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
+            <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
             <Route
               path='*'
               element={

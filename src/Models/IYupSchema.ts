@@ -18,6 +18,11 @@ export const IUserYupSchema = yup.object().shape({
   age: yup.number().required().min(1).max(16),
   height: yup.number().required().min(15).max(110),
 });
+export const IUpdateUserYupSchema = yup.object().shape({
+  name: yup.string(),
+  age: yup.number().min(1).max(16),
+  height: yup.number().min(15).max(110),
+});
 export const IPasswordResetYupSchema = yup.object().shape({
   email: yup.string().required().email(),
 });

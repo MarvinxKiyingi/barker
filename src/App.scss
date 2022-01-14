@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
 }
-.signUpViewWrapper {
+.signUpViewWrapper,
+.signInViewWrapper,
+.resetPasswordViewWrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

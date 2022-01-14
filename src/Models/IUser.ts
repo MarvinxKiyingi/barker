@@ -3,3 +3,9 @@ export interface IUser {
   age: number;
   height: number;
 }
+
+export const userStartValue = {
+  name: 'hej',
+  age: 5,
+  height: 0,
+};
