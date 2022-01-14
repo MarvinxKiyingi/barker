@@ -2,6 +2,7 @@ import { IErrorMsg } from '../Models/IErrorMsg';
 import { ISignUp } from './ISignUp';
 import { ISignIn } from './ISignIn';
 import { IPasswrodReset } from './IPasswordReset';
+import { User as FirebaseUser } from 'firebase/auth';
 
 export interface IAuthContex {
   errorMsg: IErrorMsg;
@@ -16,6 +17,6 @@ export interface IAuthContex {
   googleSignIn: () => void;
   facebookSignIn: () => void;
   gitHubSignIn: () => void;
-  isSignedIn: boolean;
-  currentUser: any; // Remove any and set the real data type!!!
+  currentUser: FirebaseUser | null | undefined;
+  currentUserLoading: boolean; // Remove any and set the real data type!!!
 }

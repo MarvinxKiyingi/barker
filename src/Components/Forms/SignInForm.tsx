@@ -17,7 +17,7 @@ import { Alert } from '@mui/material';
 
 export const SignInForm = () => {
   // Importing function from contex
-  const { signInUser, errorMsg, firebaseError } = useAuth();
+  const { signInUser, errorMsg, firebaseError, signOutUser } = useAuth();
 
   // React-hook-form
   const {

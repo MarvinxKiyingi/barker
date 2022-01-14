@@ -5,7 +5,7 @@ export const SwipeView = () => {
   return (
     <div>
       <h1>Swipe View</h1>
-      <p>The current user logged in: {currentUser.email}</p>
+      <p>The current user logged in: {currentUser?.email}</p>
       <button onClick={() => signOutUser()}>Log out</button>
     </div>
   );

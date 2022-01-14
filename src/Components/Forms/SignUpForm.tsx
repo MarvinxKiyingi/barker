@@ -13,9 +13,11 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
-//SASS
-import '../../Styles/Scss/SignUp.scss';
+//Contex
 import { useAuth } from '../../Utils/Contexs/AuthContext';
+
+//SASS
+import '../../Styles/Scss/SignUpForm.scss';
 
 export const SignUpForm = () => {
   // Importing function from contex

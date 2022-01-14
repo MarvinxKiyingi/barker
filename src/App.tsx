@@ -1,13 +1,14 @@
 import './App.scss';
+import { AuthContexProvider } from './Utils/Contexs/AuthContext';
 import { Routes, Route } from 'react-router-dom';
 import { LogoLarge } from './Components/Logo/Logo';
 import { SignInView } from './Views/SignInView';
 import { ErrorPage } from './Views/ErrorView';
 import { SignUpView } from './Views/SignUpView';
-import { AuthContexProvider } from './Utils/Contexs/AuthContext';
-import { PrivateRoute } from './Utils/PrivateRoute';
 import { SwipeView } from './Views/SwipeView';
 import { ResetPasswordView } from './Views/ResetPasswordView';
+import { CreateProfileView } from './Views/CreateProfileView';
+import { PrivateRoute } from './Utils/PrivateRoute';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <AuthContexProvider>
         <header className='appWrapper'>
           <Routes>
+            <Route path='/' element={<PrivateRoute component={SwipeView} />} />
             <Route
-              path='/'
+              path='/signin'
               element={
                 <div className='appContent'>
                   <nav>
@@ -48,7 +50,7 @@ function App() {
                 </div>
               }
             />
-            <Route path='/swipe' element={<PrivateRoute component={SwipeView} />} />
+            <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
             <Route
               path='*'
               element={

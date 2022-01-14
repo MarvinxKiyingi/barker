@@ -43,7 +43,7 @@ export const ResetPassword = () => {
   return (
     <div className='passwordResetContent'>
       {isSuccess ? <Alert severity='success'>{succsessMsg}</Alert> : null}
-      {firebaseError ? <Alert severity='error'>{succsessMsg}</Alert> : null}
+      {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
       <h1>Reset password</h1>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
@@ -70,7 +70,7 @@ export const ResetPassword = () => {
           </Button>
         </div>
         <div>
-          <Link to='/'>Sign in</Link>
+          <Link to='/signin'>Sign in</Link>
         </div>
       </form>
     </div>

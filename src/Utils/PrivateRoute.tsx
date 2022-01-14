@@ -4,8 +4,7 @@ import { useAuth } from './Contexs/AuthContext';
 
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ component: RouteComponent }) => {
   // importing state from context
-  const { isSignedIn, currentUser } = useAuth();
+  const { currentUser, currentUserLoading } = useAuth();
 
-  // using state to toggle the private routing.
-  return currentUser && isSignedIn ? <RouteComponent /> : <Navigate replace to='/' />;
+  return currentUser || currentUserLoading ? <RouteComponent /> : <Navigate replace to='/signin' />;
 };

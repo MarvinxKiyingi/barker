@@ -5,6 +5,9 @@ import { SignInForm } from '../Components/Forms/SignInForm';
 import Button from '@mui/material/Button';
 import { useAuth } from '../Utils/Contexs/AuthContext';
 
+//SASS
+import '../Styles/Scss/SignInView.scss';
+
 export const SignInView = () => {
   const { googleSignIn, facebookSignIn, gitHubSignIn } = useAuth();
   return (
@@ -34,10 +37,10 @@ export const SignInView = () => {
         >
           Github
         </Button>
-        <p>
-          Not a member? <Link to={'/signup'}>Sign up</Link>
-        </p>
       </div>
+      <p>
+        Not a member? <Link to={'/signup'}>Sign up</Link>
+      </p>
     </div>
   );
 };
