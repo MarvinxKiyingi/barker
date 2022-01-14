@@ -1,14 +1,24 @@
 import { NavBar } from '../Components/Navbar/NavBar';
-import { useAuth } from '../Utils/Contexs/AuthContext';
+import Box from '@mui/material/Box';
+import { DatingCard } from '../Components/DatingCard/DatingCard';
 
 export const SwipeView = () => {
-  const { currentUser, signOutUser } = useAuth();
   return (
-    <div>
-      <NavBar />
-      <h1>Swipe View</h1>
-      <p>The current user logged in: {currentUser?.email}</p>
-      <button onClick={() => signOutUser()}>Log out</button>
-    </div>
+    <Box
+      sx={{
+        maxWidth: '30rem',
+        minHeight: '100vh',
+      }}
+    >
+      <Box
+        component='div'
+        sx={{
+          maxWidth: '40rem',
+        }}
+      >
+        <NavBar />
+      </Box>
+      <DatingCard />
+    </Box>
   );
 };

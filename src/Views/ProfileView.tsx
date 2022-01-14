@@ -1,9 +1,15 @@
 import { Profile } from '../Components/Profile/Profile';
+import Box from '@mui/material/Box';
 
 export const ProfileView = () => {
   return (
-    <div>
+    <Box
+      sx={{
+        maxWidth: '30rem',
+        minHeight: '100vh',
+      }}
+    >
       <Profile />
-    </div>
+    </Box>
   );
 };
