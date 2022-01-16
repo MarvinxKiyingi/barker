@@ -11,7 +11,7 @@ import { CreateProfileView } from './Views/CreateProfileView';
 import { PrivateRoute } from './Utils/PrivateRoute';
 import { ProfileView } from './Views/ProfileView';
 import { DatingContexProvider } from './Utils/Contexs/DatingContex';
-import { MatchView } from './Views/MatchView';
+import { MatchesView } from './Views/MatchesView';
 
 function App() {
   return (
@@ -56,7 +56,7 @@ function App() {
               />
               <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
               <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
-              <Route path='/match' element={<PrivateRoute component={MatchView} />} />
+              <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
               <Route
                 path='*'
                 element={

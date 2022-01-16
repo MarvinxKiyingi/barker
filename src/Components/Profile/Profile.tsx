@@ -1,5 +1,5 @@
 import IconButton from '@mui/material/IconButton';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
 // Importing context
@@ -20,7 +20,7 @@ export const Profile = () => {
     <div className='profileWrapper'>
       <nav className='navigation'>
         <IconButton className='navigation_iconbutton' size='large' onClick={() => navigate('/')}>
-          <ArrowBackIosIcon fontSize='inherit' />
+          <ArrowBackIcon fontSize='inherit' />
         </IconButton>
         <h3 className='navigation_header'>profile</h3>
         <span></span>

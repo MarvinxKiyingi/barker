@@ -15,7 +15,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
 
-export const DatingCard = () => {
+export const SwipeCard = () => {
   const { dog, getDogs, randomAge, randomHeight, loading } = useDating();
 
   return (
