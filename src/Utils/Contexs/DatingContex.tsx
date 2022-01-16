@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import axios from 'axios';
-
-// Npm packages
-import { useNavigate } from 'react-router-dom';
 
 // Models
 import { IDatingContext } from '../../Models/IDatingContex';
@@ -17,66 +13,76 @@ export const useDating = () => useContext(DatingContex);
 
 export const DatingContexProvider: React.FC = ({ children }) => {
   // My useStates
-  const [dog, setDog] = useState<[IDog]>([dogInitialValue]);
+  const [dog, setDog] = useState<IDog>(dogInitialValue);
   const [randomAge, setRandomAge] = useState(0);
   const [randomHeight, setRandomHeight] = useState(0);
-  const [isError, setIsError] = useState(false);
-  const lifeSpan = dog[0].breeds[0].life_span;
-  const heightMetric = dog[0].breeds[0].height.metric;
-
-  // Used to redirect users to a spesific route
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const getDogs = async () => {
     axios
-      .get<[IDog]>('https://api.thedogapi.com/v1/images/search')
+      .get<IDog[]>('https://api.thedogapi.com/v1/images/search')
       .then((res) => {
-        if (dog && dog[0].breeds !== undefined) {
-          setDog(res.data);
-          generateRandomAge();
-          generateRandomHeight();
-          // setIsError(false);
+        const dog = res.data[0];
+        const breeds = res.data[0].breeds;
+        setLoading(true);
+
+        if (breeds[0]?.name) {
+          setDog(dog);
+          setLoading(false);
+        } else {
+          getDogs();
         }
       })
       .catch((error) => {
-        setIsError(true);
         console.log(error);
       });
   };
 
   // Extract numbers from a string
-  function getNumbersOnly(props: any) {
-    const str = props;
-    const extractedNumbers = str.match(/\d+/g);
+  function getNumbersOnly(extractedStr: string | null | undefined) {
+    setLoading(true);
 
-    return extractedNumbers;
+    if (extractedStr) {
+      const str = extractedStr;
+      setLoading(false);
+      const extractedNumbers = str?.match(/\d+/g);
+      return extractedNumbers;
+    }
   }
 
-  // Returns a random age based on the feted dog object
+  // Returns a random age based on the fetched dog object
   const generateRandomAge = () => {
+    const lifeSpan = dog.breeds[0].life_span;
+
     if (getNumbersOnly(lifeSpan)) {
       const min = 1;
-      const max = parseInt(getNumbersOnly(lifeSpan)[1]);
-      setRandomAge(Math.floor(Math.random() * (max - min)) + min);
-      // return Math.floor(Math.random() * (max - min)) + min;
+      const max = parseInt(getNumbersOnly(lifeSpan)![1]);
+      const age = Math.floor(Math.random() * (max - min)) + min;
+      setRandomAge(age);
     }
-    // if(getNumbersOnly === NaN)
   };
 
-  // Returns a random height based on the feted dog object
+  // Returns a random height based on the fetched dog object
   const generateRandomHeight = () => {
+    const heightMetric = dog.breeds[0].height.metric;
+
     if (getNumbersOnly(heightMetric)) {
-      const min = parseInt(getNumbersOnly(heightMetric)[0]);
-      const max = parseInt(getNumbersOnly(heightMetric)[1]);
-      setRandomHeight(Math.floor(Math.random() * (max - min)) + min);
-      // return Math.floor(Math.random() * (max - min)) + min;
+      const min = parseInt(getNumbersOnly(heightMetric)![0]);
+      const max = parseInt(getNumbersOnly(heightMetric)![1]);
+      const height = Math.floor(Math.random() * (max - min)) + min;
+      setRandomHeight(height);
     }
   };
   useEffect(() => {
     getDogs();
   }, []);
+
+  useEffect(() => {
+    generateRandomAge();
+    generateRandomHeight();
+  }, [dog]);
   // Dating provider values
-  const values = { getDogs, dog, generateRandomAge, generateRandomHeight, isError };
+  const values = { getDogs, dog, randomAge, randomHeight, loading };
 
   return <DatingContex.Provider value={values}>{children}</DatingContex.Provider>;
 };

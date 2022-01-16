@@ -46,6 +46,6 @@ export const dogInitialValue: IDog = {
   ],
   height: 0,
   id: '',
-  url: 'https://cdn2.thedogapi.com/images/Tu1CbaVud.jpg',
+  url: '',
   width: 0,
 };

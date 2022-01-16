@@ -1,7 +1,12 @@
+// importing context
+import { useDating } from '../../Utils/Contexs/DatingContex';
+
+// MUI components
 import { Box } from '@mui/system';
 import { StyledDeclinedButton, StyledLikeButton } from '../../Styles/StyledComponents/Button';
 import PetsIcon from '@mui/icons-material/Pets';
 import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
 
 //card
 import Card from '@mui/material/Card';
@@ -9,15 +14,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
-import { useDating } from '../../Utils/Contexs/DatingContex';
-import { Button } from '@mui/material';
 
 export const DatingCard = () => {
-  const { dog, getDogs, generateRandomAge, generateRandomHeight, isError } = useDating();
-
-  console.log(dog);
-  // console.log(randomAge);
-  // console.log(randomHeight);
+  const { dog, getDogs, randomAge, randomHeight, loading } = useDating();
 
   return (
     <Box
@@ -29,14 +28,11 @@ export const DatingCard = () => {
         justifyContent: 'space-evenly',
       }}
     >
-      {isError ? (
-        <Box>
-          <p> something went wrong try again</p>
-          <Button onClick={() => getDogs()}> Try again </Button>
-        </Box>
+      {loading ? (
+        <CircularProgress />
       ) : (
         <Card sx={{ maxWidth: '85%' }}>
-          <CardMedia component='img' height='100%' image={`${dog[0].url}`} alt='card media' />
+          <CardMedia component='img' height='100%' image={`${dog.url}`} alt='card media' />
           <CardContent>
             <Box
               sx={{
@@ -47,7 +43,7 @@ export const DatingCard = () => {
               }}
             >
               <Typography gutterBottom variant='h5' component='div'>
-                {dog[0].breeds[0].name},{`${generateRandomAge()}`}
+                {dog.breeds[0].name}, {`${randomAge}`}
               </Typography>
               <Box
                 sx={{
@@ -58,12 +54,12 @@ export const DatingCard = () => {
                 }}
               >
                 <HeightIcon />
-                {`${generateRandomHeight()}cm`}
+                {`${randomHeight}cm`}
               </Box>
             </Box>
 
             <Typography variant='body2' color='text.secondary'>
-              {dog[0].breeds[0].temperament}
+              {dog.breeds[0].temperament}
             </Typography>
           </CardContent>
         </Card>
