@@ -11,6 +11,7 @@ export const MatchView = () => {
 
   return (
     <Box
+      className='matchViewWrapper'
       sx={{
         maxWidth: '30rem',
         minHeight: '100vh',

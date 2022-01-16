@@ -5,19 +5,13 @@ import { DatingCard } from '../Components/DatingCard/DatingCard';
 export const SwipeView = () => {
   return (
     <Box
+      className='swipeViewWrapper'
       sx={{
         maxWidth: '30rem',
         minHeight: '100vh',
       }}
     >
-      <Box
-        component='div'
-        sx={{
-          maxWidth: '40rem',
-        }}
-      >
-        <NavBar />
-      </Box>
+      <NavBar />
       <DatingCard />
     </Box>
   );

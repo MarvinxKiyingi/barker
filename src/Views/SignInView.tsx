@@ -6,7 +6,7 @@ import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrappe
 
 export const SignInView = () => {
   return (
-    <StyledFormsWrapper className='signUpWrapper'>
+    <StyledFormsWrapper className='signInWrapper'>
       <SignInForm />
       <SignInWithSocialMedia />
     </StyledFormsWrapper>

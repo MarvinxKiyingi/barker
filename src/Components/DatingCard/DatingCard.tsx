@@ -32,7 +32,7 @@ export const DatingCard = () => {
         <CircularProgress />
       ) : (
         <Card sx={{ maxWidth: '85%' }}>
-          <CardMedia component='img' height='100%' image={`${dog.url}`} alt='card media' />
+          <CardMedia component='img' height='100%' image={`${dog.url}`} alt='Dog image' />
           <CardContent>
             <Box
               sx={{
