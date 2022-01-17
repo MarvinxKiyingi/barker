@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 // Models
-import { IDatingContext } from '../../Models/IDatingContex';
+import { ISwipeContext } from '../../Models/ISwipeContex';
 import { dogInitialValue, IDog } from '../../Models/IDog';
 
 // Initiating context
-export const DatingContex = React.createContext({} as IDatingContext);
+export const SwipeContex = React.createContext({} as ISwipeContext);
 
 // Exporting the context, to be used wherever
-export const useDating = () => useContext(DatingContex);
+export const useSwipe = () => useContext(SwipeContex);
 
-export const DatingContexProvider: React.FC = ({ children }) => {
+export const SwipeContexProvider: React.FC = ({ children }) => {
   // My useStates
   const [dog, setDog] = useState<IDog>(dogInitialValue);
   const [randomName, setRandomName] = useState('');
@@ -93,5 +93,5 @@ export const DatingContexProvider: React.FC = ({ children }) => {
   // Dating provider values
   const values = { getDogs, dog, randomName, randomAge, randomHeight, loading };
 
-  return <DatingContex.Provider value={values}>{children}</DatingContex.Provider>;
+  return <SwipeContex.Provider value={values}>{children}</SwipeContex.Provider>;
 };

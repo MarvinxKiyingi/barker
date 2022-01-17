@@ -1,6 +1,6 @@
 import { IDog } from './IDog';
 
-export interface IDatingContext {
+export interface ISwipeContext {
   getDogs: () => Promise<void>;
   dog: IDog;
   randomAge: number;

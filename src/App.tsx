@@ -10,14 +10,14 @@ import { ResetPasswordView } from './Views/ResetPasswordView';
 import { CreateProfileView } from './Views/CreateProfileView';
 import { PrivateRoute } from './Utils/PrivateRoute';
 import { ProfileView } from './Views/ProfileView';
-import { DatingContexProvider } from './Utils/Contexs/DatingContex';
+import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
 import { MatchesView } from './Views/MatchesView';
 
 function App() {
   return (
     <div className='app'>
       <AuthContexProvider>
-        <DatingContexProvider>
+        <SwipeContexProvider>
           <header className='appWrapper'>
             <Routes>
               <Route path='/' element={<PrivateRoute component={SwipeView} />} />
@@ -67,7 +67,7 @@ function App() {
               />
             </Routes>
           </header>
-        </DatingContexProvider>
+        </SwipeContexProvider>
       </AuthContexProvider>
     </div>
   );

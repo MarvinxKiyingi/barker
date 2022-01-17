@@ -1,5 +1,5 @@
 // importing context
-import { useDating } from '../../Utils/Contexs/DatingContex';
+import { useSwipe } from '../../Utils/Contexs/SwipeContex';
 
 // MUI components
 import { Box } from '@mui/system';
@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
 
 export const SwipeCard = () => {
-  const { dog, getDogs, randomName, randomAge, randomHeight, loading } = useDating();
+  const { dog, getDogs, randomName, randomAge, randomHeight, loading } = useSwipe();
 
   return (
     <Box
