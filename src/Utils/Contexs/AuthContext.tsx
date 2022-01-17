@@ -109,9 +109,10 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           age: props.age,
           height: props.height,
         });
+        setDoc(doc(db, 'Matches', currentUser.uid), { match: [] });
         navigate('/');
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
   };
@@ -124,7 +125,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           height: props.height,
         });
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
   };
@@ -134,12 +135,17 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       try {
         await deleteDoc(doc(db, 'Users', currentUser.uid));
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
       try {
-        deleteUser(currentUser);
+        await deleteDoc(doc(db, 'Matches', currentUser.uid));
       } catch (error) {
-        console.log(error);
+        alert(error);
+      }
+      try {
+        await deleteUser(currentUser);
+      } catch (error) {
+        alert(error);
       }
       navigate('/signin');
     }

@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
 
 export const SwipeCard = () => {
-  const { dog, getDogs, randomName, randomAge, randomHeight, loading } = useSwipe();
+  const { dog, getDogs, randomName, randomAge, randomHeight, loading, matchWithDog } = useSwipe();
 
   return (
     <Box
@@ -77,7 +77,7 @@ export const SwipeCard = () => {
         <StyledDeclinedButton onClick={() => getDogs()} sx={{ color: 'white', background: '#092C4C' }}>
           <CloseIcon />
         </StyledDeclinedButton>
-        <StyledLikeButton sx={{ color: 'white', background: '#4C6B84' }}>
+        <StyledLikeButton onClick={() => matchWithDog()} sx={{ color: 'white', background: '#4C6B84' }}>
           <PetsIcon />
         </StyledLikeButton>
       </Box>

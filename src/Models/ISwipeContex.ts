@@ -1,3 +1,4 @@
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { IDog } from './IDog';
 
 export interface ISwipeContext {
@@ -7,4 +8,7 @@ export interface ISwipeContext {
   randomHeight: number;
   loading: boolean;
   randomName: string;
+  matchWithDog: () => void;
+  matchedValues: DocumentSnapshot<DocumentData> | undefined;
+  matchedValuesIsLoading: boolean;
 }
