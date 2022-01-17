@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
 
 export const SwipeCard = () => {
-  const { dog, getDogs, randomAge, randomHeight, loading } = useDating();
+  const { dog, getDogs, randomName, randomAge, randomHeight, loading } = useDating();
 
   return (
     <Box
@@ -39,11 +39,10 @@ export const SwipeCard = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '0.35em',
               }}
             >
               <Typography gutterBottom variant='h5' component='div'>
-                {dog.breeds[0].name}, {`${randomAge}`}
+                {randomName}, {`${randomAge}`}
               </Typography>
               <Box
                 sx={{
@@ -58,6 +57,9 @@ export const SwipeCard = () => {
               </Box>
             </Box>
 
+            <Typography variant='subtitle1' color='text.secondary' component='div' sx={{ fontWeight: 600 }}>
+              {dog.breeds[0].name}
+            </Typography>
             <Typography variant='body2' color='text.secondary'>
               {dog.breeds[0].temperament}
             </Typography>

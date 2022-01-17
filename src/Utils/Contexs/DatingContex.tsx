@@ -14,9 +14,12 @@ export const useDating = () => useContext(DatingContex);
 export const DatingContexProvider: React.FC = ({ children }) => {
   // My useStates
   const [dog, setDog] = useState<IDog>(dogInitialValue);
+  const [randomName, setRandomName] = useState('');
   const [randomAge, setRandomAge] = useState(0);
   const [randomHeight, setRandomHeight] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  const dogNames = require('dog-names');
 
   const getDogs = async () => {
     axios
@@ -36,6 +39,11 @@ export const DatingContexProvider: React.FC = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  // Generates a random name
+  const generateRandomName = () => {
+    const name = dogNames.femaleRandom();
+    setRandomName(name);
   };
 
   // Extract numbers from a string
@@ -78,11 +86,12 @@ export const DatingContexProvider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    generateRandomName();
     generateRandomAge();
     generateRandomHeight();
   }, [dog]);
   // Dating provider values
-  const values = { getDogs, dog, randomAge, randomHeight, loading };
+  const values = { getDogs, dog, randomName, randomAge, randomHeight, loading };
 
   return <DatingContex.Provider value={values}>{children}</DatingContex.Provider>;
 };

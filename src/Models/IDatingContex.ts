@@ -6,4 +6,5 @@ export interface IDatingContext {
   randomAge: number;
   randomHeight: number;
   loading: boolean;
+  randomName: string;
 }
