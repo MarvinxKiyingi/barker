@@ -11,4 +11,5 @@ export interface ISwipeContext {
   matchWithDog: () => void;
   matchedValues: DocumentSnapshot<DocumentData> | undefined;
   matchedValuesIsLoading: boolean;
+  unMatch: (match: DocumentData | undefined) => void;
 }

@@ -9,7 +9,7 @@ import { dogInitialValue, IDog } from '../../Models/IDog';
 
 // Firebase
 import { useDocument } from 'react-firebase-hooks/firestore';
-import { arrayUnion, doc, DocumentData, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, DocumentData, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
 // Initiating context
@@ -95,7 +95,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     const userHeightSnapshot = userValue?.data()?.height;
     console.log('UserHeight Snapshot', userHeightSnapshot);
 
-    if (randomHeight <= userHeightSnapshot + 5 && randomHeight >= userHeightSnapshot - 5) {
+    if (randomHeight <= userHeightSnapshot + 6 && randomHeight >= userHeightSnapshot - 6) {
       console.log('Its a Match!!');
       if (currentUser) {
         try {
@@ -124,6 +124,14 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     }
   };
 
+  const unMatch = (match: DocumentData | undefined) => {
+    if (currentUser && match) {
+      const documnetRef = doc(db, 'Matches', currentUser.uid);
+      updateDoc(documnetRef, {
+        match: arrayRemove(match),
+      });
+    }
+  };
   useEffect(() => {
     getDogs();
   }, []);
@@ -134,7 +142,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     generateRandomHeight();
   }, [dog]);
   // Dating provider values
-  const values = { getDogs, dog, randomName, randomAge, randomHeight, loading, matchWithDog, matchedValues, matchedValuesIsLoading };
+  const values = { getDogs, dog, randomName, randomAge, randomHeight, loading, matchWithDog, matchedValues, matchedValuesIsLoading, unMatch };
 
   return <SwipeContex.Provider value={values}>{children}</SwipeContex.Provider>;
 };
