@@ -20,7 +20,6 @@ export const SendMessage = () => {
     // Reseting password through firebase auth
     sendMessage(data);
   };
-
   return (
     <Box className='sendMessageFormWrapper'>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
@@ -31,6 +30,9 @@ export const SendMessage = () => {
           render={({ field }) => (
             <OutlinedInput
               {...field}
+              inputProps={{
+                'aria-label': 'Send message input',
+              }}
               type={'message'}
               multiline
               endAdornment={

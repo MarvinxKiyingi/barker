@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+
+// local imports
+import { useAuth } from './AuthContext';
 
 // Models
 import { ISwipeContext } from '../../Models/ISwipeContex';
 import { dogInitialValue, IDog } from '../../Models/IDog';
+import { ISendMessage } from '../../Models/ISendMessage';
 
 // Firebase
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { arrayRemove, arrayUnion, doc, DocumentData, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-import { useNavigate } from 'react-router-dom';
-import { ISendMessage } from '../../Models/ISendMessage';
 
 // Initiating context
 export const SwipeContex = React.createContext({} as ISwipeContext);
@@ -36,7 +38,6 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   const [randomHeight, setRandomHeight] = useState(0);
   const [randomId, setrandomId] = useState('');
   const [selectedMatch, setSelectedMatch] = useState<DocumentData | undefined>(getSessionstorage || null);
-  // console.log(selectedMatch);
 
   const [loading, setLoading] = useState(false);
   // Used to generate random dog names
@@ -48,8 +49,6 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   // using React Firebase Hooks to retrive the data from firebase
   const [userValue] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const [matchedValues, matchedValuesIsLoading] = useDocument(doc(db, 'Matches', `${currentUser?.uid}`));
-  // const [messagesValues, messagesValuesIsLoading] = useDocument(doc(db, 'Messages', `${currentUser?.uid}`));
-  // const messagesSnapShot: DocumentData | undefined = messagesValues?.data();
 
   const getDogs = async () => {
     axios
@@ -67,7 +66,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
   // Generates a random name
@@ -111,7 +110,6 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
 
   const matchWithDog = () => {
     const userHeightSnapshot = userValue?.data()?.height;
-    console.log('UserHeight Snapshot', userHeightSnapshot);
 
     if (randomHeight <= userHeightSnapshot + 6 && randomHeight >= userHeightSnapshot - 6) {
       console.log('Its a Match!!');
@@ -137,15 +135,17 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
 
           // Adds a new name to the messages collection
           setDoc(messagesRef, { [randomId]: [] }, { merge: true });
-        } catch (error) {
+        } catch (error: any) {
           alert(error);
         }
       }
     } else {
+      // generate a new dog.
       getDogs();
     }
   };
 
+  // Remove a match
   const unMatch = (match: DocumentData | undefined) => {
     if (currentUser && match) {
       const documnetRef = doc(db, 'Matches', currentUser.uid);
@@ -155,27 +155,27 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     }
   };
 
+  // Runs when you click on a match to view
   const openMessage = (match: DocumentData | undefined) => {
     if (!match) {
       alert('Unfortunately your message was not able to be sent. Try to go back a step and then return back');
     } else {
       sessionStorage.setItem(sessionStorageKey, JSON.stringify(match!));
 
-      setSelectedMatch(getSessionstorage);
+      setSelectedMatch(match);
 
       navigate(`/matches/${match?.id}`);
     }
   };
 
-  console.log(selectedMatch?.id);
+  // Creates a message for the matches dog to see.
   const sendMessage = (props: ISendMessage) => {
     if (currentUser && selectedMatch !== undefined) {
       try {
-        const documnetRef = doc(db, 'Messages', currentUser.uid);
+        const documnetRef = doc(db, 'Messages', currentUser.uid, 'hjjhjh');
         updateDoc(documnetRef, {
           [selectedMatch?.id]: arrayUnion(props),
         });
-        console.log('This message is sent: ', props, +' ' + 'ID: ', selectedMatch?.id);
       } catch (error: any) {
         alert(error);
       }
