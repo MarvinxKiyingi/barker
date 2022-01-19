@@ -15,7 +15,7 @@ export const Matches = () => {
   // Used to redirect users to a spesific route
   const navigate = useNavigate();
 
-  const { matchedValues, matchedValuesIsLoading, unMatch } = useSwipe();
+  const { matchedValues, matchedValuesIsLoading, unMatch, openMessage } = useSwipe();
   const [matchesIsEmpty, setMatchesIsEmpty] = useState(false);
   const matchedSnapShot: DocumentData | undefined = matchedValues?.data()?.match;
 
@@ -51,13 +51,14 @@ export const Matches = () => {
         </Box>
       ) : matchedValuesIsLoading ? (
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-          <CircularProgress size={'5rem'} />
+          <CircularProgress size={'3rem'} />
         </Box>
       ) : (
         matchedSnapShot?.map((match: DocumentData | undefined, index: number) => (
           <Box
             key={match?.id}
             className='matchWrapper_matchContent'
+            onClick={() => openMessage(match)}
             sx={{ display: 'flex', alignItems: 'center', m: '0.5rem 0rem', p: '1rem', backgroundColor: '#f7f7f7', borderRadius: '1rem' }}
           >
             <Avatar sx={{ width: '5rem', height: '5rem', m: '0rem 1rem' }}>

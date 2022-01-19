@@ -9,8 +9,10 @@ import { dogInitialValue, IDog } from '../../Models/IDog';
 
 // Firebase
 import { useDocument } from 'react-firebase-hooks/firestore';
-import { arrayRemove, arrayUnion, doc, DocumentData, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, DocumentData, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
+import { useNavigate } from 'react-router-dom';
+import { ISendMessage } from '../../Models/ISendMessage';
 
 // Initiating context
 export const SwipeContex = React.createContext({} as ISwipeContext);
@@ -19,19 +21,35 @@ export const SwipeContex = React.createContext({} as ISwipeContext);
 export const useSwipe = () => useContext(SwipeContex);
 
 export const SwipeContexProvider: React.FC = ({ children }) => {
+  // session storage for selectedMatch
+  const sessionStorageKey = 'selectedMatch';
+  const sessionstoragestring = sessionStorage.getItem(sessionStorageKey);
+  const getSessionstorage = JSON.parse(sessionstoragestring!);
+
+  // importing current user from authContext
   const { currentUser } = useAuth();
+
   // My useStates
   const [dog, setDog] = useState<IDog>(dogInitialValue);
   const [randomName, setRandomName] = useState('');
   const [randomAge, setRandomAge] = useState(0);
   const [randomHeight, setRandomHeight] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [randomId, setrandomId] = useState('');
+  const [selectedMatch, setSelectedMatch] = useState<DocumentData | undefined>(getSessionstorage || null);
+  // console.log(selectedMatch);
 
+  const [loading, setLoading] = useState(false);
+  // Used to generate random dog names
   const dogNames = require('dog-names');
+
+  // Used to redirect users to a spesific route
+  const navigate = useNavigate();
 
   // using React Firebase Hooks to retrive the data from firebase
   const [userValue] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const [matchedValues, matchedValuesIsLoading] = useDocument(doc(db, 'Matches', `${currentUser?.uid}`));
+  // const [messagesValues, messagesValuesIsLoading] = useDocument(doc(db, 'Messages', `${currentUser?.uid}`));
+  // const messagesSnapShot: DocumentData | undefined = messagesValues?.data();
 
   const getDogs = async () => {
     axios
@@ -100,7 +118,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
       if (currentUser) {
         try {
           const newMatch = {
-            id: uuid(),
+            id: randomId,
             name: randomName,
             age: randomAge,
             height: randomHeight,
@@ -109,12 +127,16 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
             temperament: dog.breeds[0].temperament,
             bredFor: dog.breeds[0].bred_for,
           };
-          const documnetRef = doc(db, 'Matches', currentUser.uid);
+          const matchesRef = doc(db, 'Matches', currentUser.uid);
+          const messagesRef = doc(db, 'Messages', currentUser.uid);
 
           // Atomically add a new match to the "match" array field.
-          updateDoc(documnetRef, {
+          updateDoc(matchesRef, {
             match: arrayUnion(newMatch),
           });
+
+          // Adds a new name to the messages collection
+          setDoc(messagesRef, { [randomId]: [] }, { merge: true });
         } catch (error) {
           alert(error);
         }
@@ -132,17 +154,61 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
       });
     }
   };
+
+  const openMessage = (match: DocumentData | undefined) => {
+    if (!match) {
+      alert('Unfortunately your message was not able to be sent. Try to go back a step and then return back');
+    } else {
+      sessionStorage.setItem(sessionStorageKey, JSON.stringify(match!));
+
+      setSelectedMatch(getSessionstorage);
+
+      navigate(`/matches/${match?.id}`);
+    }
+  };
+
+  console.log(selectedMatch?.id);
+  const sendMessage = (props: ISendMessage) => {
+    if (currentUser && selectedMatch !== undefined) {
+      try {
+        const documnetRef = doc(db, 'Messages', currentUser.uid);
+        updateDoc(documnetRef, {
+          [selectedMatch?.id]: arrayUnion(props),
+        });
+        console.log('This message is sent: ', props, +' ' + 'ID: ', selectedMatch?.id);
+      } catch (error: any) {
+        alert(error);
+      }
+    }
+  };
   useEffect(() => {
     getDogs();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     generateRandomName();
     generateRandomAge();
     generateRandomHeight();
+    setrandomId(uuid());
+    // eslint-disable-next-line
   }, [dog]);
+  useEffect(() => {}, [selectedMatch]);
   // Dating provider values
-  const values = { getDogs, dog, randomName, randomAge, randomHeight, loading, matchWithDog, matchedValues, matchedValuesIsLoading, unMatch };
+  const values = {
+    getDogs,
+    dog,
+    randomName,
+    randomAge,
+    randomHeight,
+    loading,
+    matchWithDog,
+    matchedValues,
+    matchedValuesIsLoading,
+    unMatch,
+    openMessage,
+    sendMessage,
+  };
 
   return <SwipeContex.Provider value={values}>{children}</SwipeContex.Provider>;
 };

@@ -26,3 +26,6 @@ export const IUpdateUserYupSchema = yup.object().shape({
 export const IPasswordResetYupSchema = yup.object().shape({
   email: yup.string().required().email(),
 });
+export const ISendMessageYupSchema = yup.object().shape({
+  message: yup.string(),
+});

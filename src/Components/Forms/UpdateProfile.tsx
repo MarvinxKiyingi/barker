@@ -60,7 +60,7 @@ export const UpdateProfile = () => {
   };
 
   return (
-    <div className='passwordResetContent'>
+    <div className='updateProfileContent'>
       {isLoading ? (
         <CircularProgress />
       ) : (

@@ -110,6 +110,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           height: props.height,
         });
         setDoc(doc(db, 'Matches', currentUser.uid), { match: [] });
+        // setDoc(doc(db, 'Messages', currentUser.uid), { messages: [] });
         navigate('/');
       } catch (error) {
         alert(error);
@@ -134,11 +135,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     if (currentUser) {
       try {
         await deleteDoc(doc(db, 'Users', currentUser.uid));
-      } catch (error) {
-        alert(error);
-      }
-      try {
         await deleteDoc(doc(db, 'Matches', currentUser.uid));
+        await deleteDoc(doc(db, 'Messages', currentUser.uid));
       } catch (error) {
         alert(error);
       }

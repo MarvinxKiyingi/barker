@@ -1,5 +1,6 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { IDog } from './IDog';
+import { ISendMessage } from './ISendMessage';
 
 export interface ISwipeContext {
   getDogs: () => Promise<void>;
@@ -12,4 +13,6 @@ export interface ISwipeContext {
   matchedValues: DocumentSnapshot<DocumentData> | undefined;
   matchedValuesIsLoading: boolean;
   unMatch: (match: DocumentData | undefined) => void;
+  openMessage: (match: DocumentData | undefined) => void;
+  sendMessage: (props: ISendMessage) => void;
 }

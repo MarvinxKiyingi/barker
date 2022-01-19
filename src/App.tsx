@@ -12,6 +12,7 @@ import { PrivateRoute } from './Utils/PrivateRoute';
 import { ProfileView } from './Views/ProfileView';
 import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
 import { MatchesView } from './Views/MatchesView';
+import { MessageView } from './Views/MessageView';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
               <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
               <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
               <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
+              <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
               <Route
                 path='*'
                 element={
