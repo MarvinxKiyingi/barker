@@ -1,24 +1,76 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { AuthContexProvider } from './Utils/Contexs/AuthContext';
+import { Routes, Route } from 'react-router-dom';
+import { LogoLarge } from './Components/Logo/Logo';
+import { SignInView } from './Views/SignInView';
+import { ErrorPage } from './Views/ErrorView';
+import { SignUpView } from './Views/SignUpView';
+import { SwipeView } from './Views/SwipeView';
+import { ResetPasswordView } from './Views/ResetPasswordView';
+import { CreateProfileView } from './Views/CreateProfileView';
+import { PrivateRoute } from './Utils/PrivateRoute';
+import { ProfileView } from './Views/ProfileView';
+import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
+import { MatchesView } from './Views/MatchesView';
+import { MessageView } from './Views/MessageView';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <AuthContexProvider>
+        <SwipeContexProvider>
+          <header className='appWrapper'>
+            <Routes>
+              <Route path='/' element={<PrivateRoute component={SwipeView} />} />
+              <Route
+                path='/signin'
+                element={
+                  <div className='signInViewWrapper'>
+                    <nav>
+                      <LogoLarge />
+                    </nav>
+                    <SignInView />
+                  </div>
+                }
+              />
+              <Route
+                path='/signup'
+                element={
+                  <div className='signUpViewWrapper'>
+                    <nav>
+                      <LogoLarge />
+                    </nav>
+                    <SignUpView />
+                  </div>
+                }
+              />
+              <Route
+                path='/resetpassword'
+                element={
+                  <div className='resetPasswordViewWrapper'>
+                    <nav>
+                      <LogoLarge />
+                    </nav>
+                    <ResetPasswordView />
+                  </div>
+                }
+              />
+              <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
+              <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
+              <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
+              <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
+              <Route
+                path='*'
+                element={
+                  <div className='appContent'>
+                    <ErrorPage />
+                  </div>
+                }
+              />
+            </Routes>
+          </header>
+        </SwipeContexProvider>
+      </AuthContexProvider>
     </div>
   );
 }
