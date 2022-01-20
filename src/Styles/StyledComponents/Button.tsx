@@ -19,3 +19,15 @@ export const StyledLikeButton = styled(Button)<ButtonProps>`
     color: #90ee90;
   }
 `;
+
+export const StyledActionButton = styled(Button)<ButtonProps>(() => ({
+  color: 'white',
+  backgroundColor: '#0b203b',
+  borderRadius: '2rem',
+  padding: '0.75rem 5rem',
+  fontWeight: 600,
+  letterSpacing: '0.0180em',
+  '&:hover': {
+    backgroundColor: '#0b203b',
+  },
+}));

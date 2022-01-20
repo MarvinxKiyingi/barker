@@ -14,10 +14,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 export const CreateProfile = () => {
-  const { currentUser, createUserProfile } = useAuth();
-  console.log('CurrentUser: ', currentUser);
-
-  // Used to redirect users to a spesific route
+  const { createUserProfile } = useAuth();
 
   // React-hook-form
   const {
@@ -31,7 +28,6 @@ export const CreateProfile = () => {
 
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
-    console.log('Form object: ', data);
     createUserProfile(data);
   };
 

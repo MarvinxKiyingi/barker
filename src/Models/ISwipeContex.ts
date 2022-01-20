@@ -1,4 +1,5 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import React from 'react';
 import { IDog } from './IDog';
 import { ISendMessage } from './ISendMessage';
 
@@ -17,4 +18,8 @@ export interface ISwipeContext {
   sendMessage: (props: ISendMessage) => void;
   messagesValues: DocumentSnapshot<DocumentData> | undefined;
   messagesValuesIsLoading: boolean;
+  isMatch: boolean;
+  setIsMatch: React.Dispatch<React.SetStateAction<boolean>>;
+  matchedDog: DocumentData | undefined;
+  setMatchedDog: React.Dispatch<React.SetStateAction<DocumentData | undefined>>;
 }

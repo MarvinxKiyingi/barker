@@ -33,7 +33,13 @@ export const Matches = () => {
           <ArrowBackIcon fontSize='inherit' />
         </IconButton>
 
-        <Typography component='h2' className='matchWrapper_header_headerText' sx={{ fontWeight: 'bold', fontSize: '1.3rem', textAlign: 'center' }}>
+        <Typography
+          variant='h6'
+          className='matchWrapper_header_headerText'
+          gutterBottom
+          component='div'
+          sx={{ mb: 'unset', letterSpacing: '0.0180em', fontWeight: 600 }}
+        >
           Matches
         </Typography>
       </Box>
@@ -58,14 +64,13 @@ export const Matches = () => {
           <Box
             key={match?.id}
             className='matchWrapper_matchContent'
-            onClick={() => openMessage(match)}
             sx={{ display: 'flex', alignItems: 'center', m: '0.5rem 0rem', p: '1rem', backgroundColor: '#f7f7f7', borderRadius: '1rem' }}
           >
-            <Avatar sx={{ width: '5rem', height: '5rem', m: '0rem 1rem' }}>
-              <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
-            </Avatar>
-            <Box sx={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
-              <Box>
+            <Box onClick={() => openMessage(match)} sx={{ display: 'flex', flex: 1, alignItems: 'center', cursor: 'pointer' }}>
+              <Avatar sx={{ width: '5rem', height: '5rem', m: '0rem 1rem' }}>
+                <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
+              </Avatar>
+              <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <Typography component='h3' sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
                   {match?.name}
                 </Typography>
@@ -74,10 +79,11 @@ export const Matches = () => {
                   {match?.breed}
                 </Typography>
               </Box>
-              <IconButton onClick={() => unMatch(match)}>
-                <CloseIcon />
-              </IconButton>
             </Box>
+
+            <IconButton onClick={() => unMatch(match)}>
+              <CloseIcon />
+            </IconButton>
           </Box>
         ))
       )}

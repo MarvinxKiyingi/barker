@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 // SCSS
 import '../../Styles/Scss/Profile.scss';
 import { UpdateProfile } from '../Forms/UpdateProfile';
+import { Typography } from '@mui/material';
 
 export const Profile = () => {
   const { signOutUser } = useAuth();
@@ -22,7 +23,15 @@ export const Profile = () => {
         <IconButton className='navigation_iconbutton' size='large' onClick={() => navigate('/')}>
           <ArrowBackIcon fontSize='inherit' />
         </IconButton>
-        <h3 className='navigation_header'>profile</h3>
+        <Typography
+          variant='h6'
+          className='navigation_header'
+          gutterBottom
+          component='div'
+          sx={{ mb: 'unset', letterSpacing: '0.0180em', fontWeight: 600, flex: 1, mr: '0.75rem', textAlign: 'center' }}
+        >
+          Profile
+        </Typography>
         <span></span>
       </nav>
       <UpdateProfile />

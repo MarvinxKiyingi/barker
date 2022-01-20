@@ -37,7 +37,16 @@ export const Message = () => {
                 <Avatar sx={{ width: '2.2rem', height: '2.2rem' }}>
                   <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
                 </Avatar>
-                <Typography component='h2' className='matchWrapper_header_headerText' sx={{ fontSize: '0.75rem', textAlign: 'center' }}>
+                {/* <Typography component='h2' className='matchWrapper_header_headerText' sx={{ fontSize: '0.75rem', textAlign: 'center' }}>
+                  {match?.name}
+                </Typography> */}
+                <Typography
+                  variant='h6'
+                  className='matchWrapper_header_headerText'
+                  gutterBottom
+                  component='div'
+                  sx={{ fontSize: '0.75rem', textAlign: 'center' }}
+                >
                   {match?.name}
                 </Typography>
               </Box>
