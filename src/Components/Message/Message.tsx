@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useSwipe } from '../../Utils/Contexs/SwipeContex';
 import { SendMessage } from '../Forms/SendMessage';
+import { DisplayMessage } from './DisplayMessage';
 
 export const Message = () => {
   const { matchedValues, matchedValuesIsLoading } = useSwipe();
@@ -41,7 +42,7 @@ export const Message = () => {
                 </Typography>
               </Box>
             </Box>
-
+            <DisplayMessage />
             <SendMessage />
           </Box>
         );

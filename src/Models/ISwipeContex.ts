@@ -15,4 +15,6 @@ export interface ISwipeContext {
   unMatch: (match: DocumentData | undefined) => void;
   openMessage: (match: DocumentData | undefined) => void;
   sendMessage: (props: ISendMessage) => void;
+  messagesValues: DocumentSnapshot<DocumentData> | undefined;
+  messagesValuesIsLoading: boolean;
 }

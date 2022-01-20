@@ -30,14 +30,14 @@ export const SendMessage = () => {
           render={({ field }) => (
             <OutlinedInput
               {...field}
+              sx={{ borderRadius: '2rem' }}
               inputProps={{
                 'aria-label': 'Send message input',
               }}
               type={'message'}
-              multiline
               endAdornment={
-                <InputAdornment className='submitButtonWrapper' position='end'>
-                  <IconButton type='submit' aria-label='toggle password visibility' edge='end'>
+                <InputAdornment className='submitButtonWrapper' position='end' sx={{ marginRight: '1rem' }}>
+                  <IconButton type='submit' aria-label='toggle password visibility' edge='end' sx={{ fontSize: '1.3rem' }}>
                     send
                   </IconButton>
                 </InputAdornment>

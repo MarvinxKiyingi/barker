@@ -49,6 +49,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   // using React Firebase Hooks to retrive the data from firebase
   const [userValue] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
   const [matchedValues, matchedValuesIsLoading] = useDocument(doc(db, 'Matches', `${currentUser?.uid}`));
+  const [messagesValues, messagesValuesIsLoading] = useDocument(doc(db, 'Messages', `${currentUser?.uid}`));
 
   const getDogs = async () => {
     axios
@@ -172,7 +173,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   const sendMessage = (props: ISendMessage) => {
     if (currentUser && selectedMatch !== undefined) {
       try {
-        const documnetRef = doc(db, 'Messages', currentUser.uid, 'hjjhjh');
+        const documnetRef = doc(db, 'Messages', currentUser.uid);
         updateDoc(documnetRef, {
           [selectedMatch?.id]: arrayUnion(props),
         });
@@ -208,6 +209,8 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     unMatch,
     openMessage,
     sendMessage,
+    messagesValues,
+    messagesValuesIsLoading,
   };
 
   return <SwipeContex.Provider value={values}>{children}</SwipeContex.Provider>;
