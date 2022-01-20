@@ -1,7 +1,12 @@
+// importing context
+import { useSwipe } from '../../Utils/Contexs/SwipeContex';
+
+// MUI components
 import { Box } from '@mui/system';
 import { StyledDeclinedButton, StyledLikeButton } from '../../Styles/StyledComponents/Button';
 import PetsIcon from '@mui/icons-material/Pets';
 import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
 
 //card
 import Card from '@mui/material/Card';
@@ -9,15 +14,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
-import { useDating } from '../../Utils/Contexs/DatingContex';
-import { Button } from '@mui/material';
 
-export const DatingCard = () => {
-  const { dog, getDogs, generateRandomAge, generateRandomHeight, isError } = useDating();
-
-  console.log(dog);
-  // console.log(randomAge);
-  // console.log(randomHeight);
+export const SwipeCard = () => {
+  const { dog, getDogs, randomName, randomAge, randomHeight, loading, matchWithDog } = useSwipe();
 
   return (
     <Box
@@ -29,25 +28,21 @@ export const DatingCard = () => {
         justifyContent: 'space-evenly',
       }}
     >
-      {isError ? (
-        <Box>
-          <p> something went wrong try again</p>
-          <Button onClick={() => getDogs()}> Try again </Button>
-        </Box>
+      {loading ? (
+        <CircularProgress />
       ) : (
         <Card sx={{ maxWidth: '85%' }}>
-          <CardMedia component='img' height='100%' image={`${dog[0].url}`} alt='card media' />
+          <CardMedia component='img' height='100%' image={`${dog.url}`} alt='Dog image' />
           <CardContent>
             <Box
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '0.35em',
               }}
             >
               <Typography gutterBottom variant='h5' component='div'>
-                {dog[0].breeds[0].name},{`${generateRandomAge()}`}
+                {randomName}, {`${randomAge}`}
               </Typography>
               <Box
                 sx={{
@@ -58,12 +53,15 @@ export const DatingCard = () => {
                 }}
               >
                 <HeightIcon />
-                {`${generateRandomHeight()}cm`}
+                {`${randomHeight}cm`}
               </Box>
             </Box>
 
+            <Typography variant='subtitle1' color='text.secondary' component='div' sx={{ fontWeight: 600 }}>
+              {dog.breeds[0].name}
+            </Typography>
             <Typography variant='body2' color='text.secondary'>
-              {dog[0].breeds[0].temperament}
+              {dog.breeds[0].temperament}
             </Typography>
           </CardContent>
         </Card>
@@ -79,7 +77,7 @@ export const DatingCard = () => {
         <StyledDeclinedButton onClick={() => getDogs()} sx={{ color: 'white', background: '#092C4C' }}>
           <CloseIcon />
         </StyledDeclinedButton>
-        <StyledLikeButton sx={{ color: 'white', background: '#4C6B84' }}>
+        <StyledLikeButton onClick={() => matchWithDog()} sx={{ color: 'white', background: '#4C6B84' }}>
           <PetsIcon />
         </StyledLikeButton>
       </Box>

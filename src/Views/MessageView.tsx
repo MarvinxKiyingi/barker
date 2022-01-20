@@ -1,18 +1,18 @@
+import { Box } from '@mui/material';
+import { Message } from '../Components/Message/Message';
 import { NavBar } from '../Components/Navbar/NavBar';
-import Box from '@mui/material/Box';
-import { SwipeCard } from '../Components/SwipeCard/SwipeCard';
 
-export const SwipeView = () => {
+export const MessageView = () => {
   return (
     <Box
-      className='swipeViewWrapper'
+      className='matchViewWrapper'
       sx={{
         maxWidth: '30rem',
         minHeight: '100vh',
       }}
     >
       <NavBar />
-      <SwipeCard />
+      <Message />
     </Box>
   );
 };

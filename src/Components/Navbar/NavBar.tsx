@@ -12,12 +12,12 @@ export const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <Box className='navBarWrapper' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0rem' }}>
+    <Box className='navBarWrapper' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: '0.5rem' }}>
       <IconButton aria-label='Profile Icon' onClick={() => navigate('/profile')} size='large'>
         <AccountCircleIcon fontSize='inherit' />
       </IconButton>
       <NavLogo />
-      <IconButton onClick={() => navigate('/match')} size='large'>
+      <IconButton onClick={() => navigate('/matches')} size='large'>
         <ChatIcon fontSize='inherit' />
       </IconButton>
     </Box>

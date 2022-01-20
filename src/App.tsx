@@ -10,14 +10,15 @@ import { ResetPasswordView } from './Views/ResetPasswordView';
 import { CreateProfileView } from './Views/CreateProfileView';
 import { PrivateRoute } from './Utils/PrivateRoute';
 import { ProfileView } from './Views/ProfileView';
-import { DatingContexProvider } from './Utils/Contexs/DatingContex';
-import { MatchView } from './Views/MatchView';
+import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
+import { MatchesView } from './Views/MatchesView';
+import { MessageView } from './Views/MessageView';
 
 function App() {
   return (
     <div className='app'>
       <AuthContexProvider>
-        <DatingContexProvider>
+        <SwipeContexProvider>
           <header className='appWrapper'>
             <Routes>
               <Route path='/' element={<PrivateRoute component={SwipeView} />} />
@@ -56,7 +57,8 @@ function App() {
               />
               <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
               <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
-              <Route path='/match' element={<PrivateRoute component={MatchView} />} />
+              <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
+              <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
               <Route
                 path='*'
                 element={
@@ -67,7 +69,7 @@ function App() {
               />
             </Routes>
           </header>
-        </DatingContexProvider>
+        </SwipeContexProvider>
       </AuthContexProvider>
     </div>
   );

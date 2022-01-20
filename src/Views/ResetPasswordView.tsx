@@ -5,7 +5,7 @@ import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrappe
 
 export const ResetPasswordView = () => {
   return (
-    <StyledFormsWrapper>
+    <StyledFormsWrapper className='resetPasswordWrapper'>
       <ResetPassword />
     </StyledFormsWrapper>
   );

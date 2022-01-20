@@ -22,7 +22,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
+import { Alert, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
 
 export const UpdateProfile = () => {
   const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
@@ -60,9 +60,9 @@ export const UpdateProfile = () => {
   };
 
   return (
-    <div className='passwordResetContent'>
+    <div className='updateProfileContent'>
       {isLoading ? (
-        <p>Loading....</p>
+        <CircularProgress />
       ) : (
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
