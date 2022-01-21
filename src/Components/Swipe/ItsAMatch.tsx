@@ -12,7 +12,10 @@ export const ItsAMatch = () => {
     getDogs();
   };
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+    <Box
+      className='itsAMatchWrapper'
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '90vh', justifyContent: 'space-around' }}
+    >
       <Box>
         <Typography variant='h5' gutterBottom component='div'>
           It's a
@@ -24,7 +27,7 @@ export const ItsAMatch = () => {
 
       <Box sx={{ mb: '1rem' }}>
         <Box className='avatarWrapper' sx={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', p: '1rem' }}>
-          <Avatar sx={{ width: '15rem', height: '15rem' }}>
+          <Avatar className='avatarWrapper_avatar' sx={{ width: '15rem', height: '15rem' }}>
             <CardMedia component='img' height='100%' image={matchedDog?.imgUrl} alt='Dog image' />
           </Avatar>
         </Box>

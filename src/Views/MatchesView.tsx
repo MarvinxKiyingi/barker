@@ -5,13 +5,7 @@ import { NavBar } from '../Components/Navbar/NavBar';
 
 export const MatchesView = () => {
   return (
-    <Box
-      className='matchViewWrapper'
-      sx={{
-        maxWidth: '30rem',
-        minHeight: '100vh',
-      }}
-    >
+    <Box className='matchViewWrapper'>
       <NavBar />
       <Matches />
     </Box>

@@ -31,3 +31,26 @@ export const StyledActionButton = styled(Button)<ButtonProps>(() => ({
     backgroundColor: '#0b203b',
   },
 }));
+export const StyledUpdateButton = styled(Button)<ButtonProps>(() => ({
+  color: 'white',
+  backgroundColor: '#0b203b',
+  padding: '0.75rem 3rem',
+  fontWeight: 600,
+  letterSpacing: '0.0180em',
+  borderRadius: '2rem',
+  '&:hover': {
+    backgroundColor: '#0b203b',
+  },
+}));
+export const StyleDeleteButton = styled(Button)<ButtonProps>(() => ({
+  color: 'white',
+  backgroundColor: '#d11e35',
+  padding: '0.75rem 3rem',
+  fontWeight: 600,
+  letterSpacing: '0.0180em',
+  borderRadius: '2rem',
+
+  '&:hover': {
+    backgroundColor: '#d11e35',
+  },
+}));

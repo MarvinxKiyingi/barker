@@ -14,6 +14,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 import TextField from '@mui/material/TextField';
 import { Alert, Typography } from '@mui/material';
 import { StyledActionButton } from '../../Styles/StyledComponents/Button';
+import { StyledResetPasswordForm } from '../../Styles/StyledComponents/StyledForms';
 
 export const ResetPassword = () => {
   // Importing function from contex
@@ -41,7 +42,7 @@ export const ResetPassword = () => {
   };
 
   return (
-    <div className='passwordResetContent'>
+    <StyledResetPasswordForm className='passwordResetContent'>
       {isSuccess ? <Alert severity='success'>{succsessMsg}</Alert> : null}
       {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
 
@@ -73,6 +74,6 @@ export const ResetPassword = () => {
           </Typography>
         </div>
       </form>
-    </div>
+    </StyledResetPasswordForm>
   );
 };

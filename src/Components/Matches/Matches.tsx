@@ -30,7 +30,7 @@ export const Matches = () => {
     <Box className='matchWrapper' sx={{ p: '0rem 0.5rem' }}>
       <Box className='matchWrapper_header' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pr: ' 0.75rem' }}>
         <IconButton onClick={() => navigate('/')} size='large'>
-          <ArrowBackIcon fontSize='inherit' />
+          <ArrowBackIcon fontSize='inherit' sx={{ color: '#39353f' }} />
         </IconButton>
 
         <Typography
@@ -63,26 +63,30 @@ export const Matches = () => {
         matchedSnapShot?.map((match: DocumentData | undefined, index: number) => (
           <Box
             key={match?.id}
-            className='matchWrapper_matchContent'
+            className='matchContentWrapper'
             sx={{ display: 'flex', alignItems: 'center', m: '0.5rem 0rem', p: '1rem', backgroundColor: '#f7f7f7', borderRadius: '1rem' }}
           >
-            <Box onClick={() => openMessage(match)} sx={{ display: 'flex', flex: 1, alignItems: 'center', cursor: 'pointer' }}>
+            <Box
+              className='matchContentWrapper_container'
+              onClick={() => openMessage(match)}
+              sx={{ display: 'flex', flex: 1, alignItems: 'center', cursor: 'pointer' }}
+            >
               <Avatar sx={{ width: '5rem', height: '5rem', m: '0rem 1rem' }}>
                 <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
               </Avatar>
               <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                <Typography component='h3' sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
+                <Typography className='matchContentWrapper_name' component='h3' sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
                   {match?.name}
                 </Typography>
 
-                <Typography component='h3' sx={{ fontSize: '0.75rem' }}>
+                <Typography className='matchContentWrapper_breed' component='h3' sx={{ fontSize: '0.75rem' }}>
                   {match?.breed}
                 </Typography>
               </Box>
             </Box>
 
-            <IconButton onClick={() => unMatch(match)}>
-              <CloseIcon />
+            <IconButton className='matchRemoveButtonWrapper' onClick={() => unMatch(match)}>
+              <CloseIcon className='CloseIcon' sx={{ color: '#c50029' }} />
             </IconButton>
           </Box>
         ))

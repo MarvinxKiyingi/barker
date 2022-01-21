@@ -25,6 +25,7 @@ export const DisplayMessage = () => {
         </Box>
       ) : (
         <ChatFeed
+          className={'displayMessageWrapper'}
           messages={messagesSnapShot} // Array: list of message objects
           // JSON: Custom bubble styles
           bubbleStyles={{
