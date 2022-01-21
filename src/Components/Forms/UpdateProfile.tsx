@@ -20,7 +20,6 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Alert, Box, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
 import { StyledUpdateForm } from '../../Styles/StyledComponents/StyledForms';
