@@ -24,7 +24,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Alert, Box, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
 import { StyledUpdateForm } from '../../Styles/StyledComponents/StyledForms';
-import { StyleDeleteButton, StyledUpdateButton } from '../../Styles/StyledComponents/Button';
+import { StyleDeleteButton, StyleDialogDeleteButton, StyleDialogDisagreeButton, StyledUpdateButton } from '../../Styles/StyledComponents/Button';
 
 export const UpdateProfile = () => {
   const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
@@ -144,10 +144,12 @@ export const UpdateProfile = () => {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Disagree</Button>
-                <Button onClick={() => deleteUserAndProfile()} autoFocus>
+                <StyleDialogDisagreeButton variant='contained' onClick={handleClose}>
+                  Disagree
+                </StyleDialogDisagreeButton>
+                <StyleDialogDeleteButton variant='contained' onClick={() => deleteUserAndProfile()} autoFocus>
                   Agree
-                </Button>
+                </StyleDialogDeleteButton>
               </DialogActions>
             </Dialog>
           </Stack>
