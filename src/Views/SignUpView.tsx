@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { SignUpForm } from '../Components/Forms/SignUpForm';
 
@@ -8,10 +9,12 @@ import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrappe
 export const SignUpView = () => {
   return (
     <StyledFormsWrapper className='signUpWrapper'>
-      <h3 className='actionTitle'>Create account</h3>
-      <p>
+      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
+        Create account
+      </Typography>
+      <Typography variant='subtitle1' gutterBottom component='div'>
         Already have an account? <Link to={'/signin'}>Sign in</Link>
-      </p>
+      </Typography>
       <SignUpForm />
     </StyledFormsWrapper>
   );

@@ -11,13 +11,13 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormHelperText from '@mui/material/FormHelperText';
 import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
 
 //Contex
 import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // Styles
 import { StyledSignUpForm } from '../../Styles/StyledComponents/StyledForms';
+import { StyledActionButton } from '../../Styles/StyledComponents/Button';
 
 export const SignUpForm = () => {
   // Importing function from contex
@@ -119,9 +119,9 @@ export const SignUpForm = () => {
         </div>
 
         <div className='submitButtonWrapper'>
-          <Button type='submit' variant='contained' disabled={disabledBtn}>
+          <StyledActionButton type='submit' variant='contained' disabled={disabledBtn}>
             Sign up
-          </Button>
+          </StyledActionButton>
         </div>
       </form>
     </StyledSignUpForm>

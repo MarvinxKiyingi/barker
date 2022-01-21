@@ -45,3 +45,18 @@ export const StyledSignInForm = styled.div`
     margin: 1rem 0rem;
   }
 `;
+export const StyledResetPasswordForm = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  text-align: center;
+`;
+export const StyledUpdateForm = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  padding: 0 2rem;
+  text-align: center;
+`;

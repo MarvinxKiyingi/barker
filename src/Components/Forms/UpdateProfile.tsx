@@ -22,7 +22,9 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Alert, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
+import { Alert, Box, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel } from '@mui/material';
+import { StyledUpdateForm } from '../../Styles/StyledComponents/StyledForms';
+import { StyleDeleteButton, StyledUpdateButton } from '../../Styles/StyledComponents/Button';
 
 export const UpdateProfile = () => {
   const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
@@ -60,9 +62,11 @@ export const UpdateProfile = () => {
   };
 
   return (
-    <div className='updateProfileContent'>
+    <StyledUpdateForm className='updateProfileContent'>
       {isLoading ? (
-        <CircularProgress />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+          <CircularProgress size={'3rem'} />
+        </Box>
       ) : (
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
@@ -124,13 +128,13 @@ export const UpdateProfile = () => {
               </>
             )}
           />
-          <Stack spacing={2} direction='row' justifyContent='center'>
-            <Button type='submit' variant='contained'>
+          <Stack spacing={2} direction='row' justifyContent='space-between' sx={{ margin: '1rem 0' }}>
+            <StyledUpdateButton type='submit' variant='contained'>
               Update
-            </Button>
-            <Button variant='contained' color='error' onClick={() => handleClickOpen()}>
+            </StyledUpdateButton>
+            <StyleDeleteButton variant='contained' color='error' onClick={() => handleClickOpen()}>
               Delete
-            </Button>
+            </StyleDeleteButton>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
               <DialogTitle id='alert-dialog-title'>{'Delete account'}</DialogTitle>
@@ -149,6 +153,6 @@ export const UpdateProfile = () => {
           </Stack>
         </form>
       )}
-    </div>
+    </StyledUpdateForm>
   );
 };

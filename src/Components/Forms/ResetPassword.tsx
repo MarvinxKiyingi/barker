@@ -12,8 +12,9 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Alert } from '@mui/material';
+import { Alert, Typography } from '@mui/material';
+import { StyledActionButton } from '../../Styles/StyledComponents/Button';
+import { StyledResetPasswordForm } from '../../Styles/StyledComponents/StyledForms';
 
 export const ResetPassword = () => {
   // Importing function from contex
@@ -41,10 +42,10 @@ export const ResetPassword = () => {
   };
 
   return (
-    <div className='passwordResetContent'>
+    <StyledResetPasswordForm className='passwordResetContent'>
       {isSuccess ? <Alert severity='success'>{succsessMsg}</Alert> : null}
       {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
-      <h1>Reset password</h1>
+
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name={'email'}
@@ -65,14 +66,14 @@ export const ResetPassword = () => {
         />
 
         <div className='submitButtonWrapper'>
-          <Button type='submit' variant='contained'>
+          <StyledActionButton type='submit' variant='contained'>
             Reset password
-          </Button>
-        </div>
-        <div>
-          <Link to='/signin'>Sign in</Link>
+          </StyledActionButton>
+          <Typography variant='subtitle1' gutterBottom component='div' sx={{ textAlign: 'center', m: '1rem' }}>
+            <Link to='/signin'>Sign in</Link>
+          </Typography>
         </div>
       </form>
-    </div>
+    </StyledResetPasswordForm>
   );
 };

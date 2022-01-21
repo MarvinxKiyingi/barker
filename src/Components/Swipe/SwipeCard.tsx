@@ -35,16 +35,18 @@ export const SwipeCard = () => {
           <CardMedia component='img' height='100%' image={`${dog.url}`} alt='Dog image' />
           <CardContent>
             <Box
+              className='swipeCardTextAreaOne'
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <Typography gutterBottom variant='h5' component='div'>
+              <Typography className='swipeCardTextAreaOne_name' gutterBottom variant='h5' component='div'>
                 {randomName}, {`${randomAge}`}
               </Typography>
               <Box
+                className='swipeCardTextAreaOne_height'
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
@@ -52,21 +54,23 @@ export const SwipeCard = () => {
                   lineHeight: '1.334',
                 }}
               >
-                <HeightIcon />
+                <HeightIcon className='swipeCardTextAreaOne_HeightIcon' />
                 {`${randomHeight}cm`}
               </Box>
             </Box>
-
-            <Typography variant='subtitle1' color='text.secondary' component='div' sx={{ fontWeight: 600 }}>
-              {dog.breeds[0].name}
-            </Typography>
-            <Typography variant='body2' color='text.secondary'>
-              {dog.breeds[0].temperament}
-            </Typography>
+            <Box className='swipeCardTextAreaTwo'>
+              <Typography className='swipeCardTextAreaTwo_breedName' variant='subtitle1' color='text.secondary' component='div' sx={{ fontWeight: 600 }}>
+                {dog.breeds[0].name}
+              </Typography>
+              <Typography className='swipeCardTextAreaTwo_temperament' variant='body2' color='text.secondary'>
+                {dog.breeds[0].temperament}
+              </Typography>
+            </Box>
           </CardContent>
         </Card>
       )}
       <Box
+        className={'SwipeButtonsWrapper'}
         sx={{
           width: '100%',
           display: 'flex',
@@ -75,10 +79,10 @@ export const SwipeCard = () => {
         }}
       >
         <StyledDeclinedButton onClick={() => getDogs()} sx={{ color: 'white', background: '#092C4C' }}>
-          <CloseIcon />
+          <CloseIcon className='SwipeButtonsWrapper_CloseIcon' />
         </StyledDeclinedButton>
         <StyledLikeButton onClick={() => matchWithDog()} sx={{ color: 'white', background: '#4C6B84' }}>
-          <PetsIcon />
+          <PetsIcon className='SwipeButtonsWrapper_PetsIcon' />
         </StyledLikeButton>
       </Box>
     </Box>

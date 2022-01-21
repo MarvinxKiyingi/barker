@@ -13,7 +13,7 @@ import { ISendMessage } from '../../Models/ISendMessage';
 
 // Firebase
 import { useDocument } from 'react-firebase-hooks/firestore';
-import { arrayRemove, arrayUnion, doc, DocumentData, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, deleteField, doc, DocumentData, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
 // Initiating context
@@ -38,6 +38,8 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   const [randomHeight, setRandomHeight] = useState(0);
   const [randomId, setrandomId] = useState('');
   const [selectedMatch, setSelectedMatch] = useState<DocumentData | undefined>(getSessionstorage || null);
+  const [isMatch, setIsMatch] = useState(false);
+  const [matchedDog, setMatchedDog] = useState<DocumentData | undefined>();
 
   const [loading, setLoading] = useState(false);
   // Used to generate random dog names
@@ -113,7 +115,6 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     const userHeightSnapshot = userValue?.data()?.height;
 
     if (randomHeight <= userHeightSnapshot + 6 && randomHeight >= userHeightSnapshot - 6) {
-      console.log('Its a Match!!');
       if (currentUser) {
         try {
           const newMatch = {
@@ -126,6 +127,11 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
             temperament: dog.breeds[0].temperament,
             bredFor: dog.breeds[0].bred_for,
           };
+
+          setMatchedDog(newMatch);
+          setIsMatch(true);
+
+          // Firebase operations
           const matchesRef = doc(db, 'Matches', currentUser.uid);
           const messagesRef = doc(db, 'Messages', currentUser.uid);
 
@@ -149,9 +155,14 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   // Remove a match
   const unMatch = (match: DocumentData | undefined) => {
     if (currentUser && match) {
-      const documnetRef = doc(db, 'Matches', currentUser.uid);
-      updateDoc(documnetRef, {
+      const matchesRef = doc(db, 'Matches', currentUser.uid);
+      const messagesRef = doc(db, 'Messages', currentUser.uid);
+
+      updateDoc(matchesRef, {
         match: arrayRemove(match),
+      });
+      updateDoc(messagesRef, {
+        [match?.id]: deleteField(),
       });
     }
   };
@@ -164,6 +175,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
       sessionStorage.setItem(sessionStorageKey, JSON.stringify(match!));
 
       setSelectedMatch(match);
+      setIsMatch(false);
 
       navigate(`/matches/${match?.id}`);
     }
@@ -211,6 +223,10 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     sendMessage,
     messagesValues,
     messagesValuesIsLoading,
+    isMatch,
+    setIsMatch,
+    matchedDog,
+    setMatchedDog,
   };
 
   return <SwipeContex.Provider value={values}>{children}</SwipeContex.Provider>;
