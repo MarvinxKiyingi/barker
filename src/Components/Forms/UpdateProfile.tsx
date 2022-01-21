@@ -140,7 +140,7 @@ export const UpdateProfile = () => {
               <DialogTitle id='alert-dialog-title'>{'Delete account'}</DialogTitle>
               <DialogContent>
                 <DialogContentText id='alert-dialog-description'>
-                  Are you sure you want remove Barker account? All of your data and information will be permanently deleted.
+                  Are you sure you want to remove your Barker account? All of your data and information will be permanently deleted.
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
