@@ -16,7 +16,7 @@ export const ISignInYupSchema = yup.object().shape({
 export const IUserYupSchema = yup.object().shape({
   name: yup.string().required(),
   age: yup.number().required().min(1).max(16),
-  height: yup.number().required().min(30).max(110),
+  height: yup.number().required().min(15).max(90),
 });
 export const IUpdateUserYupSchema = yup.object().shape({
   name: yup.string(),
