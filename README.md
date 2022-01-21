@@ -1,6 +1,10 @@
 # Barker
 
-This is my degree project, where i decided to create a tinder for dogs using a api to provide the dog images.
+This is my degree project, decided to create a dating like app for dogs and their owners. Where i've used a "the dog api" to provide the dog images and information about the fetched tog. I've used an npm packgade called "dog-names" to generate a name for each dog and made two function that generates a random age and height. That eventually gets used to create a coustom dog object to be sent to the firebase-firestore
+
+The idea is that you as a user can match with a dog that is your height +6cm or -6cm, that you then can write to.
+
+live link: [The barker-webbApp](https://barrker.netlify.app)
 
 ## Naming
 
@@ -33,10 +37,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npx cypress open`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 

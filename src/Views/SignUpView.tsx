@@ -8,7 +8,7 @@ import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrappe
 
 export const SignUpView = () => {
   return (
-    <StyledFormsWrapper className='signUpWrapper'>
+    <StyledFormsWrapper data-testid='todo-1' className='signUpWrapper'>
       <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
         Create account
       </Typography>
