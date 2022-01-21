@@ -11,7 +11,8 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { StyledActionButton } from '../../Styles/StyledComponents/Button';
+import { Box } from '@mui/material';
 
 export const CreateProfile = () => {
   const { createUserProfile } = useAuth();
@@ -86,11 +87,11 @@ export const CreateProfile = () => {
           )}
         />
 
-        <div className='submitButtonWrapper'>
-          <Button type='submit' variant='contained'>
+        <Box className='submitButtonWrapper' sx={{ m: '1rem' }}>
+          <StyledActionButton type='submit' variant='contained'>
             Create profile
-          </Button>
-        </div>
+          </StyledActionButton>
+        </Box>
       </form>
     </div>
   );

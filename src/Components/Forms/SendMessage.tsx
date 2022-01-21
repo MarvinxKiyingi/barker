@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 export const SendMessage = () => {
   const { sendMessage } = useSwipe();
   // React-hook-form
-  const { control, handleSubmit } = useForm<ISendMessage>(
+  const { control, handleSubmit, reset } = useForm<ISendMessage>(
     // Importing Yup Schema for validation
     { resolver: yupResolver(ISendMessageYupSchema) }
   );
@@ -19,6 +19,7 @@ export const SendMessage = () => {
   const formSubmitHandler: SubmitHandler<ISendMessage> = (data: ISendMessage) => {
     // Reseting password through firebase auth
     sendMessage(data);
+    reset();
   };
   return (
     <Box className='sendMessageFormWrapper'>
