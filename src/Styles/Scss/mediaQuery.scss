@@ -1,0 +1,107 @@
+@import '../Scss/_partials/MediaQuery';
+.navBarWrapper {
+  @include verticalTablet {
+    .AccountCircleIcon,
+    .ChatIcon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+.swipeCardWrapper {
+  max-width: 90;
+}
+.swipeCardTextAreaOne {
+  @include verticalTablet {
+    .swipeCardTextAreaOne_name {
+      font-size: 1.8rem;
+    }
+    .swipeCardTextAreaOne_height {
+      font-size: 1.8rem;
+    }
+    .swipeCardTextAreaOne_HeightIcon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+.swipeCardTextAreaTwo {
+  @include verticalTablet {
+    .swipeCardTextAreaTwo_breedName {
+      font-size: 1.3rem;
+    }
+    .swipeCardTextAreaTwo_temperament {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.SwipeButtonsWrapper {
+  @include verticalTablet {
+    .SwipeButtonsWrapper_CloseIcon,
+    .SwipeButtonsWrapper_PetsIcon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+
+.swipeViewWrapper,
+.matchViewWrapper,
+.profileViewWrapper {
+  width: 100%;
+  max-width: 40rem;
+  min-height: 100vh;
+  @include desktopLarge {
+    min-height: unset;
+    height: 1336px;
+  }
+}
+.itsAMatchWrapper {
+  .avatarWrapper {
+    .avatarWrapper_avatar {
+      @include verticalTablet {
+        width: 24rem;
+        height: 24rem;
+      }
+    }
+  }
+}
+
+.messagesWrapper {
+  @include verticalTablet {
+    .avatarWrapper_avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    .avatarWrapper_headerText {
+      font-size: 1rem;
+    }
+    .messagesWrapper_ArrowBackIcon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+.matchWrapper {
+  .matchContentWrapper {
+    @include verticalTablet {
+      .matchRemoveButtonWrapper {
+        .CloseIcon {
+          width: 1.5em;
+          height: 1.5em;
+        }
+      }
+    }
+    .matchContentWrapper_container {
+      @include verticalTablet {
+        .matchContentWrapper_name {
+          font-size: 1.5rem;
+        }
+        .matchContentWrapper_breed {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

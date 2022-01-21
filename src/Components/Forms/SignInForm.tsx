@@ -12,11 +12,11 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Alert } from '@mui/material';
+import { Alert, Typography } from '@mui/material';
 
 //Styles
 import { StyledSignInForm } from '../../Styles/StyledComponents/StyledForms';
+import { StyledActionButton } from '../../Styles/StyledComponents/Button';
 
 export const SignInForm = () => {
   // Importing function from contex
@@ -51,10 +51,14 @@ export const SignInForm = () => {
   return (
     <StyledSignInForm className='signInContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
-      <h3 className='actionTitle'>Sign in</h3>
-      <p>
+
+      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
+        Sign in
+      </Typography>
+      <Typography variant='subtitle1' gutterBottom component='div'>
         Not a member? <Link to={'/signup'}>Sign up</Link>
-      </p>
+      </Typography>
+
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name={'email'}
@@ -91,13 +95,13 @@ export const SignInForm = () => {
           )}
         />
         <div className='submitButtonWrapper'>
-          <Button type='submit' variant='contained'>
+          <StyledActionButton type='submit' variant='contained'>
             Sign in
-          </Button>
+          </StyledActionButton>
         </div>
-        <div className='resetPassword'>
+        <Typography className='resetPassword' variant='subtitle1' gutterBottom component='div'>
           <Link to='/resetpassword'>Forgot your password ?</Link>
-        </div>
+        </Typography>
       </form>
     </StyledSignInForm>
   );
