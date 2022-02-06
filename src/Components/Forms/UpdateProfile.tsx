@@ -74,8 +74,8 @@ export const UpdateProfile = () => {
             <InputLabel>Name: {snapShot?.name}</InputLabel>
             <TextField
               {...register('name')}
+              defaultValue={snapShot?.name as string}
               label='Name'
-              value={snapShot?.name}
               variant='outlined'
               error={!!errors.name?.message}
               helperText={errors.name ? errors.name?.message : ''}
@@ -88,8 +88,8 @@ export const UpdateProfile = () => {
             <InputLabel>Age: {snapShot?.age}</InputLabel>
             <TextField
               {...register('age')}
+              defaultValue={snapShot?.age as number}
               label='Age'
-              value={snapShot?.age}
               variant='outlined'
               error={!!errors.age?.message}
               helperText={errors.age ? errors.age?.message : ''}
@@ -102,8 +102,8 @@ export const UpdateProfile = () => {
             <InputLabel>Height: {snapShot?.height}</InputLabel>
             <TextField
               {...register('height')}
+              defaultValue={snapShot?.height as number}
               label='Height'
-              value={snapShot?.height}
               variant='outlined'
               error={!!errors.height?.message}
               helperText={errors.height ? errors.height?.message : ''}
