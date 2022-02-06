@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // Npm packages
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 //Firebase
@@ -37,7 +37,7 @@ export const UpdateProfile = () => {
 
   // React-hook-form
   const {
-    control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>(
@@ -69,64 +69,49 @@ export const UpdateProfile = () => {
       ) : (
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
-          <Controller
-            name={'name'}
-            control={control}
-            defaultValue={snapShot?.name}
-            render={({ field }) => (
-              <>
-                <InputLabel>Name: {snapShot?.name}</InputLabel>
-                <TextField
-                  {...field}
-                  type='name'
-                  variant='outlined'
-                  error={!!errors.name}
-                  helperText={errors.name ? errors.name?.message : ''}
-                  fullWidth
-                  style={{ margin: ' 1rem 0rem' }}
-                />
-              </>
-            )}
-          />
-          <Controller
-            name={'age'}
-            control={control}
-            defaultValue={snapShot?.age}
-            render={({ field }) => (
-              <>
-                <InputLabel>Age: {snapShot?.age}</InputLabel>
-                <TextField
-                  {...field}
-                  type='age'
-                  variant='outlined'
-                  error={!!errors.age}
-                  helperText={errors.age ? errors.age?.message : ''}
-                  fullWidth
-                  style={{ margin: ' 1rem 0rem' }}
-                />
-              </>
-            )}
-          />
-          <Controller
-            name={'height'}
-            control={control}
-            defaultValue={snapShot?.height}
-            render={({ field }) => (
-              <>
-                <InputLabel>Height: {snapShot?.height}</InputLabel>
+          <input {...register('profileImg')} type='file' />
+          <>
+            <InputLabel>Name: {snapShot?.name}</InputLabel>
+            <TextField
+              {...register('name')}
+              label='Name'
+              value={snapShot?.name}
+              variant='outlined'
+              error={!!errors.name?.message}
+              helperText={errors.name ? errors.name?.message : ''}
+              fullWidth
+              style={{ margin: ' 1rem 0rem' }}
+            />
+          </>
 
-                <TextField
-                  {...field}
-                  type='height'
-                  variant='outlined'
-                  error={!!errors.height}
-                  helperText={errors.height ? errors.height?.message : ''}
-                  fullWidth
-                  style={{ margin: ' 1rem 0rem' }}
-                />
-              </>
-            )}
-          />
+          <>
+            <InputLabel>Age: {snapShot?.age}</InputLabel>
+            <TextField
+              {...register('age')}
+              label='Age'
+              value={snapShot?.age}
+              variant='outlined'
+              error={!!errors.age?.message}
+              helperText={errors.age ? errors.age?.message : ''}
+              fullWidth
+              style={{ margin: ' 1rem 0rem' }}
+            />
+          </>
+
+          <>
+            <InputLabel>Height: {snapShot?.height}</InputLabel>
+            <TextField
+              {...register('height')}
+              label='Height'
+              value={snapShot?.height}
+              variant='outlined'
+              error={!!errors.height?.message}
+              helperText={errors.height ? errors.height?.message : ''}
+              fullWidth
+              style={{ margin: ' 1rem 0rem' }}
+            />
+          </>
+
           <Stack spacing={2} direction='row' justifyContent='space-between' sx={{ margin: '1rem 0' }}>
             <StyledUpdateButton type='submit' variant='contained'>
               Update
