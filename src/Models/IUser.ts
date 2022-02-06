@@ -2,10 +2,12 @@ export interface IUser {
   name: string;
   age: number;
   height: number;
+  profileImg?: any;
+  // profileImg?: FileList[];
 }
 
 export const userStartValue = {
-  name: 'hej',
-  age: 5,
+  name: '',
+  age: 0,
   height: 0,
 };

@@ -12,8 +12,9 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
-import { auth, db } from '../Firebase';
+import { auth, db, storage } from '../Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { ref, uploadBytes } from 'firebase/storage';
 
 // Npm packages
 import { useNavigate } from 'react-router-dom';
@@ -102,6 +103,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       });
   };
   const createUserProfile = (props: IUser) => {
+    const file = props?.profileImg?.[0];
+
     if (currentUser) {
       try {
         setDoc(doc(db, 'Users', currentUser.uid), {
@@ -109,8 +112,11 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           age: props.age,
           height: props.height,
         });
+
         setDoc(doc(db, 'Matches', currentUser.uid), { match: [] });
-        // setDoc(doc(db, 'Messages', currentUser.uid), { messages: [] });
+
+        const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
+        uploadBytes(storageRef, file);
         navigate('/');
       } catch (error) {
         alert(error);
@@ -118,6 +124,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     }
   };
   const updateUserProfile = (props: IUser) => {
+    const file = props?.profileImg?.[0];
+
     if (currentUser) {
       try {
         updateDoc(doc(db, 'Users', currentUser.uid), {
@@ -125,6 +133,9 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           age: props.age,
           height: props.height,
         });
+
+        const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
+        uploadBytes(storageRef, file);
       } catch (error) {
         alert(error);
       }
