@@ -134,8 +134,10 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           height: props.height,
         });
 
-        const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
-        uploadBytes(storageRef, file);
+        if (props?.profileImg?.length === 1) {
+          const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
+          uploadBytes(storageRef, file);
+        }
       } catch (error) {
         alert(error);
       }
