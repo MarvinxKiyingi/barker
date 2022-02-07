@@ -14,7 +14,7 @@ import {
 } from 'firebase/auth';
 import { auth, db, storage } from '../Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { ref, uploadBytes } from 'firebase/storage';
+import { deleteObject, ref, uploadBytes } from 'firebase/storage';
 
 // Npm packages
 import { useNavigate } from 'react-router-dom';
@@ -55,6 +55,9 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
+
+  // firebase Storage ref
+  const storageRef = ref(storage, `profileImages/${currentUser?.uid}`);
 
   // Signing up a user to firebase
   const signUpUser = (props: ISignUp) => {
@@ -115,7 +118,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
 
         setDoc(doc(db, 'Matches', currentUser.uid), { match: [] });
 
-        const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
+        // Upload profileImage
         uploadBytes(storageRef, file);
         navigate('/');
       } catch (error) {
@@ -134,8 +137,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           height: props.height,
         });
 
+        // Update/upload profileImage
         if (props?.profileImg?.length === 1) {
-          const storageRef = ref(storage, `profileImages/${currentUser.uid}`);
           uploadBytes(storageRef, file);
         }
       } catch (error) {
@@ -153,6 +156,15 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       } catch (error) {
         alert(error);
       }
+
+      if (storageRef) {
+        try {
+          deleteObject(storageRef);
+        } catch (error) {
+          alert(error);
+        }
+      }
+
       try {
         await deleteUser(currentUser);
       } catch (error) {
