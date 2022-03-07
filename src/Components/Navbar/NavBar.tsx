@@ -1,4 +1,4 @@
-import { NavLogo } from '../Logo/Logo';
+import { Logo } from '../Logo/Logo';
 import { useNavigate } from 'react-router-dom';
 
 // MUI components
@@ -18,7 +18,7 @@ export const NavBar = () => {
       <IconButton aria-label='Profile Icon' onClick={() => navigate('/profile')} size='large'>
         <AccountCircleIcon className='AccountCircleIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
       </IconButton>
-      <NavLogo />
+      <Logo />
       <IconButton onClick={() => navigate('/matches')} size='large'>
         <ChatIcon className='ChatIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
       </IconButton>
