@@ -12,11 +12,13 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import { Alert, Typography } from '@mui/material';
+import { Alert, Box, Button, Typography } from '@mui/material';
 
 //Styles
-import { StyledSignInForm } from '../../Styles/StyledComponents/StyledForms';
+
 import { StyledActionButton } from '../../Styles/StyledComponents/Button';
+import { theme } from '../../Styles/theme';
+import { SignInFormWrapper } from '../../Styles/StyledComponents/StyledForms';
 
 export const SignInForm = () => {
   // Importing function from contex
@@ -49,14 +51,17 @@ export const SignInForm = () => {
   };
 
   return (
-    <StyledSignInForm className='signInContent'>
+    <SignInFormWrapper className='signInContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
 
-      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
+      <Typography className='actionTitle' variant='h6' gutterBottom component='h1'>
         Sign in
       </Typography>
-      <Typography variant='subtitle1' gutterBottom component='div'>
-        Not a member? <Link to={'/signup'}>Sign up</Link>
+      <Typography className='actionDescription' variant='body1' gutterBottom component='div'>
+        Sign in to get started, or if you already have an account?{' '}
+        <Link to={'/signup'}>
+          <b>Sign up</b>
+        </Link>
       </Typography>
 
       <form onSubmit={handleSubmit(formSubmitHandler)}>
@@ -73,7 +78,7 @@ export const SignInForm = () => {
               error={!!errors.email}
               helperText={errors.email ? errors.email?.message : ''}
               fullWidth
-              style={{ margin: ' 1rem 0rem' }}
+              style={{ margin: theme.spacing(2, 0) }}
             />
           )}
         />
@@ -90,19 +95,19 @@ export const SignInForm = () => {
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ''}
               fullWidth
-              style={{ margin: ' 1rem 0rem' }}
+              style={{ margin: theme.spacing(2, 0) }}
             />
           )}
         />
+        <Typography className='resetPassword' variant='subtitle1' gutterBottom component='div'>
+          <Link to='/resetpassword'>Forgot your password ?</Link>
+        </Typography>
         <div className='submitButtonWrapper'>
           <StyledActionButton type='submit' variant='contained'>
             Sign in
           </StyledActionButton>
         </div>
-        <Typography className='resetPassword' variant='subtitle1' gutterBottom component='div'>
-          <Link to='/resetpassword'>Forgot your password ?</Link>
-        </Typography>
       </form>
-    </StyledSignInForm>
+    </SignInFormWrapper>
   );
 };

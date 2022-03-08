@@ -1,9 +1,41 @@
 import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
+  components: {
+    MuiButton: {
+      // defaultProps: {
+      //   // The props to change the default for.
+      //   disableRipple: true,
+      // },
+      styleOverrides: {
+        root: {
+          borderRadius: 32,
+          '&.MuiButton-outlined': {
+            border: '2px solid #0b203b',
+            '&:hover': {
+              color: '#fffffe',
+              backgroundColor: '#0b203b ',
+              '&:active': {
+                color: '#0b203b',
+                backgroundColor: '#fffffe ',
+              },
+            },
+          },
+          '&:hover': {
+            color: '#0b203b',
+            backgroundColor: '#b8c1ec ',
+          },
+          '&:active': {
+            color: '#fffffe',
+            backgroundColor: '#0b203b ',
+          },
+        },
+      },
+    },
+  },
   palette: {
     primary: {
-      main: '#232946',
+      main: '#0b203b',
       dark: '#444862',
     },
     secondary: {
@@ -48,6 +80,7 @@ export const theme = createTheme({
     h6: {
       fontSize: 19,
       letterSpacing: '0.15px',
+      fontWeight: 600,
     },
     subtitle1: {
       fontSize: 16,
@@ -78,4 +111,5 @@ export const theme = createTheme({
       letterSpacing: '1.5px',
     },
   },
+  spacing: 8,
 });

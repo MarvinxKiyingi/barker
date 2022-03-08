@@ -18,6 +18,9 @@ import { MessageView } from './Views/MessageView';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './Styles/theme';
 
+//Styled components
+import { MainContentWrapper } from './Styles/StyledComponents/Wrapper';
+
 function App() {
   return (
     <div className='app'>
@@ -30,12 +33,9 @@ function App() {
                 <Route
                   path='/signin'
                   element={
-                    <div className='signInViewWrapper'>
-                      <nav>
-                        <Logo />
-                      </nav>
+                    <MainContentWrapper className='signInViewWrapper'>
                       <SignInView />
-                    </div>
+                    </MainContentWrapper>
                   }
                 />
                 <Route

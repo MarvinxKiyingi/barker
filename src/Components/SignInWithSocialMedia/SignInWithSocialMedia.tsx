@@ -6,35 +6,22 @@ import { Button } from '@mui/material';
 
 // styled component
 import { StyledSocialMediaOptions } from '../../Styles/StyledComponents/StyledSocialMediaOptions';
+import { StyledFacebookButton, StyledGithubButton, StyledGoogleButton } from '../../Styles/StyledComponents/Button';
 
 export const SignInWithSocialMedia = () => {
   const { googleSignIn, facebookSignIn, gitHubSignIn } = useAuth();
 
   return (
     <StyledSocialMediaOptions className='socialMediaLoginWrapper'>
-      <Button
-        variant='contained'
-        style={{
-          backgroundColor: 'white',
-          color: 'black',
-        }}
-        onClick={() => googleSignIn()}
-      >
+      <StyledGoogleButton variant='contained' onClick={() => googleSignIn()}>
         Google
-      </Button>
-      <Button variant='contained' onClick={() => facebookSignIn()}>
+      </StyledGoogleButton>
+      <StyledFacebookButton variant='contained' onClick={() => facebookSignIn()}>
         Facebook
-      </Button>
-      <Button
-        variant='contained'
-        style={{
-          backgroundColor: 'black',
-          color: 'white',
-        }}
-        onClick={() => gitHubSignIn()}
-      >
+      </StyledFacebookButton>
+      <StyledGithubButton variant='contained' onClick={() => gitHubSignIn()}>
         Github
-      </Button>
+      </StyledGithubButton>
     </StyledSocialMediaOptions>
   );
 };
