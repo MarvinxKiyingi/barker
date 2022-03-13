@@ -12,7 +12,7 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // MUI components
 import TextField from '@mui/material/TextField';
-import { Alert, Box, Button, Typography } from '@mui/material';
+import { Alert, Box, Typography } from '@mui/material';
 
 //Styles
 
@@ -57,7 +57,7 @@ export const SignInForm = () => {
       <Typography className='actionTitle' variant='h6' gutterBottom component='h1'>
         Sign in
       </Typography>
-      <Typography className='actionDescription' variant='body1' gutterBottom component='div'>
+      <Typography className='actionDescription' variant='body1' gutterBottom component='p'>
         Sign in to get started, or if you already have an account?{' '}
         <Link to={'/signup'}>
           <b>Sign up</b>
@@ -100,13 +100,15 @@ export const SignInForm = () => {
           )}
         />
         <Typography className='resetPassword' variant='subtitle1' gutterBottom component='div'>
-          <Link to='/resetpassword'>Forgot your password ?</Link>
+          <b>
+            <Link to='/resetpassword'>Forgot your password?</Link>
+          </b>
         </Typography>
-        <div className='submitButtonWrapper'>
+        <Box className='submitButtonWrapper'>
           <StyledActionButton type='submit' variant='contained'>
             Sign in
           </StyledActionButton>
-        </div>
+        </Box>
       </form>
     </SignInFormWrapper>
   );

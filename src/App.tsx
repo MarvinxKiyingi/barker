@@ -41,23 +41,17 @@ function App() {
                 <Route
                   path='/signup'
                   element={
-                    <div className='signUpViewWrapper'>
-                      <nav>
-                        <Logo />
-                      </nav>
+                    <MainContentWrapper className='signUpViewWrapper'>
                       <SignUpView />
-                    </div>
+                    </MainContentWrapper>
                   }
                 />
                 <Route
                   path='/resetpassword'
                   element={
-                    <div className='resetPasswordViewWrapper'>
-                      <nav>
-                        <Logo />
-                      </nav>
+                    <MainContentWrapper className='resetPasswordViewWrapper'>
                       <ResetPasswordView />
-                    </div>
+                    </MainContentWrapper>
                   }
                 />
                 <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />

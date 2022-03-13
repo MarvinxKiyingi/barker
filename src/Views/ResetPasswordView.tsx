@@ -1,17 +1,26 @@
 import { Typography } from '@mui/material';
 import { ResetPassword } from '../Components/Forms/ResetPassword';
+import { Logo } from '../Components/Logo/Logo';
+import { ContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
+import { Link } from 'react-router-dom';
 
 // Styles
-import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrapper';
+import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
+import { StyledDevider } from '../Components/Devider/Devider';
 
 export const ResetPasswordView = () => {
   return (
-    <StyledFormsWrapper className='resetPasswordWrapper'>
-      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
-        Reset Password
-      </Typography>
-
+    <ContentWrapper className='resetPasswordWrapper'>
+      <NavWrapper>
+        <Logo />
+      </NavWrapper>
       <ResetPassword />
-    </StyledFormsWrapper>
+      <StyledDevider />
+      <Typography variant='subtitle1' gutterBottom component='div' sx={{ textAlign: 'center', m: '1rem' }}>
+        <b>
+          <Link to='/signin'>Sign in</Link>
+        </b>
+      </Typography>
+    </ContentWrapper>
   );
 };

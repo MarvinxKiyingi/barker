@@ -1,6 +1,7 @@
 // Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 
 // Models
 import { ISignUp } from '../../Models/ISignUp';
@@ -18,6 +19,8 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 // Styles
 import { StyledSignUpForm } from '../../Styles/StyledComponents/StyledForms';
 import { StyledActionButton } from '../../Styles/StyledComponents/Button';
+import { Box, Typography } from '@mui/material';
+import { theme } from '../../Styles/theme';
 
 export const SignUpForm = () => {
   // Importing function from contex
@@ -49,6 +52,15 @@ export const SignUpForm = () => {
   return (
     <StyledSignUpForm className='signUpContent'>
       {firebaseError ? <Alert severity='error'>{errorHandler()}</Alert> : null}
+      <Typography className='actionTitle' variant='h6' gutterBottom component='h1'>
+        Create account
+      </Typography>
+      <Typography className='actionDescription' variant='body1' gutterBottom component='p'>
+        Already have an account?{' '}
+        <b>
+          <Link to={'/signin'}>Sign in</Link>
+        </b>
+      </Typography>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name={'email'}
@@ -102,21 +114,25 @@ export const SignUpForm = () => {
             />
           )}
         />
-        <div className='gdprTermsWrapper'>
-          <div className='gdprTermsWrapper_content'>
+        <Box className='gdprTermsWrapper'>
+          <Box className='gdprTermsWrapper_content'>
             <Controller
               name={'gdprTerms'}
               control={control}
               defaultValue={false}
               render={({ field }) => <Checkbox {...field} inputProps={{ 'aria-label': 'checked this checkbox to continue' }} />}
             />
-            <p>
-              I have read and agreed to the <a href='https://gdpr.eu/terms-and-conditions/'>Terms & Conditions</a> and{' '}
-              <a href='https://gdpr.eu/privacy-policy/'> Privicy Policy</a>
-            </p>
-          </div>
-          <FormHelperText error>{errors.gdprTerms?.message}</FormHelperText>
-        </div>
+            <Typography className='termsAndCondition' variant='body1' gutterBottom component='p'>
+              I have read and agreed to Barkers{' '}
+              <b>
+                <a href='https://gdpr.eu/terms-and-conditions/'>Terms & Conditions</a>
+              </b>
+            </Typography>
+          </Box>
+          <FormHelperText error sx={{ m: theme.spacing(1, 2) }}>
+            {errors.gdprTerms?.message}
+          </FormHelperText>
+        </Box>
 
         <div className='submitButtonWrapper'>
           <StyledActionButton type='submit' variant='contained' disabled={disabledBtn}>

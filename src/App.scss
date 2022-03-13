@@ -3,6 +3,10 @@
   min-height: 100vh;
 }
 .appWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   // min-height: 100vh;
   // display: flex;
   // flex-direction: column;
@@ -19,4 +23,9 @@
   // justify-content: center;
   // width: 100%;
   // max-width: 40rem;
+}
+@media (min-width: 600px) {
+  .appWrapper {
+    height: 100%;
+  }
 }
