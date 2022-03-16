@@ -12,6 +12,8 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
+  maxWidth: '1680px ',
+
   //   paddingLeft: '0 !important',
   //   paddingRight: '0 !important',
 }));
