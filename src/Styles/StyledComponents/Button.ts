@@ -32,6 +32,7 @@ export const StyledActionButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(2, 10),
   fontWeight: 600,
   letterSpacing: '0.0180em',
+  minWidth: 290,
 }));
 export const StyledGoogleButton = styled(Button)(({ theme }) => ({
   backgroundColor: 'white',

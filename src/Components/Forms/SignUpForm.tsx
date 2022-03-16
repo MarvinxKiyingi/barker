@@ -136,7 +136,7 @@ export const SignUpForm = () => {
 
         <div className='submitButtonWrapper'>
           <StyledActionButton type='submit' variant='contained' disabled={disabledBtn}>
-            Sign up
+            Create account
           </StyledActionButton>
         </div>
       </form>

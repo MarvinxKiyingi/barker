@@ -7,7 +7,7 @@ import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const SignInView = () => {
   return (
-    <ContentWrapper>
+    <ContentWrapper maxWidth={false}>
       <NavWrapper component='nav'>
         <Logo />
       </NavWrapper>

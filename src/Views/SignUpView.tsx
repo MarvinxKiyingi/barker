@@ -7,7 +7,7 @@ import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const SignUpView = () => {
   return (
-    <ContentWrapper data-testid='todo-1' className='signUpWrapper'>
+    <ContentWrapper data-testid='todo-1' maxWidth={false} className='signUpWrapper'>
       <NavWrapper>
         <Logo />
       </NavWrapper>

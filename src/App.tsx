@@ -1,7 +1,6 @@
 import './App.scss';
 import { AuthContexProvider } from './Utils/Contexs/AuthContext';
 import { Routes, Route } from 'react-router-dom';
-import { Logo } from './Components/Logo/Logo';
 import { SignInView } from './Views/SignInView';
 import { ErrorPage } from './Views/ErrorView';
 import { SignUpView } from './Views/SignUpView';

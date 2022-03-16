@@ -1,12 +1,7 @@
 import { Box, styled } from '@mui/material';
 
-export const SignInFormWrapper = styled(Box)(({ theme }) => ({
+export const StyledForm = styled(Box)(({ theme }) => ({
   '.actionTitle': {
-    padding: theme.spacing(2, 0),
-  },
-  '.resetPassword': {
-    display: 'flex',
-    justifyContent: 'end',
     padding: theme.spacing(2, 0),
   },
   '.submitButtonWrapper': {
@@ -16,17 +11,15 @@ export const SignInFormWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledSignUpForm = styled(Box)(({ theme }) => ({
-  '.actionTitle': {
+export const SignInFormWrapper = styled(StyledForm)(({ theme }) => ({
+  '.resetPassword': {
+    display: 'flex',
+    justifyContent: 'end',
     padding: theme.spacing(2, 0),
   },
+}));
 
-  '.submitButtonWrapper': {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: theme.spacing(2, 0),
-  },
-
+export const StyledSignUpForm = styled(StyledForm)(({ theme }) => ({
   '.gdprTermsWrapper': {
     display: 'flex',
     flexDirection: 'column',
@@ -40,17 +33,13 @@ export const StyledSignUpForm = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledResetPasswordForm = styled(Box)(({ theme }) => ({
-  '.actionTitle': {
-    padding: theme.spacing(2, 0),
-  },
-
-  '.submitButtonWrapper': {
-    display: 'flex',
-    justifyContent: 'center',
+export const StyledCreateProfileForm = styled(StyledForm)(({ theme }) => ({
+  '.alert': {
     margin: theme.spacing(2, 0),
   },
 }));
+
+export const StyledResetPasswordForm = styled(StyledForm)(({ theme }) => ({}));
 
 export const StyledUpdateForm = styled(Box)(({ theme }) => ({
   width: '100%',

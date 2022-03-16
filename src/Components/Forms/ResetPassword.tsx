@@ -1,6 +1,7 @@
 // Npm packages
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 
 // Models
 import { IPasswordResetYupSchema } from '../../Models/IYupSchema';
@@ -47,6 +48,12 @@ export const ResetPassword = () => {
 
       <Typography className='actionTitle' variant='h6' gutterBottom component='h1'>
         Reset Password
+      </Typography>
+      <Typography className='actionDescription' variant='body1' gutterBottom component='p'>
+        Type in your email adress, to get back on track! Or if you remember your password?
+        <b>
+          <Link to={'/signin'}>Sign in</Link>
+        </b>
       </Typography>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
