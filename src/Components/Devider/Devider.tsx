@@ -8,6 +8,12 @@ const StyleDevider = styled(Divider)(({ theme }) => ({
     '&:after': {
       position: 'initial',
     },
+    padding: theme.spacing(2, 0),
+    [theme.breakpoints.up('sm')]: {
+      width: '100%',
+      maxWidth: 600,
+      margin: '0 auto',
+    },
   },
 }));
 

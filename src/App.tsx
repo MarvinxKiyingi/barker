@@ -26,7 +26,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <AuthContexProvider>
           <SwipeContexProvider>
-            <header className='appWrapper'>
+            <div className='appWrapper'>
               <Routes>
                 <Route path='/' element={<PrivateRoute component={SwipeView} />} />
                 <Route
@@ -66,7 +66,7 @@ function App() {
                   }
                 />
               </Routes>
-            </header>
+            </div>
           </SwipeContexProvider>
         </AuthContexProvider>
       </ThemeProvider>

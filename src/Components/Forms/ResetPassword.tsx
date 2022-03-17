@@ -50,7 +50,7 @@ export const ResetPassword = () => {
         Reset Password
       </Typography>
       <Typography className='actionDescription' variant='body1' gutterBottom component='p'>
-        Type in your email adress, to get back on track! Or if you remember your password?
+        Type in your email adress, to get back on track! Or{' '}
         <b>
           <Link to={'/signin'}>Sign in</Link>
         </b>

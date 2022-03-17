@@ -20,4 +20,7 @@ export const NavWrapper = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   margin: theme.spacing(2, 0),
+  [theme.breakpoints.up('md')]: {
+    margin: theme.spacing(6, 0),
+  },
 }));

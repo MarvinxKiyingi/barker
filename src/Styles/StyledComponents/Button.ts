@@ -1,4 +1,4 @@
-import { Button, IconButton, styled } from '@mui/material';
+import { Button, styled } from '@mui/material';
 
 // export const StyledSwipeButtons = styled(IconButton)({
 //   borderRadius: '50%',
@@ -29,10 +29,13 @@ export const StyledLikeButton = styled(Button)(({ theme }) => ({
 }));
 
 export const StyledActionButton = styled(Button)(({ theme }) => ({
+  width: '100%',
   padding: theme.spacing(2, 10),
   fontWeight: 600,
   letterSpacing: '0.0180em',
-  minWidth: 290,
+  [theme.breakpoints.up('sm')]: {
+    minWidth: 290,
+  },
 }));
 export const StyledGoogleButton = styled(Button)(({ theme }) => ({
   backgroundColor: 'white',

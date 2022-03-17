@@ -1,9 +1,6 @@
 // Import context
 import { useAuth } from '../../Utils/Contexs/AuthContext';
 
-// MUI components
-import { Button } from '@mui/material';
-
 // styled component
 import { StyledSocialMediaOptions } from '../../Styles/StyledComponents/StyledSocialMediaOptions';
 import { StyledFacebookButton, StyledGithubButton, StyledGoogleButton } from '../../Styles/StyledComponents/Button';

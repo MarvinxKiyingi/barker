@@ -101,7 +101,7 @@ export const SignInForm = () => {
         />
         <Typography className='resetPassword' variant='subtitle1' gutterBottom component='div'>
           <b>
-            <Link to='/resetpassword'>Forgot your password?</Link>
+            <Link to='/resetpassword'>Forgot your password ?</Link>
           </b>
         </Typography>
         <Box className='submitButtonWrapper'>

@@ -1,17 +1,25 @@
+import { DogIllustration } from '../Components/DogIllustration/DogIllustration';
 import { ResetPassword } from '../Components/Forms/ResetPassword';
 import { Logo } from '../Components/Logo/Logo';
-import { ContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
+import { ContentWrapper, StyledSection } from '../Styles/StyledComponents/ContentWrapper';
 
 // Styles
 import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const ResetPasswordView = () => {
   return (
-    <ContentWrapper maxWidth={false} className='resetPasswordWrapper'>
-      <NavWrapper>
+    <ContentWrapper maxWidth={'xl'} className='resetPasswordWrapper'>
+      <NavWrapper component='header'>
         <Logo />
       </NavWrapper>
-      <ResetPassword />
+      <StyledSection className='StyledSection'>
+        <div>
+          <ResetPassword />
+        </div>
+        <div className='Illustration'>
+          <DogIllustration />
+        </div>
+      </StyledSection>
     </ContentWrapper>
   );
 };

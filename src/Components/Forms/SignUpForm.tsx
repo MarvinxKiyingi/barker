@@ -122,7 +122,7 @@ export const SignUpForm = () => {
               defaultValue={false}
               render={({ field }) => <Checkbox {...field} inputProps={{ 'aria-label': 'checked this checkbox to continue' }} />}
             />
-            <Typography className='termsAndCondition' variant='body1' gutterBottom component='p'>
+            <Typography className='termsAndCondition' variant='body1' component='p'>
               I have read and agreed to Barkers{' '}
               <b>
                 <a href='https://gdpr.eu/terms-and-conditions/'>Terms & Conditions</a>

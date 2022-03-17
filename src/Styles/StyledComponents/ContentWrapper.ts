@@ -12,8 +12,22 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: '1680px ',
 
   //   paddingLeft: '0 !important',
   //   paddingRight: '0 !important',
+}));
+
+export const StyledSection = styled('section')(({ theme }) => ({
+  '.Illustration': {
+    display: 'none',
+  },
+  [theme.breakpoints.up('md')]: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: theme.spacing(2),
+    margin: 'auto 0',
+    '.Illustration': {
+      display: 'inline-grid',
+    },
+  },
 }));

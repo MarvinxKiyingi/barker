@@ -9,6 +9,11 @@ export const StyledForm = styled(Box)(({ theme }) => ({
     justifyContent: 'center',
     margin: theme.spacing(2, 0),
   },
+  [theme.breakpoints.up('sm')]: {
+    width: '100%',
+    maxWidth: 600,
+    margin: '0 auto',
+  },
 }));
 
 export const SignInFormWrapper = styled(StyledForm)(({ theme }) => ({
@@ -20,15 +25,8 @@ export const SignInFormWrapper = styled(StyledForm)(({ theme }) => ({
 }));
 
 export const StyledSignUpForm = styled(StyledForm)(({ theme }) => ({
-  '.gdprTermsWrapper': {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: '1rem 0rem',
-  },
   '.gdprTermsWrapper_content': {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
   },
 }));
