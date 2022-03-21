@@ -4,8 +4,6 @@ This is my degree project, decided to create a dating like app for dogs and thei
 
 The idea is that you as a user can match with a dog that is your height +6cm or -6cm, that you then can write to.
 
-live link: [The barker-webbApp](https://barrker.netlify.app)
-
 ## Naming
 
 - Filename: Use PascalCase e.g, `ButtonComponent.jsx`
