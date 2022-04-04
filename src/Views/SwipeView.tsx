@@ -1,17 +1,22 @@
 import { NavBar } from '../Components/Navbar/NavBar';
-import Box from '@mui/material/Box';
 import { SwipeCard } from '../Components/Swipe/SwipeCard';
 import { ItsAMatch } from '../Components/Swipe/ItsAMatch';
 import { useSwipe } from '../Utils/Contexs/SwipeContex';
-// Import Scss styles
+// Import styles
 import '../Styles/Scss/mediaQuery.scss';
+import { AlternativContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
+import { AlternativNavWrapper, MainContentWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const SwipeView = () => {
   const { isMatch } = useSwipe();
   return (
-    <Box className='swipeViewWrapper'>
-      <NavBar />
-      {isMatch ? <ItsAMatch /> : <SwipeCard />}
-    </Box>
+    <MainContentWrapper className='swipeViewWrapper'>
+      <AlternativContentWrapper>
+        <AlternativNavWrapper className='alternativNavWrapper'>
+          <NavBar />
+        </AlternativNavWrapper>
+        {isMatch ? <ItsAMatch /> : <SwipeCard />}
+      </AlternativContentWrapper>
+    </MainContentWrapper>
   );
 };

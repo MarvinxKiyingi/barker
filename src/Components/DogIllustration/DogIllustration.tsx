@@ -1,9 +1,9 @@
-import React from 'react';
+import img from '../../Styles/Images/Dog.png';
 
 export const DogIllustration = () => {
   return (
     <div>
-      <img src='../../Styles/Images/Dog.png' alt='dog illustration' />
+      <img style={{ width: '100%' }} src={img} alt='dog illustration' />
     </div>
   );
 };

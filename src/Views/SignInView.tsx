@@ -9,7 +9,7 @@ import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
 export const SignInView = () => {
   return (
     <ContentWrapper maxWidth={'xl'}>
-      <NavWrapper component='header'>
+      <NavWrapper className='NavWrapper' component='nav'>
         <Logo />
       </NavWrapper>
       <StyledSection className='StyledSection'>
@@ -18,6 +18,7 @@ export const SignInView = () => {
           <StyledDevider />
           <SignInWithSocialMedia />
         </div>
+
         <div className='Illustration'>
           <DogIllustration />
         </div>

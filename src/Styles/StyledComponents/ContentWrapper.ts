@@ -16,6 +16,10 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
   //   paddingLeft: '0 !important',
   //   paddingRight: '0 !important',
 }));
+export const AlternativContentWrapper = styled(ContentWrapper)(({ theme }) => ({
+  paddingLeft: 'unset',
+  paddingRight: 'unset',
+}));
 
 export const StyledSection = styled('section')(({ theme }) => ({
   '.Illustration': {

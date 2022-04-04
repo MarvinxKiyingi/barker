@@ -3,10 +3,6 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   components: {
     MuiButton: {
-      // defaultProps: {
-      //   // The props to change the default for.
-      //   disableRipple: true,
-      // },
       styleOverrides: {
         root: {
           borderRadius: 32,
@@ -31,6 +27,15 @@ export const theme = createTheme({
           },
         },
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 376,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
     },
   },
   palette: {

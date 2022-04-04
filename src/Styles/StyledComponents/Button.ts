@@ -1,31 +1,20 @@
-import { Button, styled } from '@mui/material';
+import { Button, IconButton, styled } from '@mui/material';
 
-// export const StyledSwipeButtons = styled(IconButton)({
-//   borderRadius: '50%',
-//   fontSize: '2.5rem',
-//   border: 'solid 0.2rem',
-// });
-// export const StyledDeclinedButton = styled(StyledSwipeButtons)(({ theme }) => ({
-//   color: theme.palette.error.main,
-// }));
-// export const StyledLikeButton = styled(StyledSwipeButtons)(({ theme }) => ({
-//   color: theme.palette.success.main,
-// }));
-export const StyledDeclinedButton = styled(Button)(({ theme }) => ({
+const StyledSwipeButtons = styled(IconButton)(({ theme }) => ({
   borderRadius: '50%',
+  fontSize: '2rem',
   padding: theme.spacing(3),
-  '&:hover': {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.error.main,
+  border: 'solid 0.2rem',
+  backgroundColor: theme.palette.background.paper,
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '2.5rem',
   },
 }));
-export const StyledLikeButton = styled(Button)(({ theme }) => ({
-  borderRadius: '50%',
-  padding: theme.spacing(3),
-  '&:hover': {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.success.main,
-  },
+export const StyledDeclinedButton = styled(StyledSwipeButtons)(({ theme }) => ({
+  color: theme.palette.error.main,
+}));
+export const StyledLikeButton = styled(StyledSwipeButtons)(({ theme }) => ({
+  color: theme.palette.success.main,
 }));
 
 export const StyledActionButton = styled(Button)(({ theme }) => ({
