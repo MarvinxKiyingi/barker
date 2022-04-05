@@ -12,6 +12,7 @@ import { ProfileView } from './Views/ProfileView';
 import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
 import { MatchesView } from './Views/MatchesView';
 import { MessageView } from './Views/MessageView';
+import { EditProfileView } from './Views/EditProfileView';
 
 //Mui theme
 import { ThemeProvider } from '@mui/material/styles';
@@ -55,6 +56,7 @@ function App() {
                 />
                 <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
                 <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
+                <Route path='/editprofile' element={<PrivateRoute component={EditProfileView} />} />
                 <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
                 <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
                 <Route

@@ -75,18 +75,6 @@ export const Input = styled('input')({
 
 export const StyleDialogDisagreeButton = styled(Button)(({ theme }) => ({
   color: 'white',
-  backgroundColor: '#0b203b',
-  padding: '0.375 1rem',
-  fontWeight: 600,
-  letterSpacing: '0.0180em',
-  borderRadius: '2rem',
-
-  '&:hover': {
-    backgroundColor: '#0b203b',
-  },
-}));
-export const StyleDialogDeleteButton = styled(Button)(({ theme }) => ({
-  color: 'white',
   backgroundColor: '#d11e35',
   padding: '0.375 1rem',
   fontWeight: 600,
@@ -95,5 +83,17 @@ export const StyleDialogDeleteButton = styled(Button)(({ theme }) => ({
 
   '&:hover': {
     backgroundColor: '#d11e35',
+  },
+}));
+export const StyleDialogDeleteButton = styled(Button)(({ theme }) => ({
+  color: 'white',
+  backgroundColor: '#0b203b',
+  padding: '0.375 1rem',
+  fontWeight: 600,
+  letterSpacing: '0.0180em',
+  borderRadius: '2rem',
+
+  '&:hover': {
+    backgroundColor: '#0b203b',
   },
 }));
