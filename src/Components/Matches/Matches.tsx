@@ -27,7 +27,7 @@ export const Matches = () => {
     }
   }, [matchesIsEmpty, matchedValues, matchedSnapShot?.length]);
   return (
-    <Box className='matchWrapper' sx={{ p: '0rem 0.5rem' }}>
+    <Box className='matchWrapper' sx={{ p: '0rem 0.5rem 0.5rem' }}>
       <Box className='matchWrapper_header' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pr: ' 0.75rem' }}>
         <IconButton onClick={() => navigate('/')} size='large'>
           <ArrowBackIcon fontSize='inherit' sx={{ color: '#39353f' }} />

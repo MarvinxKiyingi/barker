@@ -11,7 +11,7 @@ export const SwipeView = () => {
   const { isMatch } = useSwipe();
   return (
     <MainContentWrapper className='swipeViewWrapper'>
-      <AlternativContentWrapper>
+      <AlternativContentWrapper className='alternativContentWrapper'>
         <AlternativNavWrapper className='alternativNavWrapper'>
           <NavBar />
         </AlternativNavWrapper>

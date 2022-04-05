@@ -27,7 +27,10 @@ export const Message = () => {
     matchedSnapShot?.map((match: DocumentData | undefined, index: number) => {
       if (id === match?.id) {
         return (
-          <Box className='messagesWrapper' sx={{ p: '0rem 0.5rem', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <Box
+            className='messagesWrapper'
+            sx={{ p: '0rem 0.5rem 0.5rem', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+          >
             <Box className='messagesWrapper_header' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pr: ' 0.75rem' }}>
               <IconButton onClick={() => navigate('/matches')} size='large'>
                 <ArrowBackIcon className='messagesWrapper_ArrowBackIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
@@ -37,7 +40,13 @@ export const Message = () => {
                 <Avatar className='avatarWrapper_avatar' sx={{ width: '2.2rem', height: '2.2rem' }}>
                   <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
                 </Avatar>
-                <Typography variant='h6' className='avatarWrapper_headerText' gutterBottom component='div' sx={{ fontSize: '0.75rem', textAlign: 'center' }}>
+                <Typography
+                  variant='h6'
+                  className='avatarWrapper_headerText'
+                  gutterBottom
+                  component='div'
+                  sx={{ fontSize: '0.75rem', textAlign: 'center' }}
+                >
                   {match?.name}
                 </Typography>
               </Box>

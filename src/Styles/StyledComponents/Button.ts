@@ -19,7 +19,7 @@ export const StyledLikeButton = styled(StyledSwipeButtons)(({ theme }) => ({
 
 export const StyledActionButton = styled(Button)(({ theme }) => ({
   width: '100%',
-  padding: theme.spacing(2, 10),
+  padding: '0.75rem 3rem',
   fontWeight: 600,
   letterSpacing: '0.0180em',
   [theme.breakpoints.up('sm')]: {
