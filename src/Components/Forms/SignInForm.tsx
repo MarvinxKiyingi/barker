@@ -19,6 +19,8 @@ import { Alert, Box, Typography } from '@mui/material';
 import { StyledActionButton } from '../../Styles/StyledComponents/Button';
 import { theme } from '../../Styles/theme';
 import { SignInFormWrapper } from '../../Styles/StyledComponents/StyledForms';
+import { StyledDevider } from '../Devider/Devider';
+import { SignInWithSocialMedia } from '../SignInWithSocialMedia/SignInWithSocialMedia';
 
 export const SignInForm = () => {
   // Importing function from contex
@@ -108,6 +110,8 @@ export const SignInForm = () => {
           <StyledActionButton type='submit' variant='contained'>
             Sign in
           </StyledActionButton>
+          <StyledDevider />
+          <SignInWithSocialMedia />
         </Box>
       </form>
     </SignInFormWrapper>

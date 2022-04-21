@@ -26,15 +26,11 @@ export const StyledActionButton = styled(Button)(({ theme }) => ({
     minWidth: 290,
   },
 }));
-export const StyledGoogleButton = styled(Button)(({ theme }) => ({
+export const StyledGoogleButton = styled(StyledActionButton)(({ theme }) => ({
   backgroundColor: 'white',
   color: 'black',
 }));
-export const StyledFacebookButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#4267B2',
-  color: 'white',
-}));
-export const StyledGithubButton = styled(Button)(({ theme }) => ({
+export const StyledGithubButton = styled(StyledActionButton)(({ theme }) => ({
   backgroundColor: 'black',
   color: 'white',
 }));

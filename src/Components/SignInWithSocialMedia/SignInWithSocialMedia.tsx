@@ -2,23 +2,34 @@
 import { useAuth } from '../../Utils/Contexs/AuthContext';
 
 // styled component
-import { StyledSocialMediaOptions } from '../../Styles/StyledComponents/StyledSocialMediaOptions';
-import { StyledFacebookButton, StyledGithubButton, StyledGoogleButton } from '../../Styles/StyledComponents/Button';
+
+import { Stack } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import { StyledGoogleButton, StyledGithubButton } from '../../Styles/StyledComponents/Button';
+import { GoogleIcon } from '../../Styles/Icons/GoogleIcon';
 
 export const SignInWithSocialMedia = () => {
-  const { googleSignIn, facebookSignIn, gitHubSignIn } = useAuth();
+  const { googleSignIn, gitHubSignIn } = useAuth();
 
   return (
-    <StyledSocialMediaOptions className='socialMediaLoginWrapper'>
-      <StyledGoogleButton variant='contained' onClick={() => googleSignIn()}>
+    <Stack className='socialMediaLoginWrapper' spacing={2}>
+      <StyledGoogleButton variant='contained' startIcon={<GoogleIcon />} onClick={() => googleSignIn()}>
         Google
       </StyledGoogleButton>
-      <StyledFacebookButton variant='contained' onClick={() => facebookSignIn()}>
-        Facebook
-      </StyledFacebookButton>
-      <StyledGithubButton variant='contained' onClick={() => gitHubSignIn()}>
+      <StyledGithubButton variant='contained' startIcon={<GitHubIcon />} onClick={() => gitHubSignIn()}>
         Github
       </StyledGithubButton>
-    </StyledSocialMediaOptions>
+    </Stack>
+    // <StyledSocialMediaOptions className='socialMediaLoginWrapper'>
+    //   <StyledGoogleButton variant='contained' onClick={() => googleSignIn()}>
+    //     Google
+    //   </StyledGoogleButton>
+    //   <StyledFacebookButton variant='contained' onClick={() => facebookSignIn()}>
+    //     Facebook
+    //   </StyledFacebookButton>
+    //   <StyledGithubButton variant='contained' onClick={() => gitHubSignIn()}>
+    //     Github
+    //   </StyledGithubButton>
+    // </StyledSocialMediaOptions>
   );
 };

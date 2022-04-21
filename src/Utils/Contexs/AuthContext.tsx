@@ -4,7 +4,6 @@ import React, { useContext, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   deleteUser,
-  FacebookAuthProvider,
   GithubAuthProvider,
   GoogleAuthProvider,
   sendPasswordResetEmail,
@@ -53,7 +52,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
 
   //Social media providor
   const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
 
   // firebase Storage ref
@@ -203,20 +201,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
       });
   };
 
-  // Facebook sign in
-  const facebookSignIn = () => {
-    signInWithPopup(auth, facebookProvider)
-      .then((result) => {
-        // IsNewUser returns a string depending on if the users first time or not.
-        navigate(`${IsNewSocialMediaUser(result)}`);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        setErrorMsg({ errorMessage: error.message, errorCode: error.code });
-        navigate('/signin');
-      });
-  };
-
   // Github sign in
   const gitHubSignIn = () => {
     signInWithPopup(auth, gitHubProvider)
@@ -243,7 +227,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     passwordReset,
     signOutUser,
     googleSignIn,
-    facebookSignIn,
     gitHubSignIn,
     currentUser,
     currentUserLoading,
