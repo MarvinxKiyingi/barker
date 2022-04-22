@@ -19,6 +19,10 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
 export const AlternativContentWrapper = styled(ContentWrapper)(({ theme }) => ({
   paddingLeft: 'unset',
   paddingRight: 'unset',
+  [theme.breakpoints.up('md')]: {
+    height: '100%',
+    padding: 24,
+  },
 }));
 
 export const StyledSection = styled('section')(({ theme }) => ({

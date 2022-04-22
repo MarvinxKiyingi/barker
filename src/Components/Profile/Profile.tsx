@@ -26,11 +26,16 @@ import { StyledActionButton } from '../../Styles/StyledComponents/Button';
 
 //Firebase
 
-const ProfileNavigation = styled(Box)({
+const ProfileNavigation = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   paddingRight: '0.5rem',
-});
+  '.navigation_iconbutton': {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+}));
 
 const ProfileWrapper = styled(Box)({
   flex: 2,

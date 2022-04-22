@@ -15,12 +15,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HeightIcon from '@mui/icons-material/Height';
 
-const SwipeCardContainer = styled(Box)({
+const SwipeCardContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   flex: 2,
   justifyContent: 'space-around',
-});
+  [theme.breakpoints.up('md')]: {
+    maxWidth: '70%',
+    alignSelf: 'center',
+  },
+}));
 const LoadingContainer = styled('div')({
   display: 'flex',
   justifyContent: 'center',
@@ -48,7 +52,7 @@ export const SwipeCard = () => {
       ) : (
         <>
           <SwipeCardContent className='swipeCardContent'>
-            <CardMedia component='img' height='100%' image={`${dog.url}`} alt='Dog image' />
+            <CardMedia component='img' height='fit-content' image={`${dog.url}`} alt='Dog image' />
             <CardContent>
               <Box
                 className='swipeCardTextAreaOne'

@@ -15,11 +15,11 @@ export const NavBar = () => {
 
   return (
     <NavBarWrapper className='navBarWrapper' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: '0.5rem' }}>
-      <IconButton aria-label='Profile Icon' onClick={() => navigate('/profile')} size='large'>
+      <IconButton className='profileIconButton' aria-label='Profile Icon' onClick={() => navigate('/profile')} size='large'>
         <AccountCircleIcon className='AccountCircleIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
       </IconButton>
       <Logo />
-      <IconButton onClick={() => navigate('/matches')} size='large'>
+      <IconButton className='chatIconButton' onClick={() => navigate('/matches')} size='large'>
         <ChatIcon className='ChatIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
       </IconButton>
     </NavBarWrapper>
