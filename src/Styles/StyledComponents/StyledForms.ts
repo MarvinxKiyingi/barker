@@ -7,6 +7,7 @@ export const StyledForm = styled(Box)(({ theme }) => ({
   '.submitButtonWrapper': {
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
     margin: theme.spacing(2, 0),
   },
   [theme.breakpoints.up('sm')]: {
