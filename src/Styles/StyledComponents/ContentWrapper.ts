@@ -20,8 +20,13 @@ export const AlternativContentWrapper = styled(ContentWrapper)(({ theme }) => ({
   paddingLeft: 'unset',
   paddingRight: 'unset',
   [theme.breakpoints.up('md')]: {
+    paddingLeft: 'unset',
+    paddingRight: 'unset',
+    minHeight: 'unset',
+  },
+  [theme.breakpoints.up('lg')]: {
     height: '100%',
-    padding: 24,
+    maxWidth: 1480,
   },
 }));
 

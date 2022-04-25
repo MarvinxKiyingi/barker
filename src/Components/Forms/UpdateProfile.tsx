@@ -171,7 +171,7 @@ export const UpdateProfile = () => {
                   Are you sure you want to remove your Barker account? All of your data and information will be permanently deleted.
                 </DialogContentText>
               </DialogContent>
-              <DialogActions>
+              <DialogActions sx={{ p: 2 }}>
                 <StyleDialogDisagreeButton variant='contained' onClick={handleClose}>
                   Disagree
                 </StyleDialogDisagreeButton>

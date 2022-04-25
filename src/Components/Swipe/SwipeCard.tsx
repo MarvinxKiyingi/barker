@@ -21,7 +21,11 @@ const SwipeCardContainer = styled(Box)(({ theme }) => ({
   flex: 2,
   justifyContent: 'space-around',
   [theme.breakpoints.up('md')]: {
-    maxWidth: '70%',
+    maxWidth: '55%',
+    alignSelf: 'center',
+  },
+  [theme.breakpoints.up('lg')]: {
+    maxWidth: '45%',
     alignSelf: 'center',
   },
 }));
@@ -52,7 +56,7 @@ export const SwipeCard = () => {
       ) : (
         <>
           <SwipeCardContent className='swipeCardContent'>
-            <CardMedia component='img' height='fit-content' image={`${dog.url}`} alt='Dog image' />
+            <CardMedia component='img' height='fit-content' image={`${dog.url}`} alt='Dog image' sx={{ aspectRatio: '1/1' }} />
             <CardContent>
               <Box
                 className='swipeCardTextAreaOne'

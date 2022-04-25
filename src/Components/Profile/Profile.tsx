@@ -64,6 +64,12 @@ const TextSection = styled(Box)(({ theme }) => ({
     fontWeight: 500,
   },
 }));
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  width: '10rem',
+  height: '10rem',
+  alignSelf: 'center',
+  margin: theme.spacing(2),
+}));
 
 export const Profile = () => {
   const { signOutUser, currentUser } = useAuth();
@@ -97,7 +103,7 @@ export const Profile = () => {
       </ProfileNavigation>
       <Box sx={{ flex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: '12px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-          {!loading && <Avatar alt='userProfile' src={imageUrl} sx={{ width: '10rem', height: '10rem', alignSelf: 'center' }} />}
+          {!loading && <StyledAvatar alt='userProfile' src={imageUrl} />}
           <InfoContainer className='InfoContainer' sx={{ mt: '24px' }}>
             {snapShot?.name && (
               <Box>
@@ -126,11 +132,11 @@ export const Profile = () => {
         </Box>
 
         <StyledButtonStack spacing={2}>
-          <StyledActionButton variant='outlined' onClick={() => navigate('/editprofile')}>
+          <StyledActionButton variant='contained' onClick={() => navigate('/editprofile')}>
             Edit profile
           </StyledActionButton>
 
-          <StyledActionButton onClick={() => signOutUser()} variant='contained'>
+          <StyledActionButton onClick={() => signOutUser()} variant='outlined'>
             Sign Out
           </StyledActionButton>
         </StyledButtonStack>

@@ -3,16 +3,23 @@ import { Box, styled } from '@mui/material';
 export const MainContentWrapper = styled(Box)(({ theme }) => ({
   '@media (max-width:1200px) and (orientation: portrait)': {
     height: '100% !important',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   },
   '@media (max-height:1200px) and (orientation: landscape)': {
     height: '100% !important',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   },
   padding: theme.spacing(),
   width: '100%',
   [theme.breakpoints.up('lg')]: {
-    minWidth: '100%',
-    height: '50%',
-    minHeight: 1000,
+    height: '100%',
+    maxHeight: ' 70%',
   },
 }));
 
@@ -26,6 +33,7 @@ export const NavWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 export const AlternativNavWrapper = styled(NavWrapper)(({ theme }) => ({
+  margin: 'unset',
   [theme.breakpoints.up('md')]: {
     margin: 'unset',
   },
@@ -56,15 +64,21 @@ export const IsDesktop = styled(Box)(({ theme }) => ({
   height: '100%',
   [theme.breakpoints.down('md')]: {
     display: 'none',
+    maxHeight: 884,
   },
 }));
 export const LeftWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  flex: 1,
+  flex: 0.5,
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  padding: theme.spacing(2),
+  paddingTop: 68,
+  borderRadius: theme.spacing(2, 0, 0, 2),
 }));
 export const RightWrapper = styled(Box)(({ theme }) => ({
   flex: 2,
   display: 'flex',
   flexDirection: 'column',
+  padding: theme.spacing(2, 0),
 }));
