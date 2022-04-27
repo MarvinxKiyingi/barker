@@ -1,18 +1,82 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Message } from '../Components/Message/Message';
 import { NavBar } from '../Components/Navbar/NavBar';
+import { Profile } from '../Components/Profile/Profile';
+import { AlternativContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
+import {
+  AlternativNavWrapper,
+  IsDesktop,
+  IsMobile,
+  LeftWrapper,
+  MainContentWrapper,
+  RightWrapper,
+  StyledTabsWrapper,
+} from '../Styles/StyledComponents/Wrapper';
 
 // Import Scss styles
 import '../Styles/Scss/mediaQuery.scss';
-import { AlternativContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
-import { AlternativNavWrapper, MainContentWrapper } from '../Styles/StyledComponents/Wrapper';
+
+// mui
+import { Tabs, Tab, Box, Divider } from '@mui/material';
+import { Matches } from '../Components/Matches/Matches';
+
 export const MessageView = () => {
+  const [pageView, setPageView] = useState('matches');
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setPageView(newValue);
+  };
+  const navigate = useNavigate();
   return (
     <MainContentWrapper className='messageViewWrapper'>
       <AlternativContentWrapper className='alternativContentWrapper'>
-        <AlternativNavWrapper className='alternativNavWrapper'>
-          <NavBar />
-        </AlternativNavWrapper>
-        <Message />
+        <IsMobile className='isMobile'>
+          <AlternativNavWrapper className='alternativNavWrapper'>
+            <NavBar />
+          </AlternativNavWrapper>
+          <Message />
+        </IsMobile>
+
+        <IsDesktop className='isDesktop'>
+          <LeftWrapper className='leftWrapper'>
+            <Profile />
+          </LeftWrapper>
+
+          <RightWrapper className='rightWrapper matchesView'>
+            <AlternativNavWrapper className='alternativNavWrapper'>
+              <NavBar />
+            </AlternativNavWrapper>
+
+            <StyledTabsWrapper>
+              <Tabs
+                value={pageView}
+                onChange={handleChange}
+                textColor='primary'
+                indicatorColor='primary'
+                aria-label='Navigation between swipe and messages'
+              >
+                <Tab value='swipe' label='swipe' onClick={() => navigate('/')} />
+                <Tab value='matches' label='matches' onClick={() => navigate('/matches')} />
+              </Tabs>
+            </StyledTabsWrapper>
+
+            <Box>
+              <Box>
+                <Matches />
+              </Box>
+
+              <Box>
+                <Divider />
+              </Box>
+
+              <Box>
+                <Message />
+              </Box>
+            </Box>
+          </RightWrapper>
+        </IsDesktop>
       </AlternativContentWrapper>
     </MainContentWrapper>
   );

@@ -9,11 +9,11 @@
   align-items: center;
 }
 
-// @media (min-width: 900) {
-//   .appWrapper {
-//     height: initial;
-//   }
-// }
+@media (min-width: 900px) {
+  .appWrapper {
+    height: unset;
+  }
+}
 // .signUpViewWrapper,
 // .signInViewWrapper,
 // .resetPasswordViewWrapper {

@@ -81,4 +81,14 @@ export const RightWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(2, 2, 2, 0),
+  '&.matchesView': {
+    padding: theme.spacing(2, 2, 0, 0),
+  },
+}));
+
+export const StyledTabsWrapper = styled(Box)(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  padding: theme.spacing(1, 0),
 }));
