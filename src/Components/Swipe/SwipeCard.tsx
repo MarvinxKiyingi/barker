@@ -19,13 +19,13 @@ const SwipeCardContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   flex: 2,
-  justifyContent: 'space-around',
+  justifyContent: 'space-evenly',
   [theme.breakpoints.up('md')]: {
-    maxWidth: '55%',
+    maxWidth: '45%',
     alignSelf: 'center',
   },
   [theme.breakpoints.up('lg')]: {
-    maxWidth: '45%',
+    maxWidth: '40%',
     alignSelf: 'center',
   },
 }));

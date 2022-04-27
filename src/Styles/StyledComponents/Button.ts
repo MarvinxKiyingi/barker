@@ -6,9 +6,6 @@ const StyledSwipeButtons = styled(IconButton)(({ theme }) => ({
   padding: theme.spacing(3),
   border: 'solid 0.2rem',
   backgroundColor: theme.palette.background.paper,
-  [theme.breakpoints.up('sm')]: {
-    fontSize: '2.5rem',
-  },
 }));
 export const StyledDeclinedButton = styled(StyledSwipeButtons)(({ theme }) => ({
   color: theme.palette.error.main,

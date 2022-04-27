@@ -80,5 +80,5 @@ export const RightWrapper = styled(Box)(({ theme }) => ({
   flex: 2,
   display: 'flex',
   flexDirection: 'column',
-  padding: theme.spacing(2, 0),
+  padding: theme.spacing(2, 2, 2, 0),
 }));
