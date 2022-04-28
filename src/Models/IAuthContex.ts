@@ -19,7 +19,6 @@ export interface IAuthContex {
   updateUserProfile: (props: IUser) => void;
   deleteUserAndProfile: () => Promise<void>;
   googleSignIn: () => void;
-  facebookSignIn: () => void;
   gitHubSignIn: () => void;
   currentUser: FirebaseUser | null | undefined;
   currentUserLoading: boolean; // Remove any and set the real data type!!!

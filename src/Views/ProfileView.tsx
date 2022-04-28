@@ -1,12 +1,20 @@
 import { Profile } from '../Components/Profile/Profile';
-import Box from '@mui/material/Box';
+
 // Import Scss styles
 import '../Styles/Scss/mediaQuery.scss';
+import { AlternativNavWrapper, MainContentWrapper } from '../Styles/StyledComponents/Wrapper';
+import { AlternativContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
+import { NavBar } from '../Components/Navbar/NavBar';
 
 export const ProfileView = () => {
   return (
-    <Box className='profileViewWrapper'>
-      <Profile />
-    </Box>
+    <MainContentWrapper className='profileViewWrapper'>
+      <AlternativContentWrapper className='alternativContentWrapper'>
+        <AlternativNavWrapper className='alternativNavWrapper'>
+          <NavBar />
+        </AlternativNavWrapper>
+        <Profile />
+      </AlternativContentWrapper>
+    </MainContentWrapper>
   );
 };

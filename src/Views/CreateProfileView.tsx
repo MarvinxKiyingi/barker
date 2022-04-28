@@ -1,18 +1,25 @@
-import { Alert, Box, Typography } from '@mui/material';
-import React from 'react';
+import { DogIllustration } from '../Components/DogIllustration/DogIllustration';
 import { CreateProfile } from '../Components/Forms/CreateProfile';
+import { Logo } from '../Components/Logo/Logo';
+import { ContentWrapper, StyledSection } from '../Styles/StyledComponents/ContentWrapper';
+import { MainContentWrapper, NavWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const CreateProfileView = () => {
   return (
-    <Box component='div' sx={{ textAlign: 'center' }}>
-      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
-        Create profile
-      </Typography>
-
-      <Alert severity='info' sx={{ textAlign: 'initial', mb: '1rem' }}>
-        A match is established when a dog is proportionate in height with your dog profile.
-      </Alert>
-      <CreateProfile />
-    </Box>
+    <MainContentWrapper>
+      <ContentWrapper maxWidth={'xl'}>
+        <NavWrapper component='header'>
+          <Logo />
+        </NavWrapper>
+        <StyledSection className='StyledSection'>
+          <div>
+            <CreateProfile />
+          </div>
+          <div className='Illustration'>
+            <DogIllustration />
+          </div>
+        </StyledSection>
+      </ContentWrapper>
+    </MainContentWrapper>
   );
 };

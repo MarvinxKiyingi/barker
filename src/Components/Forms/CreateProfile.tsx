@@ -12,7 +12,8 @@ import { useAuth } from '../../Utils/Contexs/AuthContext';
 // MUI components
 import TextField from '@mui/material/TextField';
 import { StyledActionButton } from '../../Styles/StyledComponents/Button';
-import { Box } from '@mui/material';
+import { Alert, Box, Typography } from '@mui/material';
+import { StyledCreateProfileForm } from '../../Styles/StyledComponents/StyledForms';
 
 export const CreateProfile = () => {
   const { createUserProfile } = useAuth();
@@ -35,8 +36,15 @@ export const CreateProfile = () => {
   };
 
   return (
-    <div className='createProfileContent'>
+    <StyledCreateProfileForm className='createProfileContent'>
+      <Alert className='alert' severity='info'>
+        Welcome to <b>Barker</b>! A match is established when a dog is proportionate in height with your dog profile, so choose carefully.
+      </Alert>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <Typography className='actionTitle' variant='h6' gutterBottom component='h1'>
+          Create profile
+        </Typography>
+
         <input {...register('profileImg')} type='file' />
         <TextField
           {...register('name')}
@@ -66,12 +74,12 @@ export const CreateProfile = () => {
           style={{ margin: ' 1rem 0rem' }}
         />
 
-        <Box className='submitButtonWrapper' sx={{ m: '1rem' }}>
+        <Box className='submitButtonWrapper'>
           <StyledActionButton type='submit' variant='contained'>
             Create profile
           </StyledActionButton>
         </Box>
       </form>
-    </div>
+    </StyledCreateProfileForm>
   );
 };

@@ -1,7 +1,6 @@
 import './App.scss';
 import { AuthContexProvider } from './Utils/Contexs/AuthContext';
 import { Routes, Route } from 'react-router-dom';
-import { LogoLarge } from './Components/Logo/Logo';
 import { SignInView } from './Views/SignInView';
 import { ErrorPage } from './Views/ErrorView';
 import { SignUpView } from './Views/SignUpView';
@@ -13,64 +12,66 @@ import { ProfileView } from './Views/ProfileView';
 import { SwipeContexProvider } from './Utils/Contexs/SwipeContex';
 import { MatchesView } from './Views/MatchesView';
 import { MessageView } from './Views/MessageView';
+import { EditProfileView } from './Views/EditProfileView';
+
+//Mui theme
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './Styles/theme';
+
+//Styled components
+import { MainContentWrapper } from './Styles/StyledComponents/Wrapper';
 
 function App() {
   return (
     <div className='app'>
-      <AuthContexProvider>
-        <SwipeContexProvider>
-          <header className='appWrapper'>
-            <Routes>
-              <Route path='/' element={<PrivateRoute component={SwipeView} />} />
-              <Route
-                path='/signin'
-                element={
-                  <div className='signInViewWrapper'>
-                    <nav>
-                      <LogoLarge />
-                    </nav>
-                    <SignInView />
-                  </div>
-                }
-              />
-              <Route
-                path='/signup'
-                element={
-                  <div className='signUpViewWrapper'>
-                    <nav>
-                      <LogoLarge />
-                    </nav>
-                    <SignUpView />
-                  </div>
-                }
-              />
-              <Route
-                path='/resetpassword'
-                element={
-                  <div className='resetPasswordViewWrapper'>
-                    <nav>
-                      <LogoLarge />
-                    </nav>
-                    <ResetPasswordView />
-                  </div>
-                }
-              />
-              <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
-              <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
-              <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
-              <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
-              <Route
-                path='*'
-                element={
-                  <div className='appContent'>
-                    <ErrorPage />
-                  </div>
-                }
-              />
-            </Routes>
-          </header>
-        </SwipeContexProvider>
-      </AuthContexProvider>
+      <ThemeProvider theme={theme}>
+        <AuthContexProvider>
+          <SwipeContexProvider>
+            <div className='appWrapper'>
+              <Routes>
+                <Route path='/' element={<PrivateRoute component={SwipeView} />} />
+                <Route
+                  path='/signin'
+                  element={
+                    <MainContentWrapper className='signInViewWrapper'>
+                      <SignInView />
+                    </MainContentWrapper>
+                  }
+                />
+                <Route
+                  path='/signup'
+                  element={
+                    <MainContentWrapper className='signUpViewWrapper'>
+                      <SignUpView />
+                    </MainContentWrapper>
+                  }
+                />
+                <Route
+                  path='/resetpassword'
+                  element={
+                    <MainContentWrapper className='resetPasswordViewWrapper'>
+                      <ResetPasswordView />
+                    </MainContentWrapper>
+                  }
+                />
+                <Route path='/createprofile' element={<PrivateRoute component={CreateProfileView} />} />
+                <Route path='/profile' element={<PrivateRoute component={ProfileView} />} />
+                <Route path='/editprofile' element={<PrivateRoute component={EditProfileView} />} />
+                <Route path='/matches' element={<PrivateRoute component={MatchesView} />} />
+                <Route path='/matches/:id' element={<PrivateRoute component={MessageView} />} />
+                <Route
+                  path='*'
+                  element={
+                    <div className='appContent'>
+                      <ErrorPage />
+                    </div>
+                  }
+                />
+              </Routes>
+            </div>
+          </SwipeContexProvider>
+        </AuthContexProvider>
+      </ThemeProvider>
     </div>
   );
 }

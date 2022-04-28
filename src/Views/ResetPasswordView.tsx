@@ -1,17 +1,25 @@
-import { Typography } from '@mui/material';
+import { DogIllustration } from '../Components/DogIllustration/DogIllustration';
 import { ResetPassword } from '../Components/Forms/ResetPassword';
+import { Logo } from '../Components/Logo/Logo';
+import { ContentWrapper, StyledSection } from '../Styles/StyledComponents/ContentWrapper';
 
 // Styles
-import { StyledFormsWrapper } from '../Styles/StyledComponents/StyledFormsWrapper';
+import { NavWrapper } from '../Styles/StyledComponents/Wrapper';
 
 export const ResetPasswordView = () => {
   return (
-    <StyledFormsWrapper className='resetPasswordWrapper'>
-      <Typography className='actionTitle' variant='h5' gutterBottom component='div' sx={{ fontWeight: 600 }}>
-        Reset Password
-      </Typography>
-
-      <ResetPassword />
-    </StyledFormsWrapper>
+    <ContentWrapper maxWidth={'xl'} className='resetPasswordWrapper'>
+      <NavWrapper component='header'>
+        <Logo />
+      </NavWrapper>
+      <StyledSection className='StyledSection'>
+        <div>
+          <ResetPassword />
+        </div>
+        <div className='Illustration'>
+          <DogIllustration />
+        </div>
+      </StyledSection>
+    </ContentWrapper>
   );
 };
