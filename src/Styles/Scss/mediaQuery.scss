@@ -52,19 +52,9 @@
   width: 100%;
   max-width: 40rem;
   min-height: 100vh;
-  @include desktopLarge {
+  @include verticalTablet {
     min-height: unset;
-    height: 1336px;
-  }
-}
-.itsAMatchWrapper {
-  .avatarWrapper {
-    .avatarWrapper_avatar {
-      @include verticalTablet {
-        width: 24rem;
-        height: 24rem;
-      }
-    }
+    max-width: initial;
   }
 }
 
