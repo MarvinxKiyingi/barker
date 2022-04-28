@@ -9,11 +9,19 @@ import '../../Styles/Scss/Profile.scss';
 import { UpdateProfile } from '../Forms/UpdateProfile';
 import { Box, styled, Typography } from '@mui/material';
 
-const ProfileNavigation = styled(Box)({
+const ProfileNavigation = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   paddingRight: '0.5rem',
-});
+  [theme.breakpoints.up('md')]: {
+    justifyContent: 'end',
+  },
+  '.navigation_iconbutton': {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+}));
 
 export const EditProfile = () => {
   const navigate = useNavigate();

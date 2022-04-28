@@ -46,4 +46,7 @@ export const StyledUpdateForm = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   maxWidth: '40rem',
   textAlign: 'center',
+  [theme.breakpoints.up('md')]: {
+    margin: '0 auto',
+  },
 }));

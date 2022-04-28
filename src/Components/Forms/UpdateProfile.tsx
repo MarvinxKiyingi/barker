@@ -49,6 +49,7 @@ const EditProfileImg = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '10rem',
   height: '10rem',
+  cursor: 'pointer',
   '.cameraIcon': {
     position: 'absolute',
     top: '65%',
@@ -84,7 +85,11 @@ export const UpdateProfile = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
     updateUserProfile(data);
-    navigate('/profile');
+    if (window.screen.width >= 900) {
+      navigate('/editprofile');
+    } else {
+      navigate('/profile');
+    }
   };
 
   const handleClickOpen = () => {
@@ -112,7 +117,7 @@ export const UpdateProfile = () => {
               <Box>
                 <label htmlFor='icon-button-file'>
                   <Input {...register('profileImg')} accept='image/*' id='icon-button-file' type='file' />
-                  <EditProfileImg>
+                  <EditProfileImg className='editProfileImg'>
                     <Avatar alt='userProfile' src={imageUrl} sx={{ width: '10rem', height: '10rem' }} />
                     <IconButton className='cameraIcon' color='secondary' aria-label='upload picture' component='span'>
                       <PhotoCameraIcon fontSize='inherit' />
@@ -163,24 +168,24 @@ export const UpdateProfile = () => {
             <StyleDeleteButton variant='contained' color='error' onClick={() => handleClickOpen()}>
               Delete
             </StyleDeleteButton>
-
-            <Dialog open={open} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
-              <DialogTitle id='alert-dialog-title'>{'Delete account'}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id='alert-dialog-description'>
-                  Are you sure you want to remove your Barker account? All of your data and information will be permanently deleted.
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions sx={{ p: 2 }}>
-                <StyleDialogDisagreeButton variant='contained' onClick={handleClose}>
-                  Disagree
-                </StyleDialogDisagreeButton>
-                <StyleDialogDeleteButton variant='contained' onClick={() => deleteUserAndProfile()} autoFocus>
-                  Agree
-                </StyleDialogDeleteButton>
-              </DialogActions>
-            </Dialog>
           </Stack>
+
+          <Dialog open={open} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
+            <DialogTitle id='alert-dialog-title'>{'Delete account'}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id='alert-dialog-description'>
+                Are you sure you want to remove your Barker account? All of your data and information will be permanently deleted.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions sx={{ p: 2 }}>
+              <StyleDialogDisagreeButton variant='contained' onClick={handleClose}>
+                Disagree
+              </StyleDialogDisagreeButton>
+              <StyleDialogDeleteButton variant='contained' onClick={() => deleteUserAndProfile()} autoFocus>
+                Agree
+              </StyleDialogDeleteButton>
+            </DialogActions>
+          </Dialog>
         </form>
       )}
     </StyledUpdateForm>
