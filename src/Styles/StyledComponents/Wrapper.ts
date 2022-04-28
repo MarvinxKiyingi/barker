@@ -1,15 +1,14 @@
 import { Box, styled } from '@mui/material';
 
 export const MainContentWrapper = styled(Box)(({ theme }) => ({
+  height: '100%',
   '@media (max-width:1200px) and (orientation: portrait)': {
-    height: '100% !important',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       alignItems: 'center',
     },
   },
   '@media (max-height:1200px) and (orientation: landscape)': {
-    height: '100% !important',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       alignItems: 'center',
@@ -20,6 +19,9 @@ export const MainContentWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     height: '100%',
     maxHeight: ' 70%',
+    '@media (max-height:1200px) and (orientation: landscape)': {
+      maxHeight: ' unset',
+    },
   },
 }));
 
@@ -81,4 +83,15 @@ export const RightWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(2, 2, 2, 0),
+  overflow: 'scroll',
+  '&.matchesView': {
+    padding: theme.spacing(2, 2, 0, 0),
+  },
+}));
+
+export const StyledTabsWrapper = styled(Box)(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  padding: theme.spacing(0, 0, 2),
 }));

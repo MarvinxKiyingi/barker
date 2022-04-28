@@ -28,6 +28,11 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTab: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
   },
   breakpoints: {
     values: {

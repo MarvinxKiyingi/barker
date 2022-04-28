@@ -11,6 +11,36 @@ import { useSwipe } from '../../Utils/Contexs/SwipeContex';
 import { SendMessage } from '../Forms/SendMessage';
 import { DisplayMessage } from './DisplayMessage';
 
+import { styled } from '@mui/material';
+
+const MessagesWrapper = styled(Box)(({ theme }) => ({
+  padding: '0rem 0.5rem 0.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  flex: 1,
+
+  '.messagesWrapper_header': {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: ' 0.75rem',
+  },
+  '.avatarWrapper': {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center',
+    paddingright: ' 0.75rem',
+    '.avatarWrapper_avatar': {
+      width: '2.2rem',
+      height: '2.2rem',
+    },
+  },
+  '.displayMessageWrapper': {
+    flex: 1,
+  },
+}));
 export const Message = () => {
   const { matchedValues, matchedValuesIsLoading } = useSwipe();
   const matchedSnapShot: DocumentData | undefined = matchedValues?.data()?.match;
@@ -27,17 +57,14 @@ export const Message = () => {
     matchedSnapShot?.map((match: DocumentData | undefined, index: number) => {
       if (id === match?.id) {
         return (
-          <Box
-            className='messagesWrapper'
-            sx={{ p: '0rem 0.5rem 0.5rem', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-          >
-            <Box className='messagesWrapper_header' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pr: ' 0.75rem' }}>
+          <MessagesWrapper className='messagesWrapper'>
+            <Box className='messagesWrapper_header'>
               <IconButton onClick={() => navigate('/matches')} size='large'>
                 <ArrowBackIcon className='messagesWrapper_ArrowBackIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
               </IconButton>
 
-              <Box className='avatarWrapper' sx={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', pr: ' 0.75rem' }}>
-                <Avatar className='avatarWrapper_avatar' sx={{ width: '2.2rem', height: '2.2rem' }}>
+              <Box className='avatarWrapper'>
+                <Avatar className='avatarWrapper_avatar'>
                   <CardMedia component='img' height='100%' image={match?.imgUrl} alt='Dog image'></CardMedia>
                 </Avatar>
                 <Typography
@@ -51,11 +78,13 @@ export const Message = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box className='Testing' sx={{ height: '77vh' }}>
+
+            <Box className='displayMessageWrapper'>
               <DisplayMessage />
             </Box>
+
             <SendMessage />
-          </Box>
+          </MessagesWrapper>
         );
       } else {
         return null;

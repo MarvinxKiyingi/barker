@@ -5,11 +5,46 @@ import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 
 // MUI
-import { Avatar, Box, CardMedia, CircularProgress, Typography } from '@mui/material';
+import { Avatar, Box, CardMedia, CircularProgress, Typography, styled } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useSwipe } from '../../Utils/Contexs/SwipeContex';
 import CloseIcon from '@mui/icons-material/Close';
+
+const MatchWrapper = styled(Box)(({ theme }) => ({
+  padding: '0rem 0.5rem 0.5rem',
+  [theme.breakpoints.up('md')]: {
+    overflow: 'scroll',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+  },
+
+  '.matchWrapper_header': {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: ' 0.75rem',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  '.matchWrapper_navigationIconbutton': {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  '.matchesIsEmpty': {
+    minHeight: '80vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('md')]: {
+      minHeight: 'initial',
+      flex: 1,
+    },
+  },
+}));
 
 export const Matches = () => {
   // Used to redirect users to a spesific route
@@ -27,9 +62,9 @@ export const Matches = () => {
     }
   }, [matchesIsEmpty, matchedValues, matchedSnapShot?.length]);
   return (
-    <Box className='matchWrapper' sx={{ p: '0rem 0.5rem 0.5rem' }}>
-      <Box className='matchWrapper_header' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pr: ' 0.75rem' }}>
-        <IconButton onClick={() => navigate('/')} size='large'>
+    <MatchWrapper className='matchWrapper'>
+      <Box className='matchWrapper_header'>
+        <IconButton className='matchWrapper_navigationIconbutton' onClick={() => navigate('/')} size='large'>
           <ArrowBackIcon fontSize='inherit' sx={{ color: '#39353f' }} />
         </IconButton>
 
@@ -45,14 +80,7 @@ export const Matches = () => {
       </Box>
 
       {matchesIsEmpty ? (
-        <Box
-          sx={{
-            minHeight: '80vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Box className='matchesIsEmpty'>
           <Typography>Start swiping to get a match</Typography>
         </Box>
       ) : matchedValuesIsLoading ? (
@@ -91,6 +119,6 @@ export const Matches = () => {
           </Box>
         ))
       )}
-    </Box>
+    </MatchWrapper>
   );
 };

@@ -12,11 +12,10 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
-
-  //   paddingLeft: '0 !important',
-  //   paddingRight: '0 !important',
 }));
 export const AlternativContentWrapper = styled(ContentWrapper)(({ theme }) => ({
+  height: '100%',
+  overflow: 'scroll',
   paddingLeft: 'unset',
   paddingRight: 'unset',
   [theme.breakpoints.up('md')]: {

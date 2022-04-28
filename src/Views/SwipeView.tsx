@@ -5,18 +5,20 @@ import { useSwipe } from '../Utils/Contexs/SwipeContex';
 // Import styles
 import '../Styles/Scss/mediaQuery.scss';
 import { AlternativContentWrapper } from '../Styles/StyledComponents/ContentWrapper';
-import { AlternativNavWrapper, IsDesktop, IsMobile, LeftWrapper, MainContentWrapper, RightWrapper } from '../Styles/StyledComponents/Wrapper';
+import {
+  AlternativNavWrapper,
+  IsDesktop,
+  IsMobile,
+  LeftWrapper,
+  MainContentWrapper,
+  RightWrapper,
+  StyledTabsWrapper,
+} from '../Styles/StyledComponents/Wrapper';
 import { Profile } from '../Components/Profile/Profile';
-import { Box, Tabs, Tab, styled } from '@mui/material';
+import { Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const StyledTabsWrapper = styled(Box)(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  marginBottom: '24px',
-}));
 export const SwipeView = () => {
   const { isMatch } = useSwipe();
 
@@ -48,7 +50,7 @@ export const SwipeView = () => {
               <NavBar />
             </AlternativNavWrapper>
 
-            <StyledTabsWrapper>
+            <StyledTabsWrapper className='tabsWrapper'>
               <Tabs
                 value={pageView}
                 onChange={handleChange}
@@ -57,7 +59,7 @@ export const SwipeView = () => {
                 aria-label='Navigation between swipe and messages'
               >
                 <Tab value='swipe' label='swipe' onClick={() => navigate('/')} />
-                <Tab value='messages' label='messages' onClick={() => navigate('/matches')} />
+                <Tab value='matches' label='matches' onClick={() => navigate('/matches')} />
               </Tabs>
             </StyledTabsWrapper>
 
