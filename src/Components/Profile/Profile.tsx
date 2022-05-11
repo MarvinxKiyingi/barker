@@ -42,7 +42,7 @@ const ProfileWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   padding: '0rem 0.5rem',
-  overflow: 'scroll',
+  overflow: 'auto',
 });
 
 const StyledButtonStack = styled(Stack)(({ theme }) => ({
