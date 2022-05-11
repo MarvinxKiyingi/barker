@@ -89,14 +89,25 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     }
   }
 
+  // Generates a random number
+  function getRandomNumber(min: number, max: number) {
+    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+    return randomNumber;
+  }
+
   // Returns a random age based on the fetched dog object
   const generateRandomAge = () => {
     const lifeSpan = dog.breeds[0].life_span;
     if (getNumbersOnly(lifeSpan)) {
       const min = 1;
       const max = parseInt(getNumbersOnly(lifeSpan)![1]);
-      const age = Math.floor(Math.random() * (max - min)) + min;
+      const age = getRandomNumber(min, max);
       setRandomAge(age);
+    } else {
+      const min = 1;
+      const max = 18;
+      const ifNoLifeSpanAge = getRandomNumber(min, max);
+      setRandomAge(ifNoLifeSpanAge);
     }
   };
 
@@ -106,7 +117,7 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
     if (getNumbersOnly(heightMetric)) {
       const min = parseInt(getNumbersOnly(heightMetric)![0]);
       const max = parseInt(getNumbersOnly(heightMetric)![1]);
-      const height = Math.floor(Math.random() * (max - min)) + min;
+      const height = getRandomNumber(min, max);
       setRandomHeight(height);
     }
   };

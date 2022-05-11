@@ -15,7 +15,7 @@ export const ContentWrapper = styled(Container)(({ theme }) => ({
 }));
 export const AlternativContentWrapper = styled(ContentWrapper)(({ theme }) => ({
   height: '100%',
-  overflow: 'scroll',
+  overflow: 'auto',
   paddingLeft: 'unset',
   paddingRight: 'unset',
   [theme.breakpoints.up('md')]: {

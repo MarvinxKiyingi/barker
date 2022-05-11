@@ -14,7 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const MatchWrapper = styled(Box)(({ theme }) => ({
   padding: '0rem 0.5rem 0.5rem',
   [theme.breakpoints.up('md')]: {
-    overflow: 'scroll',
+    overflow: 'auto',
     display: 'flex',
     flexDirection: 'column',
     flex: 1,

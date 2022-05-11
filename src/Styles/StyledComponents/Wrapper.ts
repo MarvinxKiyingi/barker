@@ -83,7 +83,7 @@ export const RightWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(2, 2, 2, 0),
-  overflow: 'scroll',
+  overflow: 'auto',
   '&.matchesView': {
     padding: theme.spacing(2, 2, 0, 0),
   },
