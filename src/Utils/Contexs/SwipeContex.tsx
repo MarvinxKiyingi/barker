@@ -53,9 +53,13 @@ export const SwipeContexProvider: React.FC = ({ children }) => {
   const [matchedValues, matchedValuesIsLoading] = useDocument(doc(db, 'Matches', `${currentUser?.uid}`));
   const [messagesValues, messagesValuesIsLoading] = useDocument(doc(db, 'Messages', `${currentUser?.uid}`));
 
+  // This step was essential for the authentication of the api call, in order to get more properties to the response
+  axios.defaults.baseURL = `${process.env.REACT_APP_THEDOGAPI_BASE_URL}`;
+  axios.defaults.headers.common['x-api-key'] = `${process.env.REACT_APP_THEDOGAPI_API_KEY}`;
+
   const getDogs = async () => {
     axios
-      .get<IDog[]>('https://api.thedogapi.com/v1/images/search')
+      .get<IDog[]>('/search')
       .then((res) => {
         const dog = res.data[0];
         const breeds = res.data[0].breeds;
