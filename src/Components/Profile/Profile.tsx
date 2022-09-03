@@ -73,7 +73,7 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 export const Profile = () => {
-  const { signOutUser, currentUser } = useAuth();
+  const { signOutUser, currentUser, currentUserImg } = useAuth();
   const navigate = useNavigate();
 
   const [imageUrl, loading] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
@@ -102,9 +102,11 @@ export const Profile = () => {
           </IconButton>
         </Tooltip>
       </ProfileNavigation>
+
       <Box sx={{ flex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: '12px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-          {!loading && <StyledAvatar alt='userProfile' src={imageUrl} />}
+          {<StyledAvatar alt='userProfile' src={currentUserImg} />}
+
           <InfoContainer className='InfoContainer' sx={{ mt: '24px' }}>
             {snapShot?.name && (
               <Box>

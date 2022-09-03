@@ -60,7 +60,7 @@ const EditProfileImg = styled(Box)(({ theme }) => ({
 }));
 
 export const UpdateProfile = () => {
-  const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
+  const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg, currentUserImg } = useAuth();
   const navigate = useNavigate();
 
   // using React Firebase Hooks to retrive the data from firebase
@@ -85,6 +85,7 @@ export const UpdateProfile = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
     updateUserProfile(data);
+    console.log(data);
     if (window.screen.width >= 900) {
       navigate('/editprofile');
     } else {

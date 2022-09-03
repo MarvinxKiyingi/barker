@@ -22,4 +22,6 @@ export interface IAuthContex {
   gitHubSignIn: () => void;
   currentUser: FirebaseUser | null | undefined;
   currentUserLoading: boolean; // Remove any and set the real data type!!!
+  setCurrentUserImg: React.Dispatch<React.SetStateAction<string | undefined>>;
+  currentUserImg: string | undefined;
 }

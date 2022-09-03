@@ -16,7 +16,6 @@ const ProfileNavigation = styled(Box)(({ theme }) => ({
   paddingRight: '0.5rem',
 }));
 
-console.log('isDesktop', isDesktop());
 export const EditProfile = () => {
   const navigate = useNavigate();
 
