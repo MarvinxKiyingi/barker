@@ -39,6 +39,9 @@ const MessagesWrapper = styled(Box)(({ theme }) => ({
   },
   '.displayMessageWrapper': {
     flex: 1,
+    [theme.breakpoints.up('md')]: {
+      overflow: 'auto',
+    },
   },
 }));
 export const Message = () => {
@@ -57,7 +60,7 @@ export const Message = () => {
     matchedSnapShot?.map((match: DocumentData | undefined, index: number) => {
       if (id === match?.id) {
         return (
-          <MessagesWrapper className='messagesWrapper'>
+          <MessagesWrapper key={index} className='messagesWrapper'>
             <Box className='messagesWrapper_header'>
               <IconButton onClick={() => navigate('/matches')} size='large'>
                 <ArrowBackIcon className='messagesWrapper_ArrowBackIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
