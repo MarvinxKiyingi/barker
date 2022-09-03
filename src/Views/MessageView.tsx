@@ -24,6 +24,12 @@ import { Tabs, Tab, Box, styled } from '@mui/material';
 const MessagesWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
   display: 'flex',
+  height: '100%',
+  overflow: 'auto',
+  [theme.breakpoints.up('md')]: {
+    height: '100%',
+    overflow: 'auto',
+  },
 }));
 export const MessageView = () => {
   const [pageView, setPageView] = useState('matches');

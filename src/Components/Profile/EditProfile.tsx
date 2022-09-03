@@ -8,19 +8,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import '../../Styles/Scss/Profile.scss';
 import { UpdateProfile } from '../Forms/UpdateProfile';
 import { Box, styled, Typography } from '@mui/material';
+import { isDesktop } from '../../Utils/IsDesktop';
 
 const ProfileNavigation = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   paddingRight: '0.5rem',
-  [theme.breakpoints.up('md')]: {
-    justifyContent: 'end',
-  },
-  '.navigation_iconbutton': {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
 }));
 
 export const EditProfile = () => {
@@ -29,9 +22,10 @@ export const EditProfile = () => {
   return (
     <Box className='profileWrapper' sx={{ p: '0rem 0.5rem' }}>
       <ProfileNavigation className='navigation'>
-        <IconButton className='navigation_iconbutton' size='large' onClick={() => navigate('/profile')}>
-          <ArrowBackIcon fontSize='inherit' sx={{ color: '#39353f' }} />
+        <IconButton className='navigation_iconbutton' size='large' onClick={() => navigate(isDesktop() ? '/' : '/profile')}>
+          <ArrowBackIcon className='profileWrapper_ArrowBackIcon' fontSize='inherit' sx={{ color: '#39353f' }} />
         </IconButton>
+
         <Typography
           variant='h6'
           className='navigation_header'

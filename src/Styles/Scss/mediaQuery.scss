@@ -95,3 +95,12 @@
     }
   }
 }
+
+.profileWrapper {
+  @include verticalTablet {
+    .profileWrapper_ArrowBackIcon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}

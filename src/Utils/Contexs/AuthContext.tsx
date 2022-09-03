@@ -29,6 +29,7 @@ import { IPasswrodReset } from '../../Models/IPasswordReset';
 import { IsNewSocialMediaUser } from '../IsNewUser';
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { IUser } from '../../Models/IUser';
+import { useDownloadURL } from 'react-firebase-hooks/storage';
 
 // Initiating context
 export const AuthContex = React.createContext({} as IAuthContex);
@@ -46,6 +47,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const [firebaseError, setFirebaseError] = useState(false);
   const [succsessMsg, setsuccsessMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [currentUserImg, setCurrentUserImg] = useState<undefined | string>();
 
   // Used to redirect users to a spesific route
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
 
   // firebase Storage ref
   const storageRef = ref(storage, `profileImages/${currentUser?.uid}`);
+  const [imageUrl] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
 
   // Signing up a user to firebase
   const signUpUser = (props: ISignUp) => {
@@ -126,6 +129,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   };
   const updateUserProfile = (props: IUser) => {
     const file = props?.profileImg?.[0];
+    console.log('file', file);
 
     if (currentUser) {
       try {
@@ -138,6 +142,7 @@ export const AuthContexProvider: React.FC = ({ children }) => {
         // Update/upload profileImage
         if (props?.profileImg?.length === 1) {
           uploadBytes(storageRef, file);
+          setCurrentUserImg(imageUrl);
         }
       } catch (error) {
         alert(error);
@@ -233,6 +238,8 @@ export const AuthContexProvider: React.FC = ({ children }) => {
     deleteUserAndProfile,
     updateUserProfile,
     createUserProfile,
+    currentUserImg,
+    setCurrentUserImg,
   };
 
   return <AuthContex.Provider value={values}>{children}</AuthContex.Provider>;

@@ -85,6 +85,7 @@ export const UpdateProfile = () => {
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
     updateUserProfile(data);
+    console.log(data);
     if (window.screen.width >= 900) {
       navigate('/editprofile');
     } else {
