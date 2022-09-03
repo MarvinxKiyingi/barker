@@ -60,7 +60,7 @@ const EditProfileImg = styled(Box)(({ theme }) => ({
 }));
 
 export const UpdateProfile = () => {
-  const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg, currentUserImg } = useAuth();
+  const { currentUser, deleteUserAndProfile, updateUserProfile, firebaseError, errorMsg } = useAuth();
   const navigate = useNavigate();
 
   // using React Firebase Hooks to retrive the data from firebase

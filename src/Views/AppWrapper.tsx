@@ -18,7 +18,7 @@ import { ref } from 'firebase/storage';
 import { storage } from '../Utils/Firebase';
 
 export const AppWrapper = () => {
-  const { currentUser, currentUserImg, setCurrentUserImg } = useAuth();
+  const { currentUser, setCurrentUserImg } = useAuth();
 
   const [imageUrl] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
 
