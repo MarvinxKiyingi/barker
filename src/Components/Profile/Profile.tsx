@@ -15,7 +15,9 @@ import { useDocument } from 'react-firebase-hooks/firestore';
 
 //Firebase
 import { doc } from 'firebase/firestore';
-import { db } from '../../Utils/Firebase';
+import { db, storage } from '../../Utils/Firebase';
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
 
 // SCSS
 import '../../Styles/Scss/Profile.scss';
@@ -70,8 +72,9 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 export const Profile = () => {
-  const { signOutUser, currentUser, currentUserImg } = useAuth();
+  const { signOutUser, currentUser } = useAuth();
   const navigate = useNavigate();
+  const [imageUrl, loading] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
 
   // using React Firebase Hooks to retrive the data from firebase
   const [value] = useDocument(doc(db, 'Users', `${currentUser?.uid}`));
@@ -100,7 +103,7 @@ export const Profile = () => {
 
       <Box sx={{ flex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: '12px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-          {<StyledAvatar alt='userProfile' src={currentUserImg} />}
+          {<StyledAvatar alt='userProfile' src={!loading && imageUrl ? imageUrl : imageUrl} />}
 
           <InfoContainer className='InfoContainer' sx={{ mt: '24px' }}>
             {snapShot?.name && (
