@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { MainContentWrapper } from '../Styles/StyledComponents/Wrapper';
-import { useAuth } from '../Utils/Contexs/AuthContext';
 import { PrivateRoute } from '../Utils/PrivateRoute';
 import { CreateProfileView } from './CreateProfileView';
 import { EditProfileView } from './EditProfileView';
@@ -13,20 +11,8 @@ import { ResetPasswordView } from './ResetPasswordView';
 import { SignInView } from './SignInView';
 import { SignUpView } from './SignUpView';
 import { SwipeView } from './SwipeView';
-import { useDownloadURL } from 'react-firebase-hooks/storage';
-import { ref } from 'firebase/storage';
-import { storage } from '../Utils/Firebase';
 
 export const AppWrapper = () => {
-  const { currentUser, setCurrentUserImg } = useAuth();
-
-  const [imageUrl] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
-
-  useEffect(() => {
-    if (imageUrl) {
-      setCurrentUserImg(imageUrl);
-    }
-  }, [imageUrl, setCurrentUserImg]);
   return (
     <div className='appWrapper'>
       <Routes>

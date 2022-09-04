@@ -41,6 +41,7 @@ import { StyledUpdateForm } from '../../Styles/StyledComponents/StyledForms';
 import { StyleDeleteButton, StyleDialogDeleteButton, StyleDialogDisagreeButton, StyledUpdateButton } from '../../Styles/StyledComponents/Button';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/system';
+import { isDesktop } from '../../Utils/IsDesktop';
 
 const Input = styled('input')({
   display: 'none',
@@ -84,13 +85,10 @@ export const UpdateProfile = () => {
 
   // Form handler
   const formSubmitHandler: SubmitHandler<IUser> = (data: IUser) => {
+    console.log('data', data);
     updateUserProfile(data);
     console.log(data);
-    if (window.screen.width >= 900) {
-      navigate('/editprofile');
-    } else {
-      navigate('/profile');
-    }
+    isDesktop() ? navigate('/editprofile') : navigate('/profile');
   };
 
   const handleClickOpen = () => {
@@ -114,20 +112,21 @@ export const UpdateProfile = () => {
           {firebaseError ? <Alert severity='error'>{errorHandler}</Alert> : null}
 
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            {!loading && (
-              <Box>
-                <label htmlFor='icon-button-file'>
-                  <Input {...register('profileImg')} accept='image/*' id='icon-button-file' type='file' />
-                  <EditProfileImg className='editProfileImg'>
-                    <Avatar alt='userProfile' src={imageUrl} sx={{ width: '10rem', height: '10rem' }} />
-                    <IconButton className='cameraIcon' color='secondary' aria-label='upload picture' component='span'>
-                      <PhotoCameraIcon fontSize='inherit' />
-                    </IconButton>
-                  </EditProfileImg>
-                </label>
-              </Box>
-            )}
+            <Box>
+              <label htmlFor='icon-button-file'>
+                <EditProfileImg className='editProfileImg'>
+                  <Avatar alt='userProfile' src={!loading && imageUrl ? imageUrl : imageUrl} sx={{ width: '10rem', height: '10rem' }} />
+                  <IconButton className='cameraIcon' color='secondary' aria-label='upload picture' component='span'>
+                    <PhotoCameraIcon fontSize='inherit' />
+                  </IconButton>
+                </EditProfileImg>
+
+                <Input {...register('profileImg')} accept='image/*' id='icon-button-file' type='file' />
+              </label>
+            </Box>
           </Box>
+          <input {...register('profileImg')} accept='image/*' id='icon-button-file' type='file' />
+          {/* <input {...register('profileImg')} accept='image/*' id='icon-button-file' type='file' /> */}
 
           <TextField
             {...register('name')}

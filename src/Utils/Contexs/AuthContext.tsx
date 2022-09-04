@@ -29,7 +29,6 @@ import { IPasswrodReset } from '../../Models/IPasswordReset';
 import { IsNewSocialMediaUser } from '../IsNewUser';
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { IUser } from '../../Models/IUser';
-import { useDownloadURL } from 'react-firebase-hooks/storage';
 
 // Initiating context
 export const AuthContex = React.createContext({} as IAuthContex);
@@ -58,7 +57,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
 
   // firebase Storage ref
   const storageRef = ref(storage, `profileImages/${currentUser?.uid}`);
-  const [imageUrl] = useDownloadURL(ref(storage, `profileImages/${currentUser?.uid}`));
 
   // Signing up a user to firebase
   const signUpUser = (props: ISignUp) => {
@@ -130,7 +128,6 @@ export const AuthContexProvider: React.FC = ({ children }) => {
   const updateUserProfile = (props: IUser) => {
     const file = props?.profileImg?.[0];
     console.log('file', file);
-
     if (currentUser) {
       try {
         updateDoc(doc(db, 'Users', currentUser.uid), {
@@ -138,11 +135,9 @@ export const AuthContexProvider: React.FC = ({ children }) => {
           age: props.age,
           height: props.height,
         });
-
         // Update/upload profileImage
         if (props?.profileImg?.length === 1) {
           uploadBytes(storageRef, file);
-          setCurrentUserImg(imageUrl);
         }
       } catch (error) {
         alert(error);

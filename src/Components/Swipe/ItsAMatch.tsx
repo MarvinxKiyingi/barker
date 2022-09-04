@@ -24,6 +24,10 @@ const ItsAMatchWrapper = styled(Box)(({ theme }) => ({
       width: '15rem',
       height: '15rem',
       backgroundColor: theme.palette.background.paper,
+      img: {
+        height: 'inherit',
+        aspectRatio: '1 / 1',
+      },
     },
   },
 }));
@@ -60,7 +64,7 @@ export const ItsAMatch = () => {
       <Box sx={{ mb: '1rem' }}>
         <Box className='avatarWrapper'>
           <Avatar className='avatarWrapper_avatar'>
-            <CardMedia component='img' sx={{ aspectRatio: 1 / 1 }} image={matchedDog?.imgUrl} alt='Dog image' />
+            <CardMedia component='img' image={matchedDog?.imgUrl} alt='Dog image' />
           </Avatar>
         </Box>
 

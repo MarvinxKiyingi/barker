@@ -20,16 +20,5 @@ export const SignInWithSocialMedia = () => {
         Github
       </StyledGithubButton>
     </Stack>
-    // <StyledSocialMediaOptions className='socialMediaLoginWrapper'>
-    //   <StyledGoogleButton variant='contained' onClick={() => googleSignIn()}>
-    //     Google
-    //   </StyledGoogleButton>
-    //   <StyledFacebookButton variant='contained' onClick={() => facebookSignIn()}>
-    //     Facebook
-    //   </StyledFacebookButton>
-    //   <StyledGithubButton variant='contained' onClick={() => gitHubSignIn()}>
-    //     Github
-    //   </StyledGithubButton>
-    // </StyledSocialMediaOptions>
   );
 };
